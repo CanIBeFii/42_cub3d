@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/11 18:43:19 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:04:56 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # include	<mlx.h>
 # include "./libft.h"
 
+typedef struct s_map
+{
+	int	north;
+	int	south;
+	int	west;
+	int	east;
+	int	ceiling;
+	int	floor;
+}t_map;
+
 typedef struct s_vector
 {
 	int	x;
@@ -34,14 +44,16 @@ typedef struct s_game
 	void		*mlx_ptr;
 	void		*window;
 	t_vector	window_size;
+	t_map		map_info;
 	char		**map;
 }t_game;
 
 //MAIN.C
 void	cub3d(int fd, char *path);
+void	game_init(t_game *mlx);
 
 //WINDOW_MANAGEMENT.C
-int		close_window(void);
+int		close_window(t_game *mlx);
 
 //HANDLE_KEYS.C
 int		keys(int keycode, t_game *mlx);
@@ -50,6 +62,7 @@ int		keys(int keycode, t_game *mlx);
 int		map_check(int fd, char *path, t_game *mlx);
 char	**get_map(int fd, char *path);
 int		number_lines(int fd);
+int		check_map_elements(t_game *mlx, char *line);
 
 //FREE.C
 void	free_double_array(char **double_array);
