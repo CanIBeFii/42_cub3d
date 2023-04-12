@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/12 18:04:27 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:24:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ int	map_check(int fd, char *path, t_game *mlx)
 			lines++;
 		}
 	}
+	if (lines < 6)
+		return (0);
 	return (1);
 }
