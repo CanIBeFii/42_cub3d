@@ -6,53 +6,38 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/12 18:24:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:21:32 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_map_elements(t_game *mlx, char *line)
+int	check_map_content(t_game *mlx)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0 && mlx->map_info.north == 0)
-		mlx->map_info.north = 1;
-	else if (ft_strncmp(line, "SO ", 3) == 0 && mlx->map_info.south == 0)
-		mlx->map_info.south = 1;
-	else if (ft_strncmp(line, "WE ", 3) == 0 && mlx->map_info.west == 0)
-		mlx->map_info.west = 1;
-	else if (ft_strncmp(line, "EA ", 3) == 0 && mlx->map_info.east == 0)
-		mlx->map_info.east = 1;
-	else if (ft_strncmp(line, "F ", 2) == 0 && mlx->map_info.floor == 0)
-		mlx->map_info.floor = 1;
-	else if (ft_strncmp(line, "C ", 2) == 0 && mlx->map_info.ceiling == 0)
-		mlx->map_info.ceiling = 1;
-	else
+	int	x;
+	int	i;
+
+	i = mlx->map_info.last_line_info_elem;
+	while (mlx->map[i] && mlx->map[i][0] == '\n')
+		i++;
+	if (mlx->map[i] == NULL)
 		return (0);
-	return (1);
-}
-
-int	number_lines(int fd)
-{
-	int		linecount;
-	int		readcount;
-	int		line_size;
-	char	c;	
-
-	linecount = 1;
-	line_size = 0;
-	while (1)
+	// printf("%s\n", mlx->map[i]);
+	while (mlx->map[i])
 	{
-		readcount = read(fd, &c, 1);
-		line_size += readcount;
-		if (readcount == 0)
-			break ;
-		if (readcount < 0)
-			return (-1);
-		if (c == '\n')
-			linecount++;
+		x = 0;
+		while (mlx->map[i][x])
+		{
+			if (check_map_characters(mlx->map[i][x]) == 0)
+			{
+				printf("%s\n", mlx->map[i]);
+				return (0);
+			}
+			x++;
+		}
+		i++;
 	}
-	close(fd);
-	return (linecount);
+	return (1);
 }
 
 char	**get_map(int fd, char *path)
@@ -98,7 +83,7 @@ int	map_check(int fd, char *path, t_game *mlx)
 	lines = 0;
 	while (mlx->map[i] != NULL && lines < 6)
 	{
-		// printf("line: %d %s\n", lines, mlx->map[i]);
+		// printf("line: %d %s\n	", lines, mlx->map[i]);
 		if (mlx->map[i][0] == '\n')
 			i++;
 		else
@@ -110,6 +95,9 @@ int	map_check(int fd, char *path, t_game *mlx)
 		}
 	}
 	if (lines < 6)
+		return (0);
+	mlx->map_info.last_line_info_elem = i;
+	if (check_map_content(mlx) == 0)
 		return (0);
 	return (1);
 }
