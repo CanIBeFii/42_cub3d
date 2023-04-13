@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/11 18:48:14 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:17:07 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,22 @@ void	game_init(t_game *mlx)
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 }
 
+void	init_vars(t_game *mlx)
+{
+	mlx->map_info.north = 0;
+	mlx->map_info.south = 0;
+	mlx->map_info.west = 0;
+	mlx->map_info.east = 0;
+	mlx->map_info.ceiling = 0;
+	mlx->map_info.floor = 0;
+	mlx->map = NULL;
+}
+
 void	cub3d(int fd, char *path)
 {
 	t_game	mlx;
 
+	init_vars(&mlx);
 	if (map_check(fd, path, &mlx) == 0)
 	{
 		free_double_array(mlx.map);
