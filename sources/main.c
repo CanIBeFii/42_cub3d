@@ -6,16 +6,35 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/13 15:17:07 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:49:49 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	draw_square(t_game *mlx, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
+		{
+			mlx_pixel_put(mlx->mlx_ptr, mlx->window, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	game_init(t_game *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
-	mlx->window = mlx_new_window(mlx->mlx_ptr, 1280, 720, "so_long");
+	mlx->window = mlx_new_window(mlx->mlx_ptr, 1720, 1080, "so_long");
+	draw_square(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 }
 
@@ -28,6 +47,10 @@ void	init_vars(t_game *mlx)
 	mlx->map_info.ceiling = 0;
 	mlx->map_info.floor = 0;
 	mlx->map = NULL;
+	mlx->player.pos_x = 860;
+	mlx->player.pos_y = 540;
+	mlx->player.pdx = cos(mlx->player.pa) * 5;
+	mlx->player.pdy = sin(mlx->player.pa) * 5;
 }
 
 void	cub3d(int fd, char *path)
@@ -42,7 +65,7 @@ void	cub3d(int fd, char *path)
 		return ;
 	}
 	game_init(&mlx);
-	mlx_key_hook(mlx.window, keys, (void *)&mlx);
+	mlx_hook(mlx.window, 2, 1L << 0, keys, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 }
 
