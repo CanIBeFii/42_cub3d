@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/14 17:50:35 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:01:30 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_game
 //MAIN.C
 void	cub3d(int fd, char *path);
 void	game_init(t_game *mlx);
-void	draw_square(t_game *mlx, int x, int y, int color);
 
 //WINDOW_MANAGEMENT.C
 int		close_window(t_game *mlx);
@@ -89,5 +88,11 @@ void	free_double_array(char **double_array);
 
 //MOVEMENT.C
 void	move_dot(int key_code, t_game *mlx);
+
+//DRAW.C
+void	draw_square(t_game *mlx, int x, int y, int color);
+void	draw_line(t_game *mlx, int x2, int y2);
+void	draw_map(t_game *mlx);
+void	draw_player(t_game *mlx, int x, int y, int color);
 
 #endif
