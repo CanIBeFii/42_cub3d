@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/14 22:55:40 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:23:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ void	draw_map(t_game *mlx)
 {
 	int	x;
 	int	i;
+	int	start;
 
-	i = mlx->map_info.last_line_info_elem;
+	start = mlx->map_info.last_line_info_elem;
+	i = start;
 	while (mlx->map[i])
 	{
 		x = 0;
-		while (mlx->map[i][x])
+		while (mlx->map[i][x] && mlx->map[i][x] != '\n')
 		{
 			if (mlx->map[i][x] == '1')
-				draw_square(mlx, x * 32, i * 32, 0x00FFFFFF);
+				draw_square(mlx, x * 64, (i - start - 1) * 64, 0x00FFFFFF);
+			else
+				draw_square(mlx, x * 64, (i - start - 1) * 64, 0x00000000);
 			x++;
 		}
 		i++;
@@ -71,12 +75,17 @@ void	draw_square(t_game *mlx, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	while (i < 32)
+	while (i < 65)
 	{
 		j = 0;
-		while (j < 32)
+		while (j < 65)
 		{
-			mlx_pixel_put(mlx->mlx_ptr, mlx->window, x + i, y + j, color);
+			if (j >= 60)
+				mlx_pixel_put(mlx->mlx_ptr, mlx->window, x + i, y + j, 0x4f4d4d);
+			else if (i >= 60)
+				mlx_pixel_put(mlx->mlx_ptr, mlx->window, x + i, y + j, 0x4f4d4d);
+			else
+				mlx_pixel_put(mlx->mlx_ptr, mlx->window, x + i, y + j, color);
 			j++;
 		}
 		i++;
