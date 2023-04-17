@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/14 18:56:21 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:22:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int	check_map_content(t_game *mlx)
 {
 	int	x;
 	int	i;
+	int	start;
 
-	i = mlx->map_info.last_line_info_elem;
+	start = mlx->map_info.last_line_info_elem;
+	i = start;
 	while (mlx->map[i] && mlx->map[i][0] == '\n')
 		i++;
 	if (mlx->map[i] == NULL)
 		return (0);
-	// printf("%s\n", mlx->map[i]);
 	while (mlx->map[i])
 	{
 		x = 0;
@@ -35,8 +36,8 @@ int	check_map_content(t_game *mlx)
 			}
 			if (mlx->map[i][x] == 'N')
 			{
-				mlx->player.pos_x = x * 32;
-				mlx->player.pos_y = i * 32;
+				mlx->player.pos_x = x * 64 + 25;
+				mlx->player.pos_y = (i - start - 1) * 64 + 25;
 			}
 			x++;
 		}
