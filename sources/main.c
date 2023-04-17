@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/14 19:01:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:16:24 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	game_init(t_game *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	mlx->window = mlx_new_window(mlx->mlx_ptr, 1720, 1080, "so_long");
+	draw_map(mlx);
 	draw_player(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
 	draw_line(mlx, mlx->player.pos_x + mlx->player.pdx * 10,
 		mlx->player.pos_y + mlx->player.pdy * 10);
-	draw_map(mlx);
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 }
 
@@ -32,8 +32,8 @@ void	init_vars(t_game *mlx)
 	mlx->map_info.ceiling = 0;
 	mlx->map_info.floor = 0;
 	mlx->map = NULL;
-	mlx->player.pos_x = 860;
-	mlx->player.pos_y = 540;
+	mlx->player.pos_x = 0;
+	mlx->player.pos_y = 0;
 	mlx->player.pdx = cos(mlx->player.pa) * 5;
 	mlx->player.pdy = sin(mlx->player.pa) * 5;
 }
