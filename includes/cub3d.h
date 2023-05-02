@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/01 16:57:18 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:38:23 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@
 # include "./libft.h"
 
 # define PI 3.1415926535
+# define P2 PI/2
+# define P3 3*PI/2
 
 typedef struct s_player
 {
+	int		pos_x_map;
+	int		pos_y_map;
 	float	pos_x;
 	float	pos_y;
 	float	pdx;
@@ -44,6 +48,8 @@ typedef struct s_map
 	int	ceiling;
 	int	floor;
 	int	last_line_info_elem;
+	int	map_x;
+	int	map_y;
 }t_map;
 
 typedef struct s_vector
@@ -52,13 +58,27 @@ typedef struct s_vector
 	int	y;
 }t_vector;
 
+typedef  struct s_rays
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+}t_rays;
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}t_data;
 
 typedef struct s_game
 {
@@ -68,6 +88,7 @@ typedef struct s_game
 	t_map		map_info;
 	t_player	player;
 	t_data		img;
+	t_rays		rays;
 	char		**map;
 }t_game;
 
@@ -99,10 +120,11 @@ void	free_double_array(char **double_array);
 void	move_dot(int key_code, t_game *mlx);
 
 //DRAW.C
+void	draw_rays(t_player p, t_rays r, t_game mlx);
 void	my_img_clear(t_game *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_square(t_game *mlx, int x, int y, int color);
-void	draw_line(t_game *mlx, float x2, float y2);
+void	draw_line(t_game *mlx, float x2, float y2, int color);
 void	draw_map(t_game *mlx);
 void	draw_player(t_game *mlx, int x, int y, int color);
 
