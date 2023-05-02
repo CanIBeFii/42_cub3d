@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/01 16:57:07 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:39:00 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,59 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	draw_rays(t_player p, t_rays r, t_game mlx)
+{
+	float	a_tan;
+	
+	r.ra = p.pa;
+	r.r = 0;
+	while (r.r < 1)
+	{
+		//horizontal
+		r.dof = 0;
+		a_tan = -1 / tan(r.ra);
+		if (r.ra > PI)// looking up
+		{
+			r.ry = (((int)p.pos_y >> 6) << 6) - 0.0001;
+			r.rx = (p.pos_y - r.ry) * a_tan + p.pos_x;
+			r.yo = -64;
+			r.xo = -r.yo * a_tan;
+		}
+		if (r.ra < PI)// looking down
+		{
+			r.ry = (((int)p.pos_y >> 6) << 6) + 64;
+			r.rx = (p.pos_y - r.ry) * a_tan + p.pos_x;
+			r.yo = 64;
+			r.xo = -r.yo * a_tan;
+		}
+		if (r.ra == 0 || r.ra == PI)// looking straight left or right
+		{
+			r.rx = p.pos_x;
+			r.ry = p.pos_y;
+			r.dof = 8;
+		}
+		while (r.dof < 8)
+		{
+			r.mx = (int)(r.rx) >> 6;
+			r.my = (int)(r.ry) >> 6;
+			r.mp = r.my * mlx.map_info.map_x + r.mx;
+			printf("x:%d\n", r.mp);
+			printf("y:%d\n", (int)p.pos_y_map);
+			if (r.mp < (mlx.map_info.map_x * mlx.map_info.map_y)
+					&& mlx.map[(int)p.pos_y_map][r.mp] == '1') //hit wall
+				r.dof = 8;
+			else //next line
+			{
+				r.rx += r.xo;
+				r.ry += r.yo;
+				r.dof += 1;
+			}
+		}
+		draw_line(&mlx, r.rx, r.ry, 0x00ff00);
+		r.r++;
+	}
+}
+
 void	draw_map(t_game *mlx)
 {
 	int	x;
@@ -61,7 +114,7 @@ void	draw_map(t_game *mlx)
 	}
 }
 
-void	draw_line(t_game *mlx, float x2, float y2)
+void	draw_line(t_game *mlx, float x2, float y2, int color)
 {
 	int		dx;
 	int		dy;
@@ -78,7 +131,7 @@ void	draw_line(t_game *mlx, float x2, float y2)
 		{
 			x = mlx->player.pos_x + (i * dx) / dx;
 			y = mlx->player.pos_y + (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, 0x00FF0000);
+			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, color);
 			i++;
 		}
 	}
@@ -89,7 +142,7 @@ void	draw_line(t_game *mlx, float x2, float y2)
 		{
 			x = mlx->player.pos_x - (i * dx) / dx;
 			y = mlx->player.pos_y - (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, 0x00FF0000);
+			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, color);
 			i++;
 		}
 	}
@@ -106,9 +159,9 @@ void	draw_square(t_game *mlx, int x, int y, int color)
 		j = 0;
 		while (j < 65)
 		{
-			if (j >= 60)
+			if (j >= 63)
 				my_mlx_pixel_put(&mlx->img, x + i, y + j, 0x4f4d4d);
-			else if (i >= 60)
+			else if (i >= 63)
 				my_mlx_pixel_put(&mlx->img, x + i, y + j, 0x4f4d4d);
 			else
 				my_mlx_pixel_put(&mlx->img, x + i, y + j, color);
