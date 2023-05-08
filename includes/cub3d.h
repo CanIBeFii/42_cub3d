@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/02 17:38:23 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:57:06 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 
 typedef struct s_player
 {
-	int		pos_x_map;
-	int		pos_y_map;
 	float	pos_x;
 	float	pos_y;
 	float	pdx;
