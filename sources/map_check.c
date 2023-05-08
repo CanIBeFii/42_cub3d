@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:40:04 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:09:07 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int	check_map_content(t_game *mlx)
 			}
 			if (mlx->map[i][x] == 'N')
 			{
-				mlx->player.pos_x = x * 64 + 25;
-				mlx->player.pos_y = (i - start - 1) * 64 + 25;
-				mlx->player.pos_x_map = x;
-				mlx->player.pos_y_map = i;
+				mlx->player.pos_x = x * 64 + 32;
+				mlx->player.pos_y = (i - start - 1) * 64 + 32;
 			}
 			x++;
 		}

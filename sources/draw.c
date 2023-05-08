@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:21:26 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:11:02 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ void	draw_rays(t_player p, t_rays r, t_game mlx)
 			r.mx = (int)(r.rx) >> 6;
 			r.my = (int)(r.ry) >> 6;
 			r.mp = r.my * mlx.map_info.map_x + r.mx;
-			printf("x:%d\n", r.mp);
-			printf("y:%d\n", (int)p.pos_y_map);
 			if (r.mp < (mlx.map_info.map_x * mlx.map_info.map_y)
-					&& mlx.map[(int)p.pos_y_map][r.mp] == '1') //hit wall
+					&& mlx.map[(int)p.pos_y][r.mp] == '1') //hit wall
 				r.dof = 8;
 			else //next line
 			{
@@ -131,7 +129,7 @@ void	draw_line(t_game *mlx, float x2, float y2, int color)
 		{
 			x = mlx->player.pos_x + (i * dx) / dx;
 			y = mlx->player.pos_y + (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, color);
+			my_mlx_pixel_put(&mlx->img, x, y, color);
 			i++;
 		}
 	}
@@ -142,7 +140,7 @@ void	draw_line(t_game *mlx, float x2, float y2, int color)
 		{
 			x = mlx->player.pos_x - (i * dx) / dx;
 			y = mlx->player.pos_y - (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x + 7, y + 7, color);
+			my_mlx_pixel_put(&mlx->img, x, y, color);
 			i++;
 		}
 	}
@@ -176,11 +174,12 @@ void	draw_player(t_game *mlx, int x, int y, int color)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < 15)
+	i = -7;
+	printf("player posx: %f\nplayer posy: %f\n", mlx->player.pos_x, mlx->player.pos_y);
+	while (i < 8)
 	{
-		j = 0;
-		while (j < 15)
+		j = -7;
+		while (j < 8)
 		{
 			my_mlx_pixel_put(&mlx->img, x + i, y + j, color);
 			j++;
