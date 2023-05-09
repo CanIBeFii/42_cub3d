@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/08 11:57:06 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:50:22 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@
 # define PI 3.1415926535
 # define P2 PI/2
 # define P3 3*PI/2
+
+typedef struct s_bresenham
+{
+	int	absolute_x;
+	int	absolute_y;
+	int	x_modifier;
+	int	y_modifier;
+	int	abs_diff;
+	int	abs_diff2x;	
+}	t_bresenham;
 
 typedef struct s_player
 {
@@ -56,7 +66,7 @@ typedef struct s_vector
 	int	y;
 }t_vector;
 
-typedef  struct s_rays
+typedef struct s_rays
 {
 	int		r;
 	int		mx;
@@ -70,7 +80,8 @@ typedef  struct s_rays
 	float	yo;
 }t_rays;
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -125,5 +136,10 @@ void	draw_square(t_game *mlx, int x, int y, int color);
 void	draw_line(t_game *mlx, float x2, float y2, int color);
 void	draw_map(t_game *mlx);
 void	draw_player(t_game *mlx, int x, int y, int color);
+
+//BRESENHAM.C
+void	bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
+void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo);
+t_bresenham	bresenham_init(t_vector begin, t_vector end);
 
 #endif
