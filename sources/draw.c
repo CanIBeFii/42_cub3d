@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/11 16:23:54 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:29:02 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,34 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_rays(t_game *mlx, float x2, float y2, int color)
+void	draw_rays(t_game *mlx, float x0, float y0, int color)
 {
-	int	i;
+	float		x;
+	float		y;
+	int			i;
+	t_vector	begin;
+	t_vector	end;
 
-	i = 0;
-	printf("x: %d\ny: %d\n", (int)(mlx->player.pos_x / 64), (int)(mlx->player.pos_y / 64));
-	while (mlx->map_layout[(int)(mlx->player.pos_y + mlx->player.pdy * i) / 64][(int)(mlx->player.pos_x + mlx->player.pdx * i) / 64] != '1')
+	i = 1;
+	x = (i * 64) * cos(mlx->player.pa) + x0;
+	y = (i * 64) * sin(mlx->player.pa) + y0;
+	while (mlx->map_layout[(int)y / 64][(int)x / 64] != '1')
 	{
-		printf("%c", mlx->map[(int)(mlx->player.pos_y + mlx->player.pdy * i) / 64][(int)(mlx->player.pos_x + mlx->player.pdx * i) / 64]);
+		printf("x: %f\ny: %f\n", x / 64, y / 64);
 		i++;
+		x = (i * 64) * cos(mlx->player.pa) + x0;
+		y = (i * 64) * sin(mlx->player.pa) + y0;
 	}
-	draw_line(mlx, x2 * i, y2 * i, color);
+	begin.x = y0;
+	begin.y = x0;
+	end.x = y;
+	end.y = x;
+	printf("size: %d\n", mlx->map_info.map_x * 64);
+	printf("bx : %d by : %d\n", begin.x, begin.y);
+	printf("ex : %d ey : %d\n", end.x, end.y);
+	(void)color;
+	bresenham_algo(begin, end, mlx);
 }
-
 void	draw_map(t_game *mlx)
 {
 	int	x;
