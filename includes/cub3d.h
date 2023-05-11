@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/11 16:15:25 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:26:05 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
-# include "./libft.h"
+# include "../libft/includes/libft.h"
 
 # define PI 3.1415926535
 # define P2 PI/2
@@ -47,18 +47,23 @@ typedef struct s_player
 	float	pa;
 }t_player;
 
+typedef struct s_map_info
+{
+	char	*north_texture;
+	char	*east_texture;
+	char	*south_texture;
+	char	*west_texture;
+	int		ground_color;
+	int		sky_color;
+}	t_map_info;
+
 typedef struct s_map
 {
-	int	north;
-	int	south;
-	int	west;
-	int	east;
-	int	ceiling;
-	int	floor;
-	int	last_line_info_elem;
-	int	map_x;
-	int	map_y;
-}t_map;
+	t_map_info	info;
+	char		**map;
+	int			map_x;
+	int			map_y;
+}	t_map;
 
 typedef struct s_vector
 {
