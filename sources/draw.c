@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/09 16:16:50 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:23:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,102 +38,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_rays(t_player p, t_rays r, t_game mlx)
+void	draw_rays(t_game *mlx, float x2, float y2, int color)
 {
-	t_vector	start;
-	t_vector	end;
-	float		a_tan;
-	float		n_tan;
+	int	i;
 
-	r.ra = p.pa;
-	r.r = 0;
-	while (r.r < 1)
+	i = 0;
+	printf("x: %d\ny: %d\n", (int)(mlx->player.pos_x / 64), (int)(mlx->player.pos_y / 64));
+	while (mlx->map_layout[(int)(mlx->player.pos_y + mlx->player.pdy * i) / 64][(int)(mlx->player.pos_x + mlx->player.pdx * i) / 64] != '1')
 	{
-		//horizontal
-		r.dof = 0;
-		a_tan = -1 / tan(r.ra);
-		if (r.ra > PI)// looking up
-		{
-			r.ry = (((int)p.pos_y >> 6) << 6) - 0.0001;
-			r.rx = (p.pos_y - r.ry) * a_tan + p.pos_x;
-			r.yo = -64;
-			r.xo = -r.yo * a_tan;
-		}
-		if (r.ra < PI)// looking down
-		{
-			r.ry = (((int)p.pos_y >> 6) << 6) + 64;
-			r.rx = (p.pos_y - r.ry) * a_tan + p.pos_x;
-			r.yo = 64;
-			r.xo = -r.yo * a_tan;
-		}
-		if (r.ra == 0 || r.ra == PI)// looking straight left or right
-		{
-			r.rx = p.pos_x;
-			r.ry = p.pos_y;
-			r.dof = 8;
-		}
-		while (r.dof < 8)
-		{
-			r.mx = (int)(r.rx) >> 6;
-			r.my = (int)(r.ry) >> 6;
-			r.mp = r.my * mlx.map_info.map_x + r.mx;
-			// printf("mpx*mpy: %d\np.posy:%d\nmp: %d\n", (mlx.map_info.map_x * mlx.map_info.map_y), (int)p.pos_y / 64, r.mp / 64);
-			if (r.mp < (mlx.map_info.map_x * mlx.map_info.map_y) && mlx.map[((int)p.pos_y / 64)][(r.mp / 64)] == '1') //hit wall
-				r.dof = 8;
-			else //next line
-			{
-				r.rx += r.xo;
-				r.ry += r.yo;
-				r.dof += 1;
-			}
-		}
-		//vertical
-		r.dof = 0;
-		n_tan = -tan(r.ra);
-		if (r.ra > P2 && r.ra < P3)// looking left
-		{
-			r.rx = (((int)p.pos_x >> 6) << 6) - 0.0001;
-			r.ry = (p.pos_x - r.rx) * n_tan + p.pos_y;
-			r.xo = -64;
-			r.yo = -r.xo * n_tan;
-		}
-		if (r.ra < P2 || r.ra > P3)// looking right
-		{
-			r.rx = (((int)p.pos_x >> 6) << 6) + 64;
-			r.ry = (p.pos_x - r.rx) * n_tan + p.pos_y;
-			r.xo = 64;
-			r.yo = -r.xo * n_tan;
-		}
-		if (r.ra == 0 || r.ra == PI)// looking straight up or down
-		{
-			r.ry = p.pos_y;
-			r.rx = p.pos_x;
-			r.dof = 8;
-		}
-		while (r.dof < 8)
-		{
-			r.mx = (int)(r.rx) >> 6;
-			r.my = (int)(r.ry) >> 6;
-			r.mp = r.my * mlx.map_info.map_x + r.mx;
-			// printf("mpx*mpy: %d\np.posy:%d\nmp: %d\n", (mlx.map_info.map_x * mlx.map_info.map_y), (int)p.pos_y / 64, r.mp / 64);
-			if (r.mp < (mlx.map_info.map_x * mlx.map_info.map_y) && mlx.map[((int)p.pos_y / 64)][(r.mp / 64)] == '1') //hit wall
-				r.dof = 8;
-			else //next line
-			{
-				r.rx += r.xo;
-				r.ry += r.yo;
-				r.dof += 1;
-			}
-		}
-		start.x = p.pos_x;
-		start.y = p.pos_y;
-		end.x = r.rx;
-		end.y = r.ry;
-		printf("x: %d\ny: %d\n", end.x, end.y);
-		bresenham_algo(start, end, &mlx);
-		// draw_line(&mlx, r.rx, r.ry, 0x00ff00);
-		r.r++;
+		printf("%c", mlx->map[(int)(mlx->player.pos_y + mlx->player.pdy * i) / 64][(int)(mlx->player.pos_x + mlx->player.pdx * i) / 64]);
+		i++;
 	}
+	draw_line(mlx, x2 * i, y2 * i, color);
 }
 
 void	draw_map(t_game *mlx)

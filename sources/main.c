@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:19:31 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:22:57 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	game_init(t_game mlx)
 	draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
 	draw_line(&mlx, mlx.player.pos_x + mlx.player.pdx * 10,
 		mlx.player.pos_y + mlx.player.pdy * 10, 0x00FF0000);
-	//draw_rays(mlx.player, mlx.rays, mlx);
+	draw_rays(&mlx, mlx.player.pos_x + mlx.player.pdx,
+		mlx.player.pos_y + mlx.player.pdy, 0x00FF00);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.window, mlx.img.img, 0, 0);
 	mlx_hook(mlx.window, 17, 0L, close_window, &mlx);
 	mlx_hook(mlx.window, 2, 1L << 0, keys, &mlx);
@@ -43,6 +44,7 @@ void	init_vars(t_game *mlx)
 	mlx->map = NULL;
 	mlx->player.pos_x = 0;
 	mlx->player.pos_y = 0;
+	mlx->player.pa = 0;
 	mlx->player.pdx = cos(mlx->player.pa) * 5;
 	mlx->player.pdy = sin(mlx->player.pa) * 5;
 	mlx->map_info.map_x = 0;

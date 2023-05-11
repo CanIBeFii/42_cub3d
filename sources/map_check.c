@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/08 12:09:07 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:19:31 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	map_check(int fd, char *path, t_game *mlx)
 {
 	int	lines;
 	int	i;
+	int	x;
 
 	mlx->map = get_map(fd, path);
 	if (mlx->map == NULL)
@@ -91,7 +92,6 @@ int	map_check(int fd, char *path, t_game *mlx)
 	lines = 0;
 	while (mlx->map[i] != NULL && lines < 6)
 	{
-		// printf("line: %d %s\n	", lines, mlx->map[i]);
 		if (mlx->map[i][0] == '\n')
 			i++;
 		else
@@ -107,5 +107,15 @@ int	map_check(int fd, char *path, t_game *mlx)
 	mlx->map_info.last_line_info_elem = i;
 	if (check_map_content(mlx) == 0)
 		return (0);
+	i = 0;
+	x = mlx->map_info.last_line_info_elem;
+	while (mlx->map[x] && mlx->map[x][0] == '\n')
+		x++;
+	while (mlx->map[x])
+	{
+		mlx->map_layout[i] = ft_strdup(mlx->map[x]);
+		x++;
+		i++;
+	}
 	return (1);
 }

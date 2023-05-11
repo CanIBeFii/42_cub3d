@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/09 14:50:22 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:15:25 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_game
 	t_data		img;
 	t_rays		rays;
 	char		**map;
+	char		**map_layout;
 }t_game;
 
 //MAIN.C
@@ -129,7 +130,7 @@ void	free_double_array(char **double_array);
 void	move_dot(int key_code, t_game *mlx);
 
 //DRAW.C
-void	draw_rays(t_player p, t_rays r, t_game mlx);
+void	draw_rays(t_game *mlx, float x2, float y2, int color);
 void	my_img_clear(t_game *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_square(t_game *mlx, int x, int y, int color);
