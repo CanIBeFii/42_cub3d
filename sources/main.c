@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/11 18:03:05 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:45:16 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	game_init(t_game mlx)
 	draw_map(&mlx);
 	draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
 	draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
-	draw_rays(&mlx, mlx.player.pos_x + mlx.player.pdx,
-		mlx.player.pos_y + mlx.player.pdy, 0x00FF00);
+	draw_rays(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF00);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.window, mlx.img.img, 0, 0);
 	mlx_hook(mlx.window, 17, 0L, close_window, &mlx);
 	mlx_hook(mlx.window, 2, 1L << 0, keys, &mlx);
