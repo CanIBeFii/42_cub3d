@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/11 16:19:31 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:48:31 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,20 @@ int	map_check(int fd, char *path, t_game *mlx)
 	mlx->map_info.last_line_info_elem = i;
 	if (check_map_content(mlx) == 0)
 		return (0);
-	i = 0;
 	x = mlx->map_info.last_line_info_elem;
 	while (mlx->map[x] && mlx->map[x][0] == '\n')
 		x++;
+	i = 0;
+	while (mlx->map[i])
+		i++;
+	mlx->map_layout = malloc(sizeof(char *) * (i - x + 1));
+	i = 0;
 	while (mlx->map[x])
 	{
 		mlx->map_layout[i] = ft_strdup(mlx->map[x]);
 		x++;
 		i++;
 	}
+	mlx->map_layout[i] = NULL;
 	return (1);
 }
