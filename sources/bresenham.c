@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:26:43 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/09 15:40:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:39:12 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	bresenham_algo(t_vector begin, t_vector end, t_game *mlx)
 	if (begin.x > (mlx->map_info.map_x * 64) || begin.x < 0
 		|| begin.y > (mlx->map_info.map_y * 64) || begin.y < 0)
 		return ;
-	bresenham_loop(begin, end, mlx->img.img, algo);
+	bresenham_loop(begin, end, mlx, algo);
 	if (begin.x < (mlx->map_info.map_x * 64) && begin.x > 0
 		&& begin.y < (mlx->map_info.map_y * 64) && begin.y > 0)
 		my_mlx_pixel_put(&mlx->img, begin.x, begin.y, 0x00F0ABD7);
@@ -30,8 +30,7 @@ void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo)
 {
 	while (begin.x != end.x || begin.y != end.y)
 	{
-		printf("x: %d\ny: %d\n", begin.x, begin.y);
-		my_mlx_pixel_put(&mlx->img, begin.x, begin.y, 0x00ff00);
+		my_mlx_pixel_put(&mlx->img, begin.x, begin.y, 0x00FF00);
 		algo.abs_diff2x = algo.abs_diff * 2;
 		if (algo.abs_diff2x > -algo.absolute_y)
 		{
