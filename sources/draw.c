@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/12 19:04:13 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:53:02 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,17 @@ void	draw_rays(t_game *mlx, float x0, float y0, int color)
 	while (mlx->map_layout[(int)y / 64][(int)x / 64] != '1')
 	{
 		i++;
-		x = (i * 64) * cos(mlx->player.pa) + x0;
-		y = (i * 64) * sin(mlx->player.pa) + y0;
+		x = i * cos(mlx->player.pa) + x0;
+		y = i * sin(mlx->player.pa) + y0;
+		// printf("x: %f y: %f\n", x, y);
 	}
 	begin.x = x0;
 	begin.y = y0;
 	end.x = x;
 	end.y = y;
-	if (end.x > begin.x)
-		end.x = (int)x / 64 * 64;
-	else
-		end.x = (int)x / 64 * 64 + 64;
-	if (end.y > begin.y)
-		end.y = (int)y / 64 * 64;
-	else
-		end.y = (int)y / 64 * 64 + 64;
-	printf("size: %d\n", mlx->map_info.map_x * 64);
-	printf("bx : %d by : %d\n", begin.x, begin.y);
-	printf("ex : %d ey : %d\n", end.x, end.y);
+	// printf("size: %d\n", mlx->map_info.map_x * 64);
+	// printf("bx : %d by : %d\n", begin.x, begin.y);
+	// printf("ex : %d ey : %d\n", end.x, end.y);
 	(void)color;
 	bresenham_algo(begin, end, mlx);
 }
