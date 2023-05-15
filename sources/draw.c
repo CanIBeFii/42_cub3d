@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/14 12:53:02 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:07:37 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	draw_rays(t_game *mlx, float x0, float y0, int color)
 	t_vector	end;
 
 	i = 1;
-	x = (i * 64) * cos(mlx->player.pa) + x0;
-	y = (i * 64) * sin(mlx->player.pa) + y0;
+	x = i * cos(mlx->player.pa) + x0;
+	y = i * sin(mlx->player.pa) + y0;
 	while (mlx->map_layout[(int)y / 64][(int)x / 64] != '1')
 	{
 		i++;
