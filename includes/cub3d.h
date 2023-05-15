@@ -25,8 +25,6 @@
 # include "./libft.h"
 
 # define PI 3.1415926535
-# define P2 PI/2
-# define P3 3*PI/2
 
 typedef struct s_bresenham
 {
@@ -66,20 +64,6 @@ typedef struct s_vector
 	int	y;
 }t_vector;
 
-typedef struct s_rays
-{
-	int		r;
-	int		mx;
-	int		my;
-	int		mp;
-	int		dof;
-	float	rx;
-	float	ry;
-	float	ra;
-	float	xo;
-	float	yo;
-}t_rays;
-
 typedef struct s_data
 {
 	void	*img;
@@ -97,7 +81,6 @@ typedef struct s_game
 	t_map		map_info;
 	t_player	player;
 	t_data		img;
-	t_rays		rays;
 	char		**map;
 	char		**map_layout;
 }t_game;
@@ -130,7 +113,6 @@ void	free_double_array(char **double_array);
 void	move_dot(int key_code, t_game *mlx);
 
 //DRAW.C
-void	draw_rays(t_game *mlx, float x2, float y2, int color);
 void	my_img_clear(t_game *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_square(t_game *mlx, int x, int y, int color);
@@ -142,5 +124,9 @@ void	draw_player(t_game *mlx, int x, int y, int color);
 void	bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
 void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo);
 t_bresenham	bresenham_init(t_vector begin, t_vector end);
+
+//RAYS.C
+void		draw_rays(t_game *mlx, float x2, float y2, float loop);
+t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0);
 
 #endif
