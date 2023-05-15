@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:20:43 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/14 11:24:34 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:56:51 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,15 @@ int	check_map_elements(t_game *mlx, char *line)
 	return (1);
 }
 
-int	check_map_characters(char c)
+int	check_map_characters(t_game *mlx, int i, int x)
 {
+	char	c;
+
+	c = mlx->map[i][x];
 	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W' && c != 'E'
 		&& c != '\n' && c != ' ')
 		return (0);
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		player_orientation(mlx, i, x);
 	return (1);
 }
