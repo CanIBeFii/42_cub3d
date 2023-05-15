@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 16:49:56 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:59:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,15 @@ int		close_window(t_game *mlx);
 int		keys(int keycode, t_game *mlx);
 
 //MAP_CHECK.C
+void	player_orientation(t_game *mlx, int i, int x);
 int		map_check(int fd, char *path, t_game *mlx);
 char	**get_map(int fd, char *path);
 int		check_map_content(t_game *mlx);
 
 //MAP_CHECK_UTILS.C
-
 int		number_lines(int fd);
 int		check_map_elements(t_game *mlx, char *line);
-int		check_map_characters(char c);
+int		check_map_characters(t_game *mlx, int i, int x);
 
 //FREE.C
 void	free_double_array(char **double_array);

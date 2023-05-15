@@ -6,11 +6,24 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/12 15:48:31 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:16:50 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void	player_orientation(t_game *mlx, int i, int x)
+{
+	if (mlx->map[i][x] == 'S')
+		mlx->player.pa = PI / 2;
+	else if (mlx->map[i][x] == 'N')
+		mlx->player.pa = (3 * PI) / 2;
+	else if (mlx->map[i][x] == 'W')
+		mlx->player.pa = PI;
+	else if (mlx->map[i][x] == 'E')
+		mlx->player.pa = 0;
+	mlx->player.pos_x = x * 64 + 32;
+	mlx->player.pos_y = (i - mlx->map_info.last_line_info_elem - 1) * 64 + 32;
+}
 
 int	check_map_content(t_game *mlx)
 {
@@ -30,15 +43,10 @@ int	check_map_content(t_game *mlx)
 		x = 0;
 		while (mlx->map[i][x])
 		{
-			if (check_map_characters(mlx->map[i][x]) == 0)
+			if (check_map_characters(mlx, i, x) == 0)
 			{
 				printf("%s\n", mlx->map[i]);
 				return (0);
-			}
-			if (mlx->map[i][x] == 'N')
-			{
-				mlx->player.pos_x = x * 64 + 32;
-				mlx->player.pos_y = (i - start - 1) * 64 + 32;
 			}
 			x++;
 		}
