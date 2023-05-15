@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/11 18:26:05 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/05/15 16:56:22 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include "../libft/includes/libft.h"
 
 # define PI 3.1415926535
-# define P2 PI/2
-# define P3 3*PI/2
 
 typedef struct s_bresenham
 {
@@ -45,7 +43,7 @@ typedef struct s_player
 	float	pdx;
 	float	pdy;
 	float	pa;
-}t_player;
+}	t_player;
 
 typedef struct s_map_info
 {
@@ -69,7 +67,7 @@ typedef struct s_vector
 {
 	int	x;
 	int	y;
-}t_vector;
+}	t_vector;
 
 typedef struct s_rays
 {
@@ -83,7 +81,7 @@ typedef struct s_rays
 	float	ra;
 	float	xo;
 	float	yo;
-}t_rays;
+}	t_rays;
 
 typedef struct s_data
 {
@@ -92,7 +90,7 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}t_data;
+}	t_data;
 
 typedef struct s_game
 {
@@ -105,47 +103,61 @@ typedef struct s_game
 	t_rays		rays;
 	char		**map;
 	char		**map_layout;
-}t_game;
+}	t_game;
 
 //MAIN.C
-void	cub3d(int fd, char *path);
-void	game_init(t_game mlx);
+void		cub3d(int fd, char *path);
+void		game_init(t_game mlx);
+
+// PARSER.C
+
+t_map		*parser(char *path);
+
+t_map_info	get_map_info(int fd, char *path);
+
+int			has_all_info(t_map_info info);
+
+// PARSER_UTILS.C
+
+int			is_valid_file(char *path);
+
+int			check_file_type(char *path);
 
 //WINDOW_MANAGEMENT.C
-int		close_window(t_game *mlx);
+int			close_window(t_game *mlx);
 
 //HANDLE_KEYS.C
-int		keys(int keycode, t_game *mlx);
+int			keys(int keycode, t_game *mlx);
 
 //MAP_CHECK.C
-int		map_check(int fd, char *path, t_game *mlx);
-char	**get_map(int fd, char *path);
-int		check_map_content(t_game *mlx);
+int			map_check(int fd, char *path, t_game *mlx);
+char		**get_map(int fd, char *path);
+int			check_map_content(t_game *mlx);
 
 //MAP_CHECK_UTILS.C
 
-int		number_lines(int fd);
-int		check_map_elements(t_game *mlx, char *line);
-int		check_map_characters(char c);
+int			number_lines(int fd);
+int			check_map_elements(t_game *mlx, char *line);
+int			check_map_characters(char c);
 
 //FREE.C
-void	free_double_array(char **double_array);
+void		free_double_array(char **double_array);
 
 //MOVEMENT.C
-void	move_dot(int key_code, t_game *mlx);
+void		move_dot(int key_code, t_game *mlx);
 
 //DRAW.C
-void	draw_rays(t_game *mlx, float x2, float y2, int color);
-void	my_img_clear(t_game *mlx);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_square(t_game *mlx, int x, int y, int color);
-void	draw_line(t_game *mlx, float x2, float y2, int color);
-void	draw_map(t_game *mlx);
-void	draw_player(t_game *mlx, int x, int y, int color);
+void		draw_rays(t_game *mlx, float x2, float y2, int color);
+void		my_img_clear(t_game *mlx);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		draw_square(t_game *mlx, int x, int y, int color);
+void		draw_line(t_game *mlx, float x2, float y2, int color);
+void		draw_map(t_game *mlx);
+void		draw_player(t_game *mlx, int x, int y, int color);
 
 //BRESENHAM.C
-void	bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
-void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo);
+void		bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
+void		bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo);
 t_bresenham	bresenham_init(t_vector begin, t_vector end);
 
 #endif
