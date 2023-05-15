@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:34:05 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/12 18:44:33 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:55:34 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move_dot(int key_code, t_game *mlx)
 	}
 	else if (key_code == 97) //A KEY
 	{
-		mlx->player.pa -= 0.1;
+		mlx->player.pa -= 0.05;
 		if (mlx->player.pa < 0)
 			mlx->player.pa += (2 * PI);
 		mlx->player.pdx = cos(mlx->player.pa) * 5;
@@ -37,7 +37,7 @@ void	move_dot(int key_code, t_game *mlx)
 	}
 	else if (key_code == 100) //D KEY
 	{
-		mlx->player.pa += 0.1;
+		mlx->player.pa += 0.05;
 		if (mlx->player.pa > (2 * PI))
 			mlx->player.pa -= (2 * PI);
 		mlx->player.pdx = cos(mlx->player.pa) * 5;
