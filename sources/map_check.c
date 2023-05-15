@@ -6,16 +6,16 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 18:04:22 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:16:50 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 void	player_orientation(t_game *mlx, int i, int x)
 {
-	if (mlx->map[i][x] == 'N')
+	if (mlx->map[i][x] == 'S')
 		mlx->player.pa = PI / 2;
-	else if (mlx->map[i][x] == 'S')
+	else if (mlx->map[i][x] == 'N')
 		mlx->player.pa = (3 * PI) / 2;
 	else if (mlx->map[i][x] == 'W')
 		mlx->player.pa = PI;
