@@ -6,7 +6,7 @@
 #    By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 13:29:16 by mibernar          #+#    #+#              #
-#    Updated: 2023/05/09 14:29:54 by mibernar         ###   ########.fr        #
+#    Updated: 2023/05/15 16:49:17 by mibernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_LIST = main.c window_management.c handle_keys.c map_check.c map_check_utils.c free.c movement.c \
-				draw.c bresenham.c
+				draw.c bresenham.c rays.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
