@@ -47,44 +47,54 @@ BLUE = \033[0;94m
 YELLOW = \033[0;93m
 RESET = \033[0m
 
+# ECHO
+
+ifeq "$(TERM)" "xterm-256color"
+	ECHO = echo
+else
+	ECHO + echo -e
+endif
+
+# RULES
+
 all: ## Compiles the whole project
 	@make -s $(NAME)
 
 $(NAME): $(LIBFT) $(MINILIBX) $(OBJECTS_DIRECTORY) $(OBJECTS)
-	@echo "\n\nStarting compile, now have some $(BLUE)colorful $(RED)text $(YELLOW)slayyyy$(RESET)"
+	@$(ECHO) "\n\nStarting compile, now have some $(BLUE)colorful $(RED)text $(YELLOW)slayyyy$(RESET)"
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) $(LIBRARIES) -o $(NAME)
-	@echo "$(CYAN)$(NAME):$(RESET) $(GREEN)object files$(RESET) were created and have come to free us, $(YELLOW)monkeys$(RESET) united."
-	@echo "$(CYAN)$(NAME):$(RESET) $(GREEN)$(NAME)$(RESET) was created, like $(BLUE)god$(RESET) intended"
-	@echo "$(CYAN)$(NAME):$(RESET) now watch this video : $(RED)https://www.youtube.com/watch?v=xvFZjo5PgG0$(RESET)" 
+	@$(ECHO) "$(CYAN)$(NAME):$(RESET) $(GREEN)object files$(RESET) were created and have come to free us, $(YELLOW)monkeys$(RESET) united."
+	@$(ECHO) "$(CYAN)$(NAME):$(RESET) $(GREEN)$(NAME)$(RESET) was created, like $(BLUE)god$(RESET) intended"
+	@$(ECHO) "$(CYAN)$(NAME):$(RESET) now watch this video : $(RED)https://www.youtube.com/watch?v=xvFZjo5PgG0$(RESET)" 
 
 $(OBJECTS_DIRECTORY): ## Creates the objects directory
 	@mkdir -p $(OBJECTS_DIRECTORY)
-	@echo "$(CYAN)$(NAME): $(GREEN)$(OBJECTS_DIRECTORY)$(RESET) was created $(YELLOW)WOW $(BLUE)OMG$(RESET) i'm so $(GREEN)talented$(RESET)"
+	@$(ECHO) "$(CYAN)$(NAME): $(GREEN)$(OBJECTS_DIRECTORY)$(RESET) was created $(YELLOW)WOW $(BLUE)OMG$(RESET) i'm so $(GREEN)talented$(RESET)"
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS) ## Compiles each '*.c'
 	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
-	@echo "$(GREEN).$(RESET)\c"
+	@$(ECHO) "$(GREEN).$(RESET)\c"
 
 $(LIBFT): ## Compiles the libft
-	@echo "$(CYAN)$(NAME): $(RESET)Creating $(GREEN)$(LIBFT)$(RESET)"
+	@$(ECHO) "$(CYAN)$(NAME): $(RESET)Creating $(GREEN)$(LIBFT)$(RESET)"
 	@make -sC $(LIBFT_DIRECTORY) --no-print-directory
 
 $(MINILIBX): ## adeus
-	@echo "$(CYAN)$(NAME):$(RESET) Creating $(GREEN)$(MINILIBX)$(RESET) now a bunch of words will appear i have $(RED)no$(RESET) idea what they mean, but we $(YELLOW)roll$(RESET)"
+	@$(ECHO) "$(CYAN)$(NAME):$(RESET) Creating $(GREEN)$(MINILIBX)$(RESET) now a bunch of words will appear i have $(RED)no$(RESET) idea what they mean, but we $(YELLOW)roll$(RESET)"
 	@make -sC $(MINILIBX_DIRECTORY)
 	
 clean: ## Cleans all the '*.o' files and deletes the objects directory
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(CYAN)$(NAME): $(RED)$(OBJECTS_DIRECTORY)$(RESET) was deleted, *insert sadge emote*"
-	@echo "$(CYAN)$(NAME): $(RED)object files$(RESET) deleted, it was like Voldemort said *FETUS DELETUS*"
+	@$(ECHO) "$(CYAN)$(NAME): $(RED)$(OBJECTS_DIRECTORY)$(RESET) was deleted, *insert sadge emote*"
+	@$(ECHO) "$(CYAN)$(NAME): $(RED)object files$(RESET) deleted, it was like Voldemort said *FETUS DELETUS*"
 	@make -sC $(LIBFT_DIRECTORY) clean --no-print-directory
 
 fclean: clean ## Calls clean and deletes all executables and compiled libs
 	@rm -f $(MINILIBX)
-	@echo "$(CYAN)$(NAME): $(RED)$(MINILIBX)$(RESET) was deleted"
-	@echo "$(CYAN)$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
+	@$(ECHO) "$(CYAN)$(NAME): $(RED)$(MINILIBX)$(RESET) was deleted"
+	@$(ECHO) "$(CYAN)$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)
-	@echo "$(CYAN)$(NAME): $(RED)$(NAME) was deleted$(RESET)"
+	@$(ECHO) "$(CYAN)$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 	@make -sC $(LIBFT_DIRECTORY) fclean --no-print-directory
 
 re: ## Deep cleans the project and recompiles it
