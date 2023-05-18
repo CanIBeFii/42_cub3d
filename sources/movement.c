@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:34:05 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/18 16:44:17 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:53:06 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	move_dot(int key_code, t_game *mlx)
 	// printf("pa: %f\n", mlx->player.pa);
 	if (key_code == 119) //W KEY
 	{
-		mlx->player.pdx = cos(mlx->player.pa) * 5;
-		mlx->player.pdy = sin(mlx->player.pa) * 5;
 		mlx->player.pos_x += mlx->player.pdx;
 		mlx->player.pos_y += mlx->player.pdy;
 	}
@@ -34,8 +32,6 @@ void	move_dot(int key_code, t_game *mlx)
 	}
 	else if (key_code == 115) //S KEY
 	{
-		mlx->player.pdx = cos(mlx->player.pa) * 5;
-		mlx->player.pdy = sin(mlx->player.pa) * 5;
 		mlx->player.pos_x -= mlx->player.pdx;
 		mlx->player.pos_y -= mlx->player.pdy;
 	}

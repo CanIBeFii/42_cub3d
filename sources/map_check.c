@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 18:16:50 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:53:20 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	player_orientation(t_game *mlx, int i, int x)
 		mlx->player.pa = PI;
 	else if (mlx->map[i][x] == 'E')
 		mlx->player.pa = 0;
+	mlx->player.pdx = cos(mlx->player.pa) * 5;
+	mlx->player.pdy = sin(mlx->player.pa) * 5;
 	mlx->player.pos_x = x * 64 + 32;
 	mlx->player.pos_y = (i - mlx->map_info.last_line_info_elem - 1) * 64 + 32;
 }
