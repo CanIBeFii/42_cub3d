@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:21:35 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/15 18:31:25 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:43:33 by canibefii        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ void	assign_path_to_info(t_map_info info, char *line)
 {
 	int	iter;
 
-	iter = 0;
+	iter = 1;
+	if (line[iter] != ' ')
+		iter += 1;
+	while (line[iter] == ' ')
+		iter += 1;
+	if (ft_strncmp("NO", line, 2) == 0)
+		
 }
 
 int	is_possible_line(char *line)
