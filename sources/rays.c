@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:50 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 16:51:52 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:58:03 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0)
 	t_vector	end;
 	float		x;
 	float		y;
-	int	i;
+	int			i;
 
 	i = 1;
 	x = i * cos(mlx->player.pa + loop)+ x0;
@@ -44,6 +44,6 @@ void	draw_rays(t_game *mlx, float x0, float y0, float loop)
 		begin.y = y0;
 		end = get_end_ray_cordinates(mlx, loop, x0, y0);
 		bresenham_algo(begin, end, mlx);
-		loop += 0.01;
+		loop += 0.017;
 	}
 }
