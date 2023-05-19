@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:27:37 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:20:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define A_KEY 97
 # define S_KEY 115
 # define D_KEY 100
+# define L_ARROW 65361
+# define R_ARROW 65363
+# define ESC_KEY 65307
 
 typedef struct s_bresenham
 {
@@ -118,7 +121,8 @@ void		free_double_array(char **double_array);
 
 //MOVEMENT.C
 void		move_dot(int key_code, t_game *mlx);
-void		check_movement_keys(int key_code, t_game *mlx);
+void		movement_keys(int key_code, t_game *mlx);
+void		direction_keys(int key_code, t_game *mlx);
 
 //DRAW.C
 void		draw_square(t_game *mlx, int x, int y, int color);
