@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:26:43 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/12 18:39:12 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:01:29 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	bresenham_algo(t_vector begin, t_vector end, t_game *mlx)
 		my_mlx_pixel_put(&mlx->img, begin.x, begin.y, 0x00F0ABD7);
 }
 
-void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx, t_bresenham algo)
+void	bresenham_loop(t_vector begin, t_vector end, t_game *mlx,
+	t_bresenham algo)
 {
 	while (begin.x != end.x || begin.y != end.y)
 	{

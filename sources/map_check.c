@@ -6,11 +6,12 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:36:59 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/18 16:53:20 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:26:50 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 void	player_orientation(t_game *mlx, int i, int x)
 {
 	if (mlx->map[i][x] == 'S')

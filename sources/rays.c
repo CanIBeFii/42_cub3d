@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:50 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/17 17:58:03 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:06:01 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0)
 	int			i;
 
 	i = 1;
-	x = i * cos(mlx->player.pa + loop)+ x0;
-	y = i * sin(mlx->player.pa + loop)+ y0;
+	x = i * cos(mlx->player.pa + loop) + x0;
+	y = i * sin(mlx->player.pa + loop) + y0;
 	while (mlx->map_layout[(int)y / 64][(int)x / 64] != '1')
 	{
 		i++;
-		x = i * cos(mlx->player.pa + loop)+ x0;
-		y = i * sin(mlx->player.pa + loop)+ y0;
+		x = i * cos(mlx->player.pa + loop) + x0;
+		y = i * sin(mlx->player.pa + loop) + y0;
 	}
 	end.x = x;
 	end.y = y;

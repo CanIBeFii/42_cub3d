@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   my_mlx_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:41:52 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:02:46 by mibernar         ###   ########.fr       */
+/*   Created: 2023/05/19 16:08:25 by mibernar          #+#    #+#             */
+/*   Updated: 2023/05/19 16:10:26 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_double_array(char **double_array)
+void	my_img_clear(t_game *mlx)
 {
+	int	j;
 	int	i;
 
-	i = 0;
-	if (double_array == NULL)
-		return ;
-	while (double_array[i])
+	j = 0;
+	while (j < (mlx->map_info.map_y * 64))
 	{
-		free(double_array[i]);
-		i++;
+		i = 0;
+		while (i < (mlx->map_info.map_x * 64))
+		{
+			my_mlx_pixel_put(&mlx->img, i, j, 0x000000);
+			i++;
+		}
+		j++;
 	}
-	free(double_array);
+}
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

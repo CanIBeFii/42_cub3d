@@ -6,37 +6,11 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 16:39:04 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:48:43 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	my_img_clear(t_game *mlx)
-{
-	int	j;
-	int	i;
-
-	j = 0;
-	while (j < (mlx->map_info.map_y * 64))
-	{
-		i = 0;
-		while (i < (mlx->map_info.map_x * 64))
-		{
-			my_mlx_pixel_put(&mlx->img, i, j, 0x000000);
-			i++;
-		}
-		j++;
-	}
-}
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
 
 void	draw_map(t_game *mlx)
 {
@@ -66,30 +40,25 @@ void	draw_line(t_game *mlx, float x2, float y2, int color)
 	int		dx;
 	int		dy;
 	int		i;
-	int		x;
-	int		y;
 
 	dx = x2 - mlx->player.pos_x;
 	dy = y2 - mlx->player.pos_y;
+	i = 1;
 	if (dx >= 0)
 	{
-		i = 1;
 		while (i <= dx)
 		{
-			x = mlx->player.pos_x + (i * dx) / dx;
-			y = mlx->player.pos_y + (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x, y, color);
+			my_mlx_pixel_put(&mlx->img, mlx->player.pos_x + (i * dx) / dx,
+				mlx->player.pos_y + (i * dy) / dx, color);
 			i++;
 		}
 	}
 	else
 	{
-		i = 1;
 		while (i <= -dx)
 		{
-			x = mlx->player.pos_x - (i * dx) / dx;
-			y = mlx->player.pos_y - (i * dy) / dx;
-			my_mlx_pixel_put(&mlx->img, x, y, color);
+			my_mlx_pixel_put(&mlx->img, mlx->player.pos_x - (i * dx) / dx,
+				mlx->player.pos_y - (i * dy) / dx, color);
 			i++;
 		}
 	}
