@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:34:05 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 17:16:55 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:10:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	movement_keys(int key_code, t_game *mlx)
 	}
 	else if (key_code == A_KEY)
 	{
-		mlx->player.pos_x += mlx->player.pdx;
-		mlx->player.pos_y += mlx->player.pdy;
+		mlx->player.pos_x += cos(mlx->player.pa - (PI / 2)) * 5;
+		mlx->player.pos_y += sin(mlx->player.pa - (PI / 2)) * 5;
 	}
 	else if (key_code == S_KEY)
 	{
@@ -51,8 +51,8 @@ void	movement_keys(int key_code, t_game *mlx)
 	}
 	else if (key_code == D_KEY)
 	{
-		mlx->player.pos_x += mlx->player.pdx;
-		mlx->player.pos_y += mlx->player.pdy;
+		mlx->player.pos_x += cos(mlx->player.pa + (PI / 2)) * 5;
+		mlx->player.pos_y += sin(mlx->player.pa + (PI / 2)) * 5;
 	}
 }
 
