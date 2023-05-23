@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:34:05 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/22 18:10:10 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:13:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	move_dot(int key_code, t_game *mlx)
 {
 	movement_keys(key_code, mlx);
 	direction_keys(key_code, mlx);
-	my_img_clear(mlx);
-	draw_map(mlx);
-	draw_player(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
-	draw_line(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
+	my_img_clear(mlx, mlx->img);
+	// draw_map(mlx);
+	// draw_player(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
+	// draw_line(mlx, mlx->player.pos_x, mlx->player.pos_y, 0x00FF0000);
 	draw_rays(mlx, mlx->player.pos_x, mlx->player.pos_y, -(PI / 6));
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->window, mlx->img.img, 0, 0);
 }

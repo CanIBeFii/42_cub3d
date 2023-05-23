@@ -6,13 +6,13 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 16:08:25 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:10:26 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:04:18 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_img_clear(t_game *mlx)
+void	my_img_clear(t_game *mlx, t_data data)
 {
 	int	j;
 	int	i;
@@ -23,7 +23,7 @@ void	my_img_clear(t_game *mlx)
 		i = 0;
 		while (i < (mlx->map_info.map_x * 64))
 		{
-			my_mlx_pixel_put(&mlx->img, i, j, 0x000000);
+			my_mlx_pixel_put(&data, i, j, 0x000000);
 			i++;
 		}
 		j++;

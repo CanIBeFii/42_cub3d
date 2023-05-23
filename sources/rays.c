@@ -6,11 +6,19 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:50 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:06:01 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:03:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+float	get_distance(t_vector begin, t_vector end)
+{
+	float	distance;
+
+	distance = sqrt(pow(end.x - begin.x, 2) + pow(end.y - begin.y, 2));
+	return (distance);
+}
 
 t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0)
 {
@@ -37,13 +45,20 @@ void	draw_rays(t_game *mlx, float x0, float y0, float loop)
 {
 	t_vector	begin;
 	t_vector	end;
+	float		distance;
+	int			ray_id;
 
+	ray_id = 1;
 	while (loop < PI / 6)
 	{
+		printf("%d\n", ray_id);
 		begin.x = x0;
 		begin.y = y0;
 		end = get_end_ray_cordinates(mlx, loop, x0, y0);
-		bresenham_algo(begin, end, mlx);
-		loop += 0.017;
+		// bresenham_algo(begin, end, mlx);
+		distance = get_distance(begin, end);
+		draw_3d(mlx, distance, ray_id);
+		loop += 0.017 / 2;
+		ray_id++;
 	}
 }

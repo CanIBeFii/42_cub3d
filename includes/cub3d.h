@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 17:20:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:04:31 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # include <math.h>
 # include <mlx.h>
 # include "./libft.h"
+
+//SCREEN SIZW
+
+# define SCREEN_H 1080
+# define SCREEN_W 1920
+
+//PI
 
 # define PI 3.1415926535
 
@@ -87,10 +94,12 @@ typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*window;
+	void		*map_window;
 	t_vector	window_size;
 	t_map		map_info;
 	t_player	player;
 	t_data		img;
+	t_data		map_img;
 	char		**map;
 	char		**map_layout;
 }t_game;
@@ -141,7 +150,14 @@ void		draw_rays(t_game *mlx, float x2, float y2, float loop);
 t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0);
 
 //MY_MLX_FUNCTIONS.C
-void		my_img_clear(t_game *mlx);
+void		my_img_clear(t_game *mlx, t_data data);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+//3D.C
+void		draw_ceiling(t_game *mlx, float distance, int ray_id);
+void		draw_floor(t_game *mlx, float distance, int ray_id);
+void		draw_walls(t_game *mlx, float distance, int ray_id);
+void		draw_3d(t_game *mlx, float distance, int ray_id);
+
 
 #endif
