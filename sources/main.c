@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/23 17:12:59 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:30:49 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	game_init(t_game mlx)
 {
 	mlx.mlx_ptr = mlx_init();
-	mlx.window = mlx_new_window(mlx.mlx_ptr, SCREEN_W, SCREEN_H, "cub3d");
-	mlx.img.img = mlx_new_image(mlx.mlx_ptr, SCREEN_W, SCREEN_H);
+	mlx.window = mlx_new_window(mlx.mlx_ptr, SCREEN_W * 2, SCREEN_H, "cub3d");
+	mlx.img.img = mlx_new_image(mlx.mlx_ptr, SCREEN_W * 2, SCREEN_H);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
 			&mlx.img.line_length, &mlx.img.endian);
-	// draw_map(&mlx);
-	// draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
-	// draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
+	draw_map(&mlx);
+	draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
+	draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
 	draw_rays(&mlx, mlx.player.pos_x, mlx.player.pos_y, -(PI / 6));
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.window, mlx.img.img, 0, 0);
 	mlx_hook(mlx.window, 17, 0L, close_window, &mlx);

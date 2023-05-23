@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/19 16:48:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:29:23 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	draw_map(t_game *mlx)
 		while (mlx->map[i][x] && mlx->map[i][x] != '\n')
 		{
 			if (mlx->map[i][x] == '1')
-				draw_square(mlx, x * 64, (i - start - 1) * 64, 0x00FFFFFF);
+				draw_square(mlx, (x * 64) + SCREEN_W, (i - start - 1) * 64, 0x00FFFFFF);
 			else
-				draw_square(mlx, x * 64, (i - start - 1) * 64, 0x00000000);
+				draw_square(mlx, (x * 64) + SCREEN_W, (i - start - 1) * 64, 0x00000000);
 			x++;
 		}
 		i++;
@@ -48,7 +48,7 @@ void	draw_line(t_game *mlx, float x2, float y2, int color)
 	{
 		while (i <= dx)
 		{
-			my_mlx_pixel_put(&mlx->img, mlx->player.pos_x + (i * dx) / dx,
+			my_mlx_pixel_put(&mlx->img, (mlx->player.pos_x + (i * dx) / dx),
 				mlx->player.pos_y + (i * dy) / dx, color);
 			i++;
 		}
@@ -99,7 +99,7 @@ void	draw_player(t_game *mlx, int x, int y, int color)
 		j = -7;
 		while (j < 8)
 		{
-			my_mlx_pixel_put(&mlx->img, x + i, y + j, color);
+			my_mlx_pixel_put(&mlx->img, (x + i) + SCREEN_W, y + j, color);
 			j++;
 		}
 		i++;

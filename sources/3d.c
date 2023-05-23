@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/23 17:12:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:34:23 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_walls(t_game *mlx, float distance, int ray_id)
 		x = (ray_id - 1) * 12;
 		while (x < SCREEN_H)
 		{
-			my_mlx_pixel_put(&mlx->img, x, y, 0x000000);
+			my_mlx_pixel_put(&mlx->img, x, y, 0x00FF00);
 			x++;
 		}
 		y++;
@@ -70,5 +70,5 @@ void	draw_3d(t_game *mlx, float distance, int ray_id)
 {
 	draw_ceiling(mlx, distance, ray_id);
 	draw_floor(mlx, distance, ray_id);
-	draw_walls(mlx, distance, ray_id);
+	// draw_walls(mlx, distance, ray_id);
 }
