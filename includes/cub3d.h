@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/23 17:04:31 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:54:16 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		draw_ceiling(t_game *mlx, float distance, int ray_id);
 void		draw_floor(t_game *mlx, float distance, int ray_id);
 void		draw_walls(t_game *mlx, float distance, int ray_id);
-void		draw_3d(t_game *mlx, float distance, int ray_id);
-
+void		draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle);
 
 #endif

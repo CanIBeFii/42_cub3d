@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:50 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/24 12:57:30 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:54:14 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	draw_rays(t_game *mlx, float x0, float y0, float loop)
 	ray_id = 1;
 	while (loop < PI / 6)
 	{
-		printf("%d\n", ray_id);
+		// printf("%d\n", ray_id);
 		begin.x = x0;
 		begin.y = y0;
 		end = get_end_ray_cordinates(mlx, loop, x0, y0);
 		// bresenham_algo(begin, end, mlx);
 		distance = get_distance(begin, end);
-		draw_3d(mlx, distance, ray_id);
+		draw_3d(mlx, distance, ray_id, loop);
 		loop += 0.017 / 2;
 		ray_id++;
 	}
