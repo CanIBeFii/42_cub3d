@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/15 16:56:22 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:06:49 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		game_init(t_game mlx);
 
 t_map		*parser(char *path);
 
-t_map_info	get_map_info(int fd, char *path);
+t_map_info	get_map_info(int fd);
 
 int			has_all_info(t_map_info info);
 
