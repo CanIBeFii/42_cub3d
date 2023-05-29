@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:21:35 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/29 17:44:32 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:47:56 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,13 @@ void	assign_path_to_info(t_map_info info, char *line)
 {
 	int	iter;
 
-	iter = 0;
-	if (ft_strncmop("F", line, 1) == 0 || ft_strncmp("C", line, 1) == 0)
-	{
-
-	}
-	else
-	{
+	iter = 1;
+	if (line[iter] != ' ')
+		iter += 1;
+	while (line[iter] == ' ')
+		iter += 1;
+	if (ft_strncmp("NO", line, 2) == 0)
 		
-	}
 }
 
 int	is_possible_line(char *line)
