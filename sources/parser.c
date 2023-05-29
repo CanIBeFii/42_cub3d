@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:21:35 by canibefii         #+#    #+#             */
-/*   Updated: 2023/05/15 18:31:25 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:44:32 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_map	*parser(char *path)
 	fd = is_valid_file(path);
 	if (fd == -1)
 		return (NULL);
-
 }
 
 t_map_info	get_map_info(int fd)
@@ -33,7 +32,7 @@ t_map_info	get_map_info(int fd)
 	{
 		if (is_possible_line(line) == 1)
 		{
-			
+			assign_path_to_info(info, line);
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -45,6 +44,14 @@ void	assign_path_to_info(t_map_info info, char *line)
 	int	iter;
 
 	iter = 0;
+	if (ft_strncmop("F", line, 1) == 0 || ft_strncmp("C", line, 1) == 0)
+	{
+
+	}
+	else
+	{
+		
+	}
 }
 
 int	is_possible_line(char *line)
