@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/29 17:06:49 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:47:09 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ int			has_all_info(t_map_info info);
 int			is_valid_file(char *path);
 
 int			check_file_type(char *path);
+
+// COLOR.C
+
+int			str_to_color(char *str);
+
+int			get_color(int r, int g, int b);
 
 //WINDOW_MANAGEMENT.C
 int			close_window(t_game *mlx);
