@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/25 16:54:16 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:58:30 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 //SCREEN SIZW
 
-# define SCREEN_H 1080
-# define SCREEN_W 1920
+# define SCREEN_H 1900
+# define SCREEN_W 1900
 
 //PI
 
@@ -154,8 +154,8 @@ void		my_img_clear(t_game *mlx, t_data data);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //3D.C
-void		draw_ceiling(t_game *mlx, float distance, int ray_id);
-void		draw_floor(t_game *mlx, float distance, int ray_id);
+void		draw_ceiling(t_game *mlx);
+void		draw_floor(t_game *mlx);
 void		draw_walls(t_game *mlx, float distance, int ray_id);
 void		draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle);
 
