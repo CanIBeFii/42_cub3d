@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:47:09 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:33:21 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_map_info
 
 typedef struct s_map
 {
-	t_map_info	info;
+	t_map_info	*info;
 	char		**map;
 	int			map_x;
 	int			map_y;
@@ -113,15 +113,21 @@ void		game_init(t_game mlx);
 
 t_map		*parser(char *path);
 
-t_map_info	get_map_info(int fd);
+t_map_info	*get_map_info(int fd);
 
-int			has_all_info(t_map_info info);
+int			assign_path_to_info(t_map_info *info, char *line);
+
+int			is_possible_line(char *line);
+
+int			has_all_info(t_map_info *info);
 
 // PARSER_UTILS.C
 
 int			is_valid_file(char *path);
 
 int			check_file_type(char *path);
+
+t_map_info	*init_info(void);
 
 // COLOR.C
 
@@ -147,7 +153,10 @@ int			check_map_elements(t_game *mlx, char *line);
 int			check_map_characters(char c);
 
 //FREE.C
+
 void		free_double_array(char **double_array);
+
+void		free_map_info(t_map_info *info);
 
 //MOVEMENT.C
 void		move_dot(int key_code, t_game *mlx);
