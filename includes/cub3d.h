@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:58:30 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:55:58 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_player
 	float	pdx;
 	float	pdy;
 	float	pa;
-}t_player;
+}	t_player;
 
 typedef struct s_map
 {
@@ -73,13 +73,28 @@ typedef struct s_map
 	int	last_line_info_elem;
 	int	map_x;
 	int	map_y;
-}t_map;
+}	t_map;
 
-typedef struct s_vector
+typedef struct s_vector_int
 {
 	int	x;
 	int	y;
-}t_vector;
+}	t_vector_i;
+
+typedef struct s_vector_float
+{
+	float	x;
+	float	y;
+}	t_vector_f;
+
+typedef struct s_dda
+{
+	t_vector_f	ray_distance;
+	t_vector_f	step_unit_size;
+	t_vector_f	player_pos;
+	t_vector_i	map_pos;
+	t_vector_i	line_step;
+}	t_dda;
 
 typedef struct s_data
 {
@@ -88,21 +103,21 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}t_data;
+}	t_data;
 
 typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*window;
 	void		*map_window;
-	t_vector	window_size;
+	t_vector_i	window_size;
 	t_map		map_info;
 	t_player	player;
 	t_data		img;
 	t_data		map_img;
 	char		**map;
 	char		**map_layout;
-}t_game;
+}	t_game;
 
 //MAIN.C
 void		cub3d(int fd, char *path);
@@ -140,14 +155,14 @@ void		draw_map(t_game *mlx);
 void		draw_player(t_game *mlx, int x, int y, int color);
 
 //BRESENHAM.C
-void		bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
-void		bresenham_loop(t_vector begin, t_vector end, t_game *mlx,
+void		bresenham_algo(t_vector_i begin, t_vector_i end, t_game *mlx);
+void		bresenham_loop(t_vector_i begin, t_vector_i end, t_game *mlx,
 				t_bresenham algo);
-t_bresenham	bresenham_init(t_vector begin, t_vector end);
+t_bresenham	bresenham_init(t_vector_i begin, t_vector_i end);
 
 //RAYS.C
 void		draw_rays(t_game *mlx, float x2, float y2, float loop);
-t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0);
+t_vector_i	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0);
 
 //MY_MLX_FUNCTIONS.C
 void		my_img_clear(t_game *mlx, t_data data);
