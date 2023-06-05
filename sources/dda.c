@@ -3,24 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: canibefii <canibefii@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 11:02:55 by canibefii         #+#    #+#             */
-/*   Updated: 2023/06/04 11:52:50 by canibefii        ###   ########.fr       */
+/*   Updated: 2023/06/05 16:22:17 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
-vector2D_int {
-	int x;
-	int y;
+t_vector_f	get_angle_vector(float angle)
+{
+	t_vector_f	vector;
+
+	vector.x = cos(angle);
+	vector.y = sin(angle);
+	return (vector);
 }
 
-vector2D_float {
-	float x;
-	float y;
+t_vector_f	get_ray_distance(t_vector_f angle, t_vector_f player_pos
+	, t_vector_i map_pos, t_vector_f step_unit_size)
+{
+	t_vector_f	ray_distance;
+
+	if (angle.x < 0)
+		ray_distance.x = (player_pos.x - map_pos.x) * step_unit_size.x;
+	else
+		ray_distance.x = ((map_pos.x + 1) - player_pos.x) * step_unit_size.x;
+	if (angle.y < 0)
+		ray_distance.y = (player_pos.y - map_pos.y) * step_unit_size.y;
+	else
+		ray_distance.y = ((map_pos.y + 1) - player_pos.y) * step_unit_size.y;
+	return (ray_distance);
 }
+
+t_dda	init_dda_info(t_vector_f player_pos, t_vector_f angle)
+{
+	t_dda	dda;
+
+	dda.step_unit_size.x = abs(1 / angle.x);//sqrt(1 + (angle.y / angle.x)) * (angle.y / angle.x);
+	dda.step_unit_size.y = abs(1 / angle.y);//sqrt(1 + (angle.x / angle.y)) * (angle.x / angle.y);
+	if (angle.x < 0)
+	{
+		dda.line_step.x = -1;
+		dda.ray_distance.x = (player_pos.x - (int)player_pos.x)
+			* dda.step_unit_size.x;
+	}
+	return (dda);
+}
+
+t_vector_f	calculate_distance(t_vector_f player_pos, t_vector_f angle)
+{
+	t_vector_f	step_unit_size;
+	t_vector_i	map_pos;
+	t_vector_i	line_step;
+	t_dda		dda;
+
+	step_unit_size.x = sqrt(1 + (angle.y / angle.x)) * (angle.y / angle.x);
+	step_unit_size.y = sqrt(1 + (angle.x / angle.y)) * (angle.x / angle.y);
+	ray_distance = get_ray_distance(angle, (t_vector_f)player_pos,
+			map_pos, step_unit_size);
+	if (angle.x < 0)
+		line_step.x = -1;
+	else
+		line_step.x = 1;
+	if (angle.y < 0)
+		line_step.y = -1;
+	else
+		line_step.y = 1;
+	
+}
+
+
+
 
 void	dda(void)
 {
@@ -55,7 +110,6 @@ void	dda(void)
 		lineStep.y = 1;
 		rayDistance.y = (float(mapPos.y + 1) - playerPos.y) * rayStepSize.y;
 	}
-	
 	float maxDistance;
 	float distance;
 	int hitWall;
@@ -86,11 +140,11 @@ void	dda(void)
 		}
 	}
 	
+	vector2D_float distanceToWall;
 	if (hitWall == 1)
 	{
-		if (distance == rayDistance.x)
-			distance = distance * cos(angle.x - playerPos.x) * 2;
-		else
-			distance = distance * cos(angle.y - playerPos.y) * 2;
+		distanceToWall.x = playerPos.x + angle.x * distance;
+		distanceToWall.y = playerPos.y + angle.y * distance;
 	}
+	return distanceToWall;
 }
