@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:58:30 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:20:09 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 
 //SCREEN SIZW
 
-# define SCREEN_H 1900
-# define SCREEN_W 1900
+# define SCREEN_H 720
+# define SCREEN_W 1080
 
 //PI
 
-# define PI 3.1415926535
+# define PI 		3.1415926535
+# define FOV		(PI / 3)
+# define NB_RAYS	120
 
 //KEY_CODES
 

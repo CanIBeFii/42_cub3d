@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:55:11 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:22:05 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	draw_walls(t_game *mlx, float w_height, int ray_id)
 	y = (SCREEN_H / 2) - (w_height / 2);
 	while (y < (SCREEN_H / 2) - (w_height / 2) + w_height)
 	{
-		x = (ray_id - 1) * 10;
-		while (x < (ray_id * 10))
+		x = (ray_id - 1) * (SCREEN_W / NB_RAYS);
+		while (x < ray_id * (SCREEN_W / NB_RAYS))
 		{
 			my_mlx_pixel_put(&mlx->img, x, y, 0x00FF00);
 			x++;
@@ -72,7 +72,7 @@ void	draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle)
 
 	distance = distance * cos(ray_angle);
 	// if (ray_angle == 0)
-		printf("distance: %f\n", distance);
+		// printf("distance: %f\n", distance);
 	w_height = (64 * SCREEN_H) / distance;
 	draw_walls(mlx, w_height, ray_id);
 }
