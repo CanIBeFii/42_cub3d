@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 14:44:32 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:58:11 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define PI 		3.1415926535
 # define FOV		(PI / 3)
-# define NB_RAYS	120
+# define NB_RAYS	240
 
 //KEY_CODES
 
