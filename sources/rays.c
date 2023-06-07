@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:50 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/06 19:22:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:27:55 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_rays(t_game *mlx, float x0, float y0, float loop)
 		begin.y = y0;
 		end = get_end_ray_cordinates(mlx, loop, x0, y0);
 		// bresenham_algo(begin, end, mlx);
-		distance = get_distance(begin, end);
+		distance = get_distance(begin, end) * 1.2;
 		draw_3d(mlx, distance, ray_id, loop);
 		loop += (FOV / NB_RAYS);
 		// printf("%d\n loop: %f\n", ray_id, loop);

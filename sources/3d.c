@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 12:13:18 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:21:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle)
 	float	w_height;
 
 	distance = distance * cos(ray_angle);
-	// if (ray_angle == 0)
-		// printf("distance: %f\n", distance);
 	w_height = (64 * SCREEN_H) / distance;
 	if (w_height > SCREEN_H)
 		w_height = SCREEN_H;
