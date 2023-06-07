@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/06 19:20:09 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:08:30 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 //SCREEN SIZW
 
-# define SCREEN_H 720
-# define SCREEN_W 1080
+# define SCREEN_H 1080
+# define SCREEN_W 1920
 
 //PI
 
