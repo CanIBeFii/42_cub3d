@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 14:58:11 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:53:37 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@
 # include <mlx.h>
 # include "./libft.h"
 
-//SCREEN SIZW
+//SCREEN SIZE
 
 # define SCREEN_H 1720
 # define SCREEN_W 1920
+
+//TEXTURES
+
+# define NB_PIXLES_H 8
+# define NB_PIXLES_W 8
 
 //PI
 
@@ -83,6 +88,14 @@ typedef struct s_vector
 	int	y;
 }t_vector;
 
+typedef struct s_ray
+{
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+}t_ray;
+
 typedef struct s_data
 {
 	void	*img;
@@ -102,6 +115,7 @@ typedef struct s_game
 	t_player	player;
 	t_data		img;
 	t_data		map_img;
+	t_ray		*ray;
 	char		**map;
 	char		**map_layout;
 }t_game;
