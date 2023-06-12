@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/05 15:55:58 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:00:53 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 
 //PI
 
-# define PI 3.1415926535
+# define PI 		3.1415926535
+# define FOV		(PI / 3)
+# define NB_RAYS	240
 
 //KEY_CODES
 
