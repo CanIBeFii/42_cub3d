@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/13 16:36:22 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:02:42 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_game
 	t_ray		ray;
 	char		**map;
 	char		**map_layout;
+	char		**texture;
 }t_game;
 
 //MAIN.C
@@ -179,5 +180,7 @@ void		draw_ceiling(t_game *mlx);
 void		draw_floor(t_game *mlx);
 void		draw_walls(t_game *mlx, float distance, int ray_id);
 void		draw_3d(t_game *mlx, int ray_id);
+
+void	save_texture_array(t_game *mlx);
 
 #endif

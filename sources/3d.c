@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/13 16:38:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:18:28 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ void	draw_floor(t_game *mlx)
 	}
 }
 
+void	save_texture_array(t_game *mlx)
+{
+	int	fd;
+	int	x;
+
+	fd = open("./textures/south_wall.txt", O_RDONLY);
+	if (fd < 0)
+		return ;
+	mlx->texture = malloc(sizeof(char *) * (NB_PIXLES_H + 1));
+	if (!mlx->texture)
+		return ;
+	x = -1;
+	while (++x <= 8)
+		mlx->texture[x] = get_next_line(fd);
+}
+
 void	draw_walls(t_game *mlx, float w_height, int ray_id)
 {
 	int		x;
@@ -70,7 +86,7 @@ void	draw_3d(t_game *mlx, int ray_id)
 {
 	float	w_height;
 
-	printf("here %f\n", mlx->ray.distance);
+	// printf("here %f\n", mlx->ray.distance);
 	mlx->ray.distance = mlx->ray.distance * cos(mlx->ray.ray_angle);
 	w_height = (64 * SCREEN_H) / mlx->ray.distance;
 	if (w_height > SCREEN_H)

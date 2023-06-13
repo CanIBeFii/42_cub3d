@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:43:44 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:14:01 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	game_init(t_game mlx)
 	mlx.img.img = mlx_new_image(mlx.mlx_ptr, SCREEN_W, SCREEN_H);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
 			&mlx.img.line_length, &mlx.img.endian);
+			
 	// draw_map(&mlx);
 	// draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
 	// draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
@@ -58,6 +59,7 @@ void	cub3d(int fd, char *path)
 		perror("ERROR: invalid map");
 		return ;
 	}
+	save_texture_array(&mlx);
 	game_init(mlx);
 }
 
