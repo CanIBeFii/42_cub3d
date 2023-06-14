@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/13 19:02:42 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:57:42 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@
 
 //TEXTURES
 
-# define NB_PIXLES_H 8
-# define NB_PIXLES_W 8
+# define NB_PIXELS_H 8
+# define NB_PIXELS_W 8
+
+//COLORS
+
+# define WHITE 0xFFFFFF
+# define GREEEN 0x00FF00
 
 //PI
 
@@ -181,6 +186,6 @@ void		draw_floor(t_game *mlx);
 void		draw_walls(t_game *mlx, float distance, int ray_id);
 void		draw_3d(t_game *mlx, int ray_id);
 
-void	save_texture_array(t_game *mlx);
+void		save_texture_array(t_game *mlx);
 
 #endif
