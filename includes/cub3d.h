@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/14 14:57:42 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:59:52 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 //COLORS
 
 # define WHITE 0xFFFFFF
-# define GREEEN 0x00FF00
+# define GREEN 0x00FF00
 
 //PI
 

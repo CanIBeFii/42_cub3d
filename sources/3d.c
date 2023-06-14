@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/14 16:55:52 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:59:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,10 @@ int	get_color(t_game *mlx, int y, float w_height)
 	texture_x = get_texture_x_coor(mlx);
 	texture_y = get_texture_y_coor(y, w_height);
 	color = mlx->texture[texture_x][texture_y] - '0';
-	return (color);
+	if (color == 1)
+		return (WHITE);
+	else
+		return (GREEN);
 }
 
 void	draw_walls(t_game *mlx, float w_height, int ray_id)
