@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 11:02:55 by canibefii         #+#    #+#             */
-/*   Updated: 2023/06/12 16:59:23 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:04:35 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ t_vector_f	get_angle_vector(float angle)
 	vector.x = cos(angle);
 	vector.y = sin(angle);
 	return (vector);
+}
+
+int	is_inside_map(t_vector_i map_pos, t_map *map)
+{
+	if (map_pos.x < map->map_x && map_pos.y < map->map_y
+		&& map_pos.x >= 0 && map_pos.y >= 0)
+		return (1);
+	return (0);
 }
 
 t_vector_f	get_ray_distance(t_vector_f angle, t_vector_f player_pos
@@ -65,15 +73,38 @@ t_dda	init_dda_info(t_vector_f player_pos, t_vector_i map_pos,
 	return (dda);
 }
 
-t_vector_f	calculate_distance(t_vector_f player_pos, t_vector_f angle)
+t_vector_f	calculate_distance(t_vector_f player_pos, t_vector_f angle,
+	t_map *map)
 {
 	t_vector_i	map_pos;
 	t_dda		dda;
+	int			hitwall;
 
 	map_pos.x = (int)player_pos.x;
 	map_pos.y = (int)player_pos.y;
 	dda = init_dda_info(player_pos, map_pos, angle);
+	hitwall = 0;
+	while (hitwall == 0)
+	{
+		if (dda.ray_distance.x < dda.ray_distance.y)
+		{
+			map_pos.x += dda.line_step.x;
+			dda.ray_distance.x += dda.step_unit_size.x;
+		}
+		else
+		{
+			map_pos.y += dda.line_step.y;
+			dda.ray_distance.y += dda.step_unit_size.y;
+		}
+		if (is_inside_map(map_pos, map) == 1
+			&& map->map[map_pos.x][map_pos.y] == 1)
+			hitwall = 1;
+		else if (is_inside_map(map_pos, map) == 0)
+			hitwall = 2;
+	}
+	return (dda.ray_distance);
 }
+
 
 void	dda(void)
 {

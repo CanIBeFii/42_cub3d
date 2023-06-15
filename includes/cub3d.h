@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 15:00:53 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:58:37 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,16 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	int	north;
-	int	south;
-	int	west;
-	int	east;
-	int	ceiling;
-	int	floor;
-	int	last_line_info_elem;
-	int	map_x;
-	int	map_y;
+	int		north;
+	int		south;
+	int		west;
+	int		east;
+	int		ceiling;
+	int		floor;
+	int		last_line_info_elem;
+	int		map_x;
+	int		map_y;
+	char	**map;
 }	t_map;
 
 typedef struct s_vector_int
@@ -176,4 +177,18 @@ void		draw_floor(t_game *mlx);
 void		draw_walls(t_game *mlx, float distance, int ray_id);
 void		draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle);
 
+// DDA.C
+
+t_vector_f	get_angle_vector(float angle);
+
+int			inside_map(t_vector_i map_pos, t_map *map);
+
+t_vector_f	get_ray_distance(t_vector_f angle, t_vector_f player_pos,
+				t_vector_i map_pos, t_vector_f step_unit_size);
+
+t_dda		init_dda_info(t_vector_f player_pos, t_vector_i map_pos,
+				t_vector_f angle);
+
+t_vector_f	calculate_distance(t_vector_f player_pos, t_vector_f angle,
+				t_map *map);
 #endif
