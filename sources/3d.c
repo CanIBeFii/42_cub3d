@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 14:21:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:30:48 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,18 @@ void	draw_walls(t_game *mlx, float w_height, int ray_id)
 {
 	int		x;
 	int		y;
+	int		tex_x;
+	int		tex_y;
 
 	y = (SCREEN_H / 2) - (w_height / 2);
-	while (y < (SCREEN_H / 2) - (w_height / 2) + w_height)
+	tex_x = (int)w_height * 64;
+	while (y <= (SCREEN_H / 2) - (w_height / 2) && y <= SCREEN_H)
 	{
+		tex_y = (y - (SCREEN_H / 2) - (w_height / 2) * 64);
 		x = (ray_id - 1) * (SCREEN_W / NB_RAYS);
 		while (x < ray_id * (SCREEN_W / NB_RAYS))
 		{
-			my_mlx_pixel_put(&mlx->img, x, y, 0x00FF00);
+			my_mlx_pixel_put(&mlx->img, x, y, get_color());
 			x++;
 		}
 		y++;

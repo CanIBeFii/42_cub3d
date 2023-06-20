@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/07 14:58:11 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:37:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@
 # include <mlx.h>
 # include "./libft.h"
 
-//SCREEN SIZW
+//BIG SCREEN SIZE
 
-# define SCREEN_H 1720
-# define SCREEN_W 1920
+// # define SCREEN_H 1720
+// # define SCREEN_W 1920
+
+//SMALL SCREEN SIZE
+
+# define SCREEN_H 520
+# define SCREEN_W 720
 
 //PI
 
@@ -92,6 +97,17 @@ typedef struct s_data
 	int		endian;
 }t_data;
 
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	char	*data;
+	t_data	texture_data;
+	int		fd;
+	int		w;
+	int		h;
+}	t_texture;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
@@ -100,6 +116,7 @@ typedef struct s_game
 	t_vector	window_size;
 	t_map		map_info;
 	t_player	player;
+	t_texture	texture;
 	t_data		img;
 	t_data		map_img;
 	char		**map;
