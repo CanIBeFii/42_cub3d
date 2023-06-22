@@ -6,11 +6,17 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/13 19:14:01 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:15:30 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	open_textures(t_game *mlx)
+{
+	mlx->texture.img = mlx_xpm_file_to_image(mlx->mlx_ptr, "./textures/no.xpm",
+			&mlx->texture_size.x, &mlx->texture_size.y);
+}
 
 void	game_init(t_game mlx)
 {
@@ -19,7 +25,8 @@ void	game_init(t_game mlx)
 	mlx.img.img = mlx_new_image(mlx.mlx_ptr, SCREEN_W, SCREEN_H);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
 			&mlx.img.line_length, &mlx.img.endian);
-			
+
+	open_textures(&mlx);
 	// draw_map(&mlx);
 	// draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
 	// draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
@@ -59,7 +66,6 @@ void	cub3d(int fd, char *path)
 		perror("ERROR: invalid map");
 		return ;
 	}
-	save_texture_array(&mlx);
 	game_init(mlx);
 }
 

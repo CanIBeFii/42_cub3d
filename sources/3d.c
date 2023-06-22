@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/14 16:59:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:15:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,103 +48,40 @@ void	draw_floor(t_game *mlx)
 	}
 }
 
-void	save_texture_array(t_game *mlx)
+int	get_color(int tex_x, int tex_y, int i, t_data *curr)
 {
-	int	fd;
-	int	x;
+	int			bpp;
+	char		*data;
+	int			color;
+	int			pixel_index;
 
-	fd = open("./textures/south_wall.txt", O_RDONLY);
-	if (fd < 0)
-		return ;
-	mlx->texture = malloc(sizeof(char *) * (NB_PIXELS_H + 1));
-	if (!mlx->texture)
-		return ;
-	x = -1;
-	while (++x <= 8)
-		mlx->texture[x] = get_next_line(fd);
-}
-
-// void	draw_walls(t_game *mlx, float w_height, int ray_id)
-// {
-// 	int		x;
-// 	int		y;
-
-// 	y = (SCREEN_H / 2) - (w_height / 2);
-// 	while (y < (SCREEN_H / 2) - (w_height / 2) + w_height)
-// 	{
-// 		x = (ray_id - 1) * (SCREEN_W / NB_RAYS);
-// 		while (x < ray_id * (SCREEN_W / NB_RAYS))
-// 		{
-// 			my_mlx_pixel_put(&mlx->img, x, y, 0x00FF00);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-int	get_texture_x_coor(t_game *mlx)
-{
-	int	x;
-	int	y;
-
-	x = (int)mlx->ray.wall_hit_x;
-	while (x > 64)
-		x /= 64;
-	y = (int)mlx->ray.wall_hit_y;
-	while (y > 64)
-		y /= 64;
-	if ((x % 64) == 0)
-	{
-		x /= 8;
-		return (x);
-	}
-	else
-	{
-		y /= 8;
-		return (y);
-	}
-}
-
-int	get_texture_y_coor(int y, float w_height)
-{
-	int	i;
-
-	y = y - ((SCREEN_H / 2) - (w_height / 2));
-	i = 0;
-	while (i < y)
-		i = i + (w_height / 8);
-	return (i);
-}
-
-int	get_color(t_game *mlx, int y, float w_height)
-{
-	int	texture_x;
-	int	texture_y;
-	int	color;
-
-	texture_x = get_texture_x_coor(mlx);
-	texture_y = get_texture_y_coor(y, w_height);
-	color = mlx->texture[texture_x][texture_y] - '0';
-	if (color == 1)
-		return (WHITE);
-	else
-		return (GREEN);
+	data = mlx_get_data_addr(curr->img, &curr->bits_per_pixel,
+			&curr->line_length, &curr->endian);
+	bpp = curr->bits_per_pixel;
+	bpp /= 8;
+	color = 0;
+	pixel_index = tex_y * 64 + tex_x;
+	i = -1;
+	while (++i < bpp)
+		color |= data[(pixel_index * bpp) + i] << (8 * i);
+	return (color);
 }
 
 void	draw_walls(t_game *mlx, float w_height, int ray_id)
 {
-	int	color;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = (SCREEN_H / 2) - (w_height / 2);
 	while (y < (SCREEN_H / 2) - (w_height / 2) + w_height)
 	{
-		color = get_color(mlx, y, w_height);
 		x = (ray_id - 1) * (SCREEN_W / NB_RAYS);
 		while (x < ray_id * (SCREEN_W / NB_RAYS))
 		{
-			my_mlx_pixel_put(&mlx->img, x, y, color);
+			my_mlx_pixel_put(&mlx->img, x, y, get_color(mlx->texture_size.x *
+						((float)x - ((ray_id - 1) * (SCREEN_W / NB_RAYS))) / ((float)ray_id * (SCREEN_W / NB_RAYS) - ((ray_id - 1) * (SCREEN_W / NB_RAYS))),
+						mlx->texture_size.y * ((float)y - ((SCREEN_H / 2) - (w_height / 2))) / (((SCREEN_H / 2) - (w_height / 2)) + w_height - ((SCREEN_H / 2) - (w_height / 2))), 0,
+						&mlx->texture));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/14 16:59:52 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:14:48 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 
 //BIG SCREEN SIZE
 
-// # define SCREEN_H 1720
-// # define SCREEN_W 1920
+# define SCREEN_H 1720
+# define SCREEN_W 1920
 
 //SMALL SCREEN SIZE
 
-# define SCREEN_H 520
-# define SCREEN_W 720
+// # define SCREEN_H 520
+// # define SCREEN_W 720
 
 //TEXTURES
 
@@ -123,12 +123,13 @@ typedef struct s_game
 	t_vector	window_size;
 	t_map		map_info;
 	t_player	player;
+	t_data		texture;
+	t_vector	texture_size;
 	t_data		img;
 	t_data		map_img;
 	t_ray		ray;
 	char		**map;
 	char		**map_layout;
-	char		**texture;
 }t_game;
 
 //MAIN.C
