@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   file_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:22:58 by fialexan         ###   ########.fr       */
+/*   Created: 2023/07/25 14:21:58 by fialexan          #+#    #+#             */
+/*   Updated: 2023/07/25 14:41:12 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_double_array(char **array)
+void	check_file(int argc, char **argv)
 {
-	int	index;
+	char	*path;
+	int		fd;
+	int		x;
 
-	index = 0;
-	if (array == NULL)
-		return ;
-	while (array[index] != NULL)
+	if (argc != 2)
 	{
-		free(array[index]);
-		index++;
+		perror("ERROR: invalid number of arguments");
+		exit (1);
 	}
-	free(array);
-}
-
-void	free_map(t_map *map)
-{
-	if (map != NULL)
+	path = argv[1];
+	x = ft_strlen(path) - 1;
+	if (path[x] != 'b' || path[x - 1] != 'u' || path[x - 2] != 'c'
+		|| path[x - 3] != '.')
 	{
-		if (map->map != NULL)
-			free_double_array(map->map);
-		if (map->info != NULL)
-			free(map->info);
-		free(map);
+		perror("ERROR: invalid file type");
+		exit (1);
 	}
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		perror("ERROR: can't open file");
+		exit (1);
+	}
+	close(fd);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   3d.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:45:48 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/20 17:30:48 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:35:30 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../old_includes/cub3d.h"
 
 void	draw_ceiling(t_game *mlx)
 {

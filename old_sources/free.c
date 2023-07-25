@@ -3,38 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:22:58 by fialexan         ###   ########.fr       */
+/*   Created: 2023/04/11 18:41:52 by mibernar          #+#    #+#             */
+/*   Updated: 2023/05/19 16:02:46 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_double_array(char **array)
+void	free_double_array(char **double_array)
 {
-	int	index;
+	int	i;
 
-	index = 0;
-	if (array == NULL)
+	i = 0;
+	if (double_array == NULL)
 		return ;
-	while (array[index] != NULL)
+	while (double_array[i])
 	{
-		free(array[index]);
-		index++;
+		free(double_array[i]);
+		i++;
 	}
-	free(array);
-}
-
-void	free_map(t_map *map)
-{
-	if (map != NULL)
-	{
-		if (map->map != NULL)
-			free_double_array(map->map);
-		if (map->info != NULL)
-			free(map->info);
-		free(map);
-	}
+	free(double_array);
 }
