@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 16:24:21 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/07/25 17:14:46 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,21 @@
 
 // TYPEDEF
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_map_info
 {
-	int	north_texture;
-	int	south_texture;
-	int	east_texture;
-	int	west_texture;
-	int	floor_color;
-	int	ceiling_color;
+	int		north_texture;
+	int		south_texture;
+	int		east_texture;
+	int		west_texture;
+	t_rgb	floor_color;
+	t_rgb	ceiling_color;
 }	t_map_info;
 
 typedef struct s_map
@@ -41,10 +48,10 @@ typedef struct s_map
 	int			y;
 }	t_map;
 
-typedef struct s_game
-{
+// typedef struct s_game
+// {
 		
-}	t_game;
+// }	t_game;
 
 //MAIN.C
 
