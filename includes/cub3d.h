@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 15:36:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:39:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ typedef struct s_map
 typedef struct s_game
 {
 	void	*mlx_ptr;
-	void	window;
+	void	*window;
 	t_data	img;
 	char	*path;
 }	t_game;
 
 //MAIN.C
 
-void	cub3d(int fd, char *path);
+void	cub3d(t_game *mlx);
 
 // FILE_CHECKER.C
 
@@ -97,4 +97,10 @@ int		get_b(int trgb);
 
 void	free_double_array(char **array);
 void	free_map(t_map *map);
+
+//HANDLE_WINDOW.C
+
+void	create_window(t_game *mlx);
+int		close_window(t_game *mlx);
+
 #endif

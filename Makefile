@@ -6,7 +6,7 @@
 #    By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 13:29:16 by mibernar          #+#    #+#              #
-#    Updated: 2023/05/23 15:36:54 by mibernar         ###   ########.fr        #
+#    Updated: 2023/07/26 16:38:56 by mibernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,7 @@ HEADERS_LIST = cub3d.h
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
-SOURCES_LIST = main.c window_management.c handle_keys.c map_check.c map_check_utils.c free.c movement.c \
-				draw.c bresenham.c rays.c my_mlx_functions.c 3d.c
+SOURCES_LIST = main.c handle_window.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
