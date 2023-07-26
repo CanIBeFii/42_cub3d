@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:21:58 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 14:41:12 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:29:09 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_file(int argc, char **argv)
+void	check_file(int argc, char **argv, t_game *mlx)
 {
 	char	*path;
 	int		fd;
@@ -37,5 +37,6 @@ void	check_file(int argc, char **argv)
 		perror("ERROR: can't open file");
 		exit (1);
 	}
+	mlx->path = path;
 	close(fd);
 }

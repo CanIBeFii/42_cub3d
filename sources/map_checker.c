@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 17:35:27 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:15:40 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	check_rgb_values(char *line)
 		color.ceiling_color.r = rgb[0];
 		color.ceiling_color.g = rgb[1];
 		color.ceiling_color.b = rgb[2];
-
 	}
 	else if (ft_strncmp(line, "F ", 2) == 0)
 	{
@@ -70,13 +69,13 @@ int	check_rgb_values(char *line)
 
 int	check_info(char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0 &&
-		ft_strncmp(line, "WE ", 3) != 0 && ft_strncmp(line, "EA ", 3) != 0)
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) != 0)
 	{
 		if (check_texture_path(line) == 1)
 			return (1);
 	}
-	else if (ft_strncmp(line, "F ", 2) != 0 && ft_strncmp(line, "C ", 2) != 0)
+	else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (check_rgb_values(line) == 1)
 			return (1);
@@ -99,6 +98,7 @@ void	get_map_info(int fd)
 			continue ;
 		else if (check_info(line) == 1)
 			return (1);
+		free(line);
 		line = get_next_line(fd);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 17:14:46 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/26 15:36:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <mlx.h>
 # include "./libft.h"
 
+//SCREEN SIZE
+
+# define SCREEN_W 640
+# define SCREEN_H 480
+
 // TYPEDEF
 
 typedef struct s_rgb
@@ -29,6 +34,15 @@ typedef struct s_rgb
 	int	g;
 	int	b;
 }	t_rgb;
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 typedef struct s_map_info
 {
@@ -48,10 +62,13 @@ typedef struct s_map
 	int			y;
 }	t_map;
 
-// typedef struct s_game
-// {
-		
-// }	t_game;
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	window;
+	t_data	img;
+	char	*path;
+}	t_game;
 
 //MAIN.C
 
@@ -59,7 +76,7 @@ void	cub3d(int fd, char *path);
 
 // FILE_CHECKER.C
 
-int		check_file(int argc, char **argv);
+int		check_file(int argc, char **argv, t_game *mlx);
 
 // MAP_CHECKER.C
 
