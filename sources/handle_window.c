@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:36:57 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/26 16:40:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:52:07 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	create_window(t_game *mlx)
 
 int	close_window(t_game *mlx)
 {
-	mlx_destroy_window(mlx->mlx_ptr, mlx->window);
+	(void)mlx;
+	exit (EXIT_FAILURE);
 	return (0);
 }
