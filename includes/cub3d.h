@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/27 15:55:37 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:01:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ void	cub3d(t_game *mlx);
 int		check_file(int argc, char **argv, t_game *mlx);
 
 // MAP_CHECKER.C
+
+void	map_checker(char *path);
+t_map	*get_map(int fd, t_map_info *info);
+void	get_map_info(int fd);
+int		check_info(char *line);
+int		check_rgb_values(char *line);
+int		check_texture_path(char *line);
 
 // MAP_UTILS.C
 
