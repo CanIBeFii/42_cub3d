@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 16:39:54 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:55:37 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
+
+//KEYS
+
+# define ESC_KEY 65307
 
 // TYPEDEF
 
@@ -102,5 +106,9 @@ void	free_map(t_map *map);
 
 void	create_window(t_game *mlx);
 int		close_window(t_game *mlx);
+
+//KEYS.C
+
+int		keys(int key_code, t_game *mlx);
 
 #endif
