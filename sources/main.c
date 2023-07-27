@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/27 15:55:05 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:00:28 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	// check_file(argc, argv, &mlx);
-	// map_checker(argv[1]);
+	map_checker(argv[1]);
 	create_window(&mlx);
 	cub3d(&mlx);
 	return (0);

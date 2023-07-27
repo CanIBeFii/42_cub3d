@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/26 15:15:40 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:08:05 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_texture_path(char *line)
 {
-	t_map_info	textures;
+	t_map_info	*textures;
 	char		*path;
 	int			path_fd;
 	int			line_len;
@@ -29,40 +29,41 @@ int	check_texture_path(char *line)
 	if (path_fd < 0)
 		return (1);
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		textures.north_texture = path_fd;
+		textures->north_texture = path_fd;
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		textures.south_texture = path_fd;
+		textures->south_texture = path_fd;
 	else if (ft_strncmp(line, "EA ", 3) == 0)	
-		textures.east_texture = path_fd;
+		textures->east_texture = path_fd;
 	else
-		textures.west_texture = path_fd;
+		textures->west_texture = path_fd;
 	return (0);
 }
 
 int	check_rgb_values(char *line)
 {
-	t_map_info	color;
-	char		**rgb;
+	t_map_info	*color;
+	t_rgb		*rgb;
+	char		**rgb_char;
 	int			x;
 
 	x = 1;
 	while (line[x] == ' ' || line[x == '\t'])
 		x++;
-	rgb = ft_split(line + x, ',');
-	if ((rgb[0] < 0 || rgb[0] > 255) || (rgb[1] < 0 || rgb[1] > 255)
-		|| (rgb[2] < 0 || rgb[2] > 255) || rgb[3] != NULL)
+	rgb_char = ft_split(line + x, ',');
+	if ((rgb->r < 0 ||rgb->r > 255) || (rgb->g < 0 || rgb->g > 255)
+		|| (rgb->b < 0 || rgb->b > 255) || rgb_char[3] != NULL)
 		return (1);
 	if (ft_strncmp(line, "C ", 2) == 0)
 	{
-		color.ceiling_color.r = rgb[0];
-		color.ceiling_color.g = rgb[1];
-		color.ceiling_color.b = rgb[2];
+		color->ceiling_color.r = rgb->r;
+		color->ceiling_color.g = rgb->g;
+		color->ceiling_color.b = rgb->b;
 	}
 	else if (ft_strncmp(line, "F ", 2) == 0)
 	{
-		color.floor_color.r = rgb[0];
-		color.floor_color.g = rgb[1];
-		color.floor_color.b = rgb[2];
+		color->floor_color.r = rgb->r;
+		color->floor_color.g = rgb->g;
+		color->floor_color.b = rgb->b;
 	}
 	return (0);
 }
@@ -97,7 +98,7 @@ void	get_map_info(int fd)
 		if (line[0] == '\n')
 			continue ;
 		else if (check_info(line) == 1)
-			return (1);
+			return ;
 		free(line);
 		line = get_next_line(fd);
 	}
