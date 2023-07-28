@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/27 17:01:54 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:08:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,15 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	void	*mlx_ptr;
-	void	*window;
-	t_data	img;
-	char	*path;
+	void		*mlx_ptr;
+	void		*window;
+	t_data		img;
+	char		*path;
+
+	t_map_info	info;
+	t_rgb		rgb;
+
+	t_map		*map;
 }	t_game;
 
 //MAIN.C
@@ -84,12 +89,12 @@ int		check_file(int argc, char **argv, t_game *mlx);
 
 // MAP_CHECKER.C
 
-void	map_checker(char *path);
-t_map	*get_map(int fd, t_map_info *info);
-void	get_map_info(int fd);
-int		check_info(char *line);
-int		check_rgb_values(char *line);
-int		check_texture_path(char *line);
+void	map_checker(char *path, t_game *mlx);
+void	get_map(int fd, t_game *mlx);
+int		get_map_info(int fd, t_game *mlx);
+int		check_info(char *line, t_game *mlx);
+int		check_rgb_values(char *line, t_game *mlx);
+int		check_texture_path(char *line, t_game *mlx);
 
 // MAP_UTILS.C
 
