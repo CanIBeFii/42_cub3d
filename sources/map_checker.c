@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 14:01:57 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:399:15 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,8 @@ int	check_texture_path(char *line, t_game *mlx)
 	path_fd = open(path, O_RDONLY);
 	if (path_fd < 0)
 		return (1);
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		mlx->info.north_texture = path_fd;
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		mlx->info.south_texture = path_fd;
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		mlx->info.east_texture = path_fd;
-	else
-		mlx->info.west_texture = path_fd;
+	if (check_dup_textures(mlx, line) == 1)
+		return (1);
 	return (0);
 }
 
@@ -59,22 +53,16 @@ int	check_rgb_values(char *line, t_game *mlx)
 		|| (mlx->rgb.b < 0 || mlx->rgb.b > 255) || rgb_char[3] != NULL)
 		return (1);
 	if (ft_strncmp(line, "C ", 2) == 0)
-	{
-		mlx->info.ceiling_color.r = mlx->rgb.r;
-		mlx->info.ceiling_color.g = mlx->rgb.g;
-		mlx->info.ceiling_color.b = mlx->rgb.b;
-	}
+		get_ceiling_rgb_values(&mlx.info);
 	else if (ft_strncmp(line, "F ", 2) == 0)
-	{
-		mlx->info.floor_color.r = mlx->rgb.r;
-		mlx->info.floor_color.g = mlx->rgb.g;
-		mlx->info.floor_color.b = mlx->rgb.b;
-	}
+		get_floor_rgb_values(&mlx.info);
 	return (0);
 }
 
 int	check_info(char *line, t_game *mlx)
 {
+	if (check_missing_info(mlx) == 0)
+		return (2);
 	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 	{
@@ -87,15 +75,7 @@ int	check_info(char *line, t_game *mlx)
 			return (1);
 	}
 	else
-	{
-		if (mlx->info.east_texture == -1 || mlx->info.west_texture == -1
-			|| mlx->info.north_texture == -1 || mlx->info.south_texture == -1
-			|| mlx->info.ceiling_color.r == -1 || mlx->info.ceiling_color.g == -1
-			|| mlx->info.ceiling_color.b == -1 || mlx->info.floor_color.r == -1
-			|| mlx->info.floor_color.g == -1 || mlx->info.floor_color.b == -1)
-			return (1);
-		return (2);
-	}
+		return (1);
 	return (0);
 }
 
@@ -114,7 +94,6 @@ int	get_map_info(int fd, t_game *mlx)
 		else
 		{
 			return_value = check_info(line, mlx);
-			// printf("%d\n", return_value);
 			if (return_value == 1)
 				return (1);
 			else if (return_value == 2)
@@ -126,35 +105,45 @@ int	get_map_info(int fd, t_game *mlx)
 	return (0);
 }
 
-void	get_map(int fd, t_game *mlx)
+char *go_to_first_map_line(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL && ft_strcmp(line, "\n") == 0)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
+}
+
+int	get_map(int fd, t_map *map)
 {
 	char	*line;
 	int		index;
 
-	mlx->map = malloc(sizeof(t_map) * 1);
-	if (mlx->map == NULL)
-		return ;
-	line = get_next_line(fd);
+	line = go_to_first_map_line(fd);
 	index = 0;
 	while (line != NULL)
 	{
-		mlx->map->map = realloc_double_char_array(mlx->map->map);
-		// if (not_valid_map_line(line) == 1)
-		// {
-		// 	free_map(map);
-		// 	return (NULL);
-		// }
-		mlx->map->map[index] = ft_strdup(line);
+		if (check_map_line(line) == 0)
+		{
+			free_double_array(map->map);
+			return (0);
+		}
+		map->map = realloc_double_char_array(map->map);
+		map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
 		index++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (1);
 }
 
 void	map_checker(char *path, t_game *mlx)
 {
 	int			fd;
-	int			x = 0;
 
 	fd = open(path, O_RDONLY);
 	if (get_map_info(fd, mlx) == 1)
@@ -162,18 +151,11 @@ void	map_checker(char *path, t_game *mlx)
 		perror("Error: invalid map given");
 		exit(1);
 	}
-	close(fd);
-	fd = open(path, O_RDONLY);
-	get_map(fd, mlx);
+	get_map(fd, &mlx->map);
 	if (mlx->map == NULL)
 	{
 		perror("Error: invalid map given");
 		//Free stuff
 		exit(1);
-	}
-	while (mlx->map->map[x] != NULL)
-	{
-		printf("%s\n", mlx->map->map[x]);
-		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 14:01:01 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:47:02 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	cub3d(t_game *mlx)
 
 void	init_vars(t_game *mlx)
 {
-	mlx->info.east_texture = -1;
-	mlx->info.west_texture = -1;
-	mlx->info.north_texture = -1;
-	mlx->info.south_texture = -1;
+	mlx->info.east_texture.img = NULL;
+	mlx->info.west_texture.img = NULL;
+	mlx->info.north_texture.img = NULL;
+	mlx->info.south_texture.img = NULL;
 	mlx->info.ceiling_color.r = -1;
 	mlx->info.ceiling_color.g = -1;
 	mlx->info.ceiling_color.b = -1;
