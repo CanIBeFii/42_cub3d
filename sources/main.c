@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 17:13:27 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:01:01 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	// check_file(argc, argv, &mlx);
+	init_vars(&mlx);
 	map_checker(argv[1], &mlx);
 	create_window(&mlx);
 	cub3d(&mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 17:44:03 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:01:57 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_texture_path(char *line, t_game *mlx)
 		mlx->info.north_texture = path_fd;
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 		mlx->info.south_texture = path_fd;
-	else if (ft_strncmp(line, "EA ", 3) == 0)	
+	else if (ft_strncmp(line, "EA ", 3) == 0)
 		mlx->info.east_texture = path_fd;
 	else
 		mlx->info.west_texture = path_fd;
@@ -114,7 +114,7 @@ int	get_map_info(int fd, t_game *mlx)
 		else
 		{
 			return_value = check_info(line, mlx);
-			printf("%d\n", return_value);
+			// printf("%d\n", return_value);
 			if (return_value == 1)
 				return (1);
 			else if (return_value == 2)
