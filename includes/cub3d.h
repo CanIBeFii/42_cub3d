@@ -6,11 +6,11 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/28 17:08:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:00:114 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
+falxafalxnfalxn#ifndef CUB3D_H
 # define CUB3D_H
 
 # include <stdio.h>
@@ -32,6 +32,12 @@
 
 // TYPEDEF
 
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
+
 typedef struct s_rgb
 {
 	int	r;
@@ -41,26 +47,27 @@ typedef struct s_rgb
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_vector	img_size;
 }	t_data;
 
 typedef struct s_map_info
 {
-	int		north_texture;
-	int		south_texture;
-	int		east_texture;
-	int		west_texture;
+	t_data	north_texture;
+	t_data	south_texture;
+	t_data	east_texture;
+	t_data	west_texture;
+
 	t_rgb	floor_color;
 	t_rgb	ceiling_color;
 }	t_map_info;
 
 typedef struct s_map
 {
-	t_map_info	*info;
 	char		**map;
 	int			x;
 	int			y;
@@ -73,10 +80,10 @@ typedef struct s_game
 	t_data		img;
 	char		*path;
 
+	t_map		map;
 	t_map_info	info;
 	t_rgb		rgb;
 
-	t_map		*map;
 }	t_game;
 
 //MAIN.C
@@ -90,7 +97,7 @@ int		check_file(int argc, char **argv, t_game *mlx);
 // MAP_CHECKER.C
 
 void	map_checker(char *path, t_game *mlx);
-void	get_map(int fd, t_game *mlx);
+int		get_map(int fd, t_map *map);
 int		get_map_info(int fd, t_game *mlx);
 int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_game *mlx);
@@ -100,6 +107,13 @@ int		check_texture_path(char *line, t_game *mlx);
 
 char	**realloc_double_char_array(char **array);
 int		double_array_size(char **array);
+
+//MAP_INFO.C
+
+int		check_dup_textures(t_game *mlx, char *line);
+void	get_floor_rgb_values(t_game *mlx);
+void	get_ceiling_rgb_values(t_game *mlx);
+int		check_missing_info(t_map_info *info);
 
 //COLORS.COLORS
 
