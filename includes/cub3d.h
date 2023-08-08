@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-falxafalxnfalxn#ifndef CUB3D_H
+#ifndef CUB3D_H
 # define CUB3D_H
 
 # include <stdio.h>
@@ -31,6 +31,12 @@ falxafalxnfalxn#ifndef CUB3D_H
 # define ESC_KEY 65307
 
 // TYPEDEF
+
+typedef struct s_player
+{
+	float	pos_x;
+	float	pos_y;
+}	t_player;
 
 typedef struct s_vector
 {
@@ -57,10 +63,10 @@ typedef struct s_data
 
 typedef struct s_map_info
 {
-	t_data	north_texture;
-	t_data	south_texture;
-	t_data	east_texture;
-	t_data	west_texture;
+	t_data	no_texture;
+	t_data	so_texture;
+	t_data	ea_texture;
+	t_data	we_texture;
 
 	t_rgb	floor_color;
 	t_rgb	ceiling_color;
@@ -82,7 +88,6 @@ typedef struct s_game
 
 	t_map		map;
 	t_map_info	info;
-	t_rgb		rgb;
 
 }	t_game;
 
@@ -100,12 +105,12 @@ void	map_checker(char *path, t_game *mlx);
 int		get_map(int fd, t_map *map);
 int		get_map_info(int fd, t_game *mlx);
 int		check_info(char *line, t_game *mlx);
-int		check_rgb_values(char *line, t_game *mlx);
+int		check_rgb_values(char *line, t_map_info *info);
 int		check_texture_path(char *line, t_game *mlx);
 
 // MAP_UTILS.C
 
-char	**realloc_double_char_array(char **array);
+char	**realloc_double_char_array(char **array, int new_line_size);
 int		double_array_size(char **array);
 
 //MAP_INFO.C
@@ -126,7 +131,6 @@ int		get_b(int trgb);
 // FREE.C
 
 void	free_double_array(char **array);
-void	free_map(t_map *map);
 
 //HANDLE_WINDOW.C
 
@@ -136,5 +140,10 @@ int		close_window(t_game *mlx);
 //KEYS.C
 
 int		keys(int key_code, t_game *mlx);
+
+
+//DRAW_RAYS.C
+
+void	draw_rays(t_game *mlx);
 
 #endif
