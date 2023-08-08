@@ -6,64 +6,61 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:28:29 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/07 15:48:54 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:14:52 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-mbrarmbrnr1mbrnr1mbrarmbrnr1mbrnr1mbrarmbrnr1mbrnr#include "cub3d.h"
+#include "cub3d.h"
+
+void	get_texture(t_game *mlx, t_data *texture, char *line)
+{
+	texture->img = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
+			&texture->img_size.x, &texture->img_size.x);
+}
 
 int	check_dup_textures(t_game *mlx, char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		if (mlx->info.north_texture.img != NULL)
+		if (mlx->info.no_texture.img != NULL)
 			return (1);
-		mlx->info.north_texture.img = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
-			&mlx->info.north_texture.img_size.x, &mlx->info.north_texture.img_size.x);
+		get_texture(mlx, &mlx->info.no_texture, line);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		if (mlx->info.south_texture.img != NULL)
+		if (mlx->info.so_texture.img != NULL)
 			return (1);
-		mlx->info.south_texture.img = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
-			&mlx->info.south_texture.img_size.x, &mlx->info.south_texture.img_size.x);
+		get_texture(mlx, &mlx->info.so_texture, line);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-	if (mlx->info.east_texture.img != NULL)
+	{
+		if (mlx->info.ea_texture.img != NULL)
 			return (1);
-		mlx->info.east_texture.img = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
-			&mlx->info.east_texture.img_size.x, &mlx->info.east_texture.img_size.x);
+		get_texture(mlx, &mlx->info.ea_texture, line);
+	}
 	else
 	{
-		if (mlx->info.weast_texture.img != NULL)
+		if (mlx->info.we_texture.img != NULL)
 			return (1);
-		mlx->info.weast_texture.img = mlx_xpm_file_to_image(mlx->mlx_ptr, line,
-			&mlx->info.weast_texture.img_size.x, &mlx->info.weast_texture.img_size.x);
+		get_texture(mlx, &mlx->info.we_texture, line);
 	}
 	return (0);
 }
 
-void	get_floor_rgb_values(t_game *mlx)
+void	get_rgb_values(t_rgb *surface, t_rgb color)
 {
-	mlx->info.floor_color.r = mlx->rgb.r;
-	mlx->info.floor_color.g = mlx->rgb.g;
-	mlx->info.floor_color.b = mlx->rgb.b;
-}
-
-void	get_ceiling_rgb_values(t_game *mlx)
-{
-	mlx->info.ceiling_color.r = mlx->rgb.r;
-	mlx->info.ceiling_color.g = mlx->rgb.g;
-	mlx->info.ceiling_color.b = mlx->rgb.b;
+	surface->r = color.r;
+	surface->g = color.g;
+	surface->b = color.b;
 }
 
 int	check_missing_info(t_map_info *info)
 {
-	if (info.east_texture.img == NULL || info.west_texture.img == NULL
-			|| info.north_texture.img == NULL || info.south_texture.img == NULL
-			|| info.ceiling_color.r == -1 || info.ceiling_color.g == -1
-			|| info.ceiling_color.b == -1 || info.floor_color.r == -1
-			|| info.floor_color.g == -1 || info.floor_color.b == -1)
+	if (info->ea_texture.img == NULL || info->we_texture.img == NULL
+		|| info->no_texture.img == NULL || info->so_texture.img == NULL
+		|| info->ceiling_color.r == -1 || info->ceiling_color.g == -1
+		|| info->ceiling_color.b == -1 || info->floor_color.r == -1
+		|| info->floor_color.g == -1 || info->floor_color.b == -1)
 		return (1);
 	return (0);
 }

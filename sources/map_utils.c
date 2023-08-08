@@ -6,67 +6,16 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:07:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 16:03:05 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:18:27 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_valid_map(t_map *map)
-{
-	int		y;
-	int		x;
-	char	c;
-
-	map->x = 0;
-	y = 1;
-	x = 0;
-	while (map->map[0][x] != '\0')
-	{
-		if (map->map[0][x] != '1' || map->map[0][x] != ' ')
-			return (0);
-		x++;
-	}
-	while (map->map[y + 1] != NULL)
-	{
-		x = 0;
-		if (map->map[y][0] == '0')
-			return (0);
-		while (map->map[y][x + 1] != '\0')
-		{
-			c = map->map[y][x];
-			if (c == 0 && (check_surroundings(map->map, x, y) == 0))
-				return (0);
-			x++;
-		}
-		if (map->map[y][x] == '0')
-			return (0);
-		if (map->x < x)
-			map->x = x;
-		y++;
-	}
-	while (map->map[y][x] != '\0')
-	{
-		if (map->map[y][x] == 0 || map->map[0][x] != ' ')
-			return (0);
-		x++;
-	}
-	map->y = y;
-	return (1);
-}
-
-int	check_surroundings(char **map, int x, int y)
-{
-	if (map[y + 1][x] == ' ' || map[y - 1][x] == ' ')
-		return (0);
-	else if (map[y][x + 1] == ' ' || map[y][x - 1] == ' ')
-		return (0);
-	return (1);
-}
-
-char	**realloc_double_char_array(char **array)
+char	**realloc_double_char_array(char **array, int new_line_size)
 {
 	int		size;
+	int		line_size;
 	int		index;
 	char	**new_array;
 
@@ -77,7 +26,9 @@ char	**realloc_double_char_array(char **array)
 		return (NULL);
 	while (index != size)
 	{
-		new_array[index] = ft_strdup(array[index]);
+		line_size = ft_strlen(array[index]);
+		new_array[index] = malloc(sizeof(char) * new_line_size);
+		ft_strlcpy(new_array[index], array[index], line_size);
 		free(array[index]);
 		index++;
 	}
@@ -87,7 +38,7 @@ char	**realloc_double_char_array(char **array)
 	return (new_array);
 }
 
-int check_map_line(char *line)
+int	check_map_line(char *line)
 {
 	int		index;
 	char	c;
@@ -98,12 +49,17 @@ int check_map_line(char *line)
 	while (line[index] != '\0' || line[index] != '\n')
 	{
 		c = line[index];
-		if (c != '0' && c != '1' && c != 'N' && c != 'E'
-			&& c != 'S' && c != 'W' && c != ' ')
+		if (is_valid_map_char(c) == 0)
 			return (0);
 		index += 1;
 	}
 	return (1);
+}
+
+int	is_valid_map_char(char c)
+{
+	return (c == '0' || c == '1' || c == ' ' || c == 'N'
+		|| c == 'S' || c == 'W' || c == 'E');
 }
 
 int	double_array_size(char **array)

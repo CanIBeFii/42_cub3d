@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 15:47:02 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:21:35 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	cub3d(t_game *mlx)
 {
+	mlx->mlx_ptr = mlx_init();
+	create_window(mlx);
+	draw_rays(mlx);
 	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
 	mlx_hook(mlx->window, 2, 1L << 0, keys, &mlx);
 	mlx_loop(mlx->mlx_ptr);
@@ -21,10 +24,10 @@ void	cub3d(t_game *mlx)
 
 void	init_vars(t_game *mlx)
 {
-	mlx->info.east_texture.img = NULL;
-	mlx->info.west_texture.img = NULL;
-	mlx->info.north_texture.img = NULL;
-	mlx->info.south_texture.img = NULL;
+	mlx->info.ea_texture.img = NULL;
+	mlx->info.we_texture.img = NULL;
+	mlx->info.no_texture.img = NULL;
+	mlx->info.so_texture.img = NULL;
 	mlx->info.ceiling_color.r = -1;
 	mlx->info.ceiling_color.g = -1;
 	mlx->info.ceiling_color.b = -1;
@@ -42,7 +45,6 @@ int	main(int argc, char **argv)
 	// check_file(argc, argv, &mlx);
 	init_vars(&mlx);
 	map_checker(argv[1], &mlx);
-	create_window(&mlx);
 	cub3d(&mlx);
 	return (0);
 }
