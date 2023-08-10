@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 17:05:10 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:18:39 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	get_map(int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	// map->map = resize_map(map->map, max_line_size);
 	return (1);
 }
 

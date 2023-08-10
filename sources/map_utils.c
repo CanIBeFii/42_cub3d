@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:07:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 17:07:01 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:19:00 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ int	double_array_size(char **array)
 	while (array[size] != NULL)
 		size++;
 	return (size);
+}
+
+char	*go_to_first_map_line(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL && ft_strcmp(line, "\n") == 0)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
 }

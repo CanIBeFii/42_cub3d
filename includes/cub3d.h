@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/07 15:00:114 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:39:30 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <mlx.h>
 # include "./libft.h"
 
-//SCREEN SIZE
+// SCREEN SIZE
 
 # define SCREEN_W 640
 # define SCREEN_H 480
@@ -91,7 +91,7 @@ typedef struct s_game
 
 }	t_game;
 
-//MAIN.C
+// MAIN.C
 
 void	cub3d(t_game *mlx);
 
@@ -104,25 +104,29 @@ void	check_file(int argc, char **argv, t_game *mlx);
 void	map_checker(char *path, t_game *mlx);
 int		get_map(int fd, t_map *map);
 int		get_map_info(int fd, t_game *mlx);
-int		check_info(char *line, t_game *mlx);
-int		check_rgb_values(char *line, t_map_info *info);
-int		check_texture_path(char *line, t_game *mlx);
-char	*go_to_first_map_line(int fd);
 
 // MAP_UTILS.C
 
 char	**realloc_double_char_array(char **array, int new_line_size);
-int		double_array_size(char **array);
 int		check_map_line(char *line);
 int		is_valid_map_char(char c);
+int		double_array_size(char **array);
+char	*go_to_first_map_line(int fd);
 
-//MAP_INFO.C
+// MAP_INFO.C
 
+void	get_texture(t_game *mlx, t_data *texture, char *line);
 int		check_dup_textures(t_game *mlx, char *line);
 void	get_rgb_values(t_rgb *surface, t_rgb color);
 int		check_missing_info(t_map_info *info);
 
-//COLORS.COLORS
+// MAP_INFO_UTILS.C
+
+int		check_info(char *line, t_game *mlx);
+int		check_rgb_values(char *line, t_map_info *info);
+int		check_texture_path(char *line, t_game *mlx);
+
+// COLORS.COLORS
 
 int		create_trgb(int t, int r, int g, int b);
 int		get_t(int trgb);
@@ -134,15 +138,14 @@ int		get_b(int trgb);
 
 void	free_double_array(char **array);
 
-//HANDLE_WINDOW.C
+// HANDLE_WINDOW.C
 
 void	create_window(t_game *mlx);
 int		close_window(t_game *mlx);
 
-//KEYS.C
+// KEYS.C
 
 int		keys(int key_code, t_game *mlx);
-
 
 //DRAW_RAYS.C
 
