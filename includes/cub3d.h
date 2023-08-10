@@ -97,7 +97,7 @@ void	cub3d(t_game *mlx);
 
 // FILE_CHECKER.C
 
-int		check_file(int argc, char **argv, t_game *mlx);
+void	check_file(int argc, char **argv, t_game *mlx);
 
 // MAP_CHECKER.C
 
@@ -107,17 +107,19 @@ int		get_map_info(int fd, t_game *mlx);
 int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_map_info *info);
 int		check_texture_path(char *line, t_game *mlx);
+char	*go_to_first_map_line(int fd);
 
 // MAP_UTILS.C
 
 char	**realloc_double_char_array(char **array, int new_line_size);
 int		double_array_size(char **array);
+int		check_map_line(char *line);
+int		is_valid_map_char(char c);
 
 //MAP_INFO.C
 
 int		check_dup_textures(t_game *mlx, char *line);
-void	get_floor_rgb_values(t_game *mlx);
-void	get_ceiling_rgb_values(t_game *mlx);
+void	get_rgb_values(t_rgb *surface, t_rgb color);
 int		check_missing_info(t_map_info *info);
 
 //COLORS.COLORS

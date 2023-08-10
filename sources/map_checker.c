@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 15:45:59 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:05:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	get_map_info(int fd, t_game *mlx)
 	return (0);
 }
 
-
 int	get_map(int fd, t_map *map)
 {
 	char	*line;
@@ -74,7 +73,7 @@ int	get_map(int fd, t_map *map)
 			free_double_array(map->map);
 			return (0);
 		}
-		if (ft_strlen(line) > max_line_size)
+		if ((int)ft_strlen(line) > max_line_size)
 			max_line_size = ft_strlen(line);
 		map->map = realloc_double_char_array(map->map, max_line_size);
 		map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
@@ -82,10 +81,9 @@ int	get_map(int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 	}
-	map->map = resize_map(map->map, max_line_size);
+	// map->map = resize_map(map->map, max_line_size);
 	return (1);
 }
-
 
 char	*go_to_first_map_line(int fd)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 16:14:12 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:06:05 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_info(char *line, t_game *mlx)
 {
-	if (check_missing_info(mlx) == 0)
+	if (check_missing_info(&mlx->info) == 0)
 		return (2);
 	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
@@ -24,7 +24,7 @@ int	check_info(char *line, t_game *mlx)
 	}
 	else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 	{
-		if (check_rgb_values(line, mlx) == 1)
+		if (check_rgb_values(line, &mlx->info) == 1)
 			return (1);
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:07:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 16:18:27 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:07:01 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_map_line(char *line)
 
 	index = 0;
 	if (line == NULL || ft_strcmp(line, "\n") == 0)
-		reutrn (0);
+		return (0);
 	while (line[index] != '\0' || line[index] != '\n')
 	{
 		c = line[index];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:50:55 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 15:57:15 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:08:43 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	check_surroundings(char **map, int x, int y)
 {
+	(void)map;
+	(void)y;
 	if (x == 0)
-		reuturn (0)
+		return (0);
 	// if (map[y + 1][x] == ' ' || map[y - 1][x] == ' ')
 	// 	return (0);
 	// else if (map[y][x + 1] == ' ' || map[y][x - 1] == ' ')

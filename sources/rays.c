@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:02:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 15:04:07 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:08:56 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	draw_rays(t_game *mlx)
 {
-
+	(void)mlx;
 }
