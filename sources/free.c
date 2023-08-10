@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 12:59:06 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:50:13 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	free_double_array(char **array)
 		index++;
 	}
 	free(array);
+	array = NULL;
 }

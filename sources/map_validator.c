@@ -3,63 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:50:55 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/09 17:08:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:52:24 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_surroundings(char **map, int x, int y)
+int	check_surroundings(t_map *map, int x, int y)
 {
-	(void)map;
-	(void)y;
-	if (x == 0)
+	if (x == 0 || x == map->x || y == 0 || y == map->y)
 		return (0);
-	// if (map[y + 1][x] == ' ' || map[y - 1][x] == ' ')
-	// 	return (0);
-	// else if (map[y][x + 1] == ' ' || map[y][x - 1] == ' ')
-	// 	return (0);
 	return (1);
 }
 
-int	check_valid_map(t_map *map)
+int	validate_map(t_map *map)
 {
 	int		y;
 	int		x;
 	char	c;
 
-	map->x = 0;
 	y = 0;
-	x = -1;
-	while (map->map[0][++x] != '\0')
-	{
-		if (map->map[0][x] != '1' || map->map[0][x] != ' ')
-			return (0);
-	}
-	while (map->map[++y + 1] != NULL)
+	while (map->map[y] != NULL)
 	{
 		x = 0;
-		if (map->map[y][0] == '0')
-			return (0);
-		while (map->map[y][++x + 1] != '\0')
+		while (map->map[y][x] != '\0')
 		{
-			c = map->map[y][x];
-			if (c == 0 && (check_surroundings(map->map, x, y) == 0))
+			if (check_surroundings(map, x, y) == 0)
 				return (0);
+			x++;
 		}
-		if (map->map[y][x] == '0')
-			return (0);
-		if (map->x < x)
-			map->x = x;
+		y++;
 	}
-	while (map->map[y][++x] != '\0')
-	{
-		if (map->map[y][x] == 0 || map->map[0][x] != ' ')
-			return (0);
-	}
-	map->y = y;
 	return (1);
 }
