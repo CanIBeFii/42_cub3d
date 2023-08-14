@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 15:39:30 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:38:21 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef struct s_data
 
 typedef struct s_map_info
 {
+	int		no;
+	int		so;
+	int		ea;
+	int		we;
+
 	t_data	no_texture;
 	t_data	so_texture;
 	t_data	ea_texture;
