@@ -1,7 +1,7 @@
-NO ./textures/NO_test_texture
-SO ./textures/SO_test_texture
-WE ./textures/WE_test_texture
-EA ./textures/EA_test_texture
+NO /home/miguel/projects/42_cub3d/textures/bluestone.xpm
+SO /home/miguel/projects/42_cub3d/textures/eagle.xpm
+WE /home/miguel/projects/42_cub3d/textures/greystone.xpm
+EA /home/miguel/projects/42_cub3d/textures/redbrick.xpm
 
 F 225,100,0
 C 225,30,0
