@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/08 15:21:35 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:39:58 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	cub3d(t_game *mlx)
 
 void	init_vars(t_game *mlx)
 {
-	mlx->info.ea_texture.img = NULL;
-	mlx->info.we_texture.img = NULL;
-	mlx->info.no_texture.img = NULL;
-	mlx->info.so_texture.img = NULL;
+	mlx->info.ea = -1;
+	mlx->info.we = -1;
+	mlx->info.no = -1;
+	mlx->info.so = -1;
 	mlx->info.ceiling_color.r = -1;
 	mlx->info.ceiling_color.g = -1;
 	mlx->info.ceiling_color.b = -1;

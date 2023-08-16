@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 15:57:16 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:48:58 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	map_checker(char *path, t_game *mlx)
 		//Free stuff
 		exit(1);
 	}
-	validate_map(&mlx->map);
+	// validate_map(&mlx->map);
 }
 
 int	get_map_info(int fd, t_game *mlx)
@@ -85,17 +85,4 @@ int	get_map(int fd, t_map *map)
 	map->x = max_line_size;
 	map->y = index;
 	return (1);
-}
-
-char	*go_to_first_map_line(int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line != NULL && ft_strcmp(line, "\n") == 0)
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (line);
 }
