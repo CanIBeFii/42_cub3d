@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 16:39:58 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:12:57 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_vars(t_game *mlx)
 	mlx->info.floor_color.r = -1;
 	mlx->info.floor_color.g = -1;
 	mlx->info.floor_color.b = -1;
+	mlx->map.map = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -42,7 +43,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	// check_file(argc, argv, &mlx);
+	check_file(argc, argv, &mlx);
 	init_vars(&mlx);
 	map_checker(argv[1], &mlx);
 	cub3d(&mlx);
