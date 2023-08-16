@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/14 15:48:58 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:27:45 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@ void	map_checker(char *path, t_game *mlx)
 
 	fd = open(path, O_RDONLY);
 	if (get_map_info(fd, mlx) == 1)
-	{
-		perror("Error: invalid map given");
 		exit(1);
-	}
-	get_map(fd, &mlx->map);
-	if (mlx->map.map == NULL)
-	{
-		perror("Error: invalid map given");
-		//Free stuff
-		exit(1);
-	}
+	// get_map(fd, &mlx->map);
+	// if (mlx->map.map == NULL)
+	// {
+	// 	perror("Error: invalid map given");
+	// 	//Free stuff
+	// 	exit(1);
+	// }
 	// validate_map(&mlx->map);
 }
 
