@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:58:09 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:30:10 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,10 @@ void	map_checker(char *path, t_game *mlx)
 	fd = open(path, O_RDONLY);
 	if (get_map_info(fd, mlx) == 1)
 		exit(1);
-	get_map(fd, &mlx->map);
-	// if (mlx->map.map == NULL)
-	// {
-	// 	perror("Error: invalid map given");
-	// 	//Free stuff
-	// 	exit(1);
-	// }
-	// validate_map(&mlx->map);
+	if (get_map(fd, &mlx->map, 0) == 0)
+		exit(1);
+	if (validate_map(&mlx->map) == 0)
+		exit(1);
 }
 
 int	get_map_info(int fd, t_game *mlx)
@@ -55,20 +51,19 @@ int	get_map_info(int fd, t_game *mlx)
 	return (0);
 }
 
-int	get_map(int fd, t_map *map)
+int	get_map(int fd, t_map *map, int index)
 {
 	char	*line;
-	int		index;
 	int		max_line_size;
 
 	line = go_to_first_map_line(fd);
-	index = 0;
 	max_line_size = 0;
 	while (line != NULL)
 	{
 		if (check_map_line(line) == 0)
 		{
 			free_double_array(map->map);
+			perror("Error: invalid map line");
 			return (0);
 		}
 		if ((int)ft_strlen(line) > max_line_size)
@@ -76,7 +71,6 @@ int	get_map(int fd, t_map *map)
 		map->map = realloc_double_char_array(map->map, max_line_size);
 		map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
 		index++;
-		free(line);
 		line = get_next_line(fd);
 	}
 	map->x = max_line_size;

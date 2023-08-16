@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:50:55 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 17:59:15 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:29:52 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	validate_map(t_map *map)
 		while (map->map[y][x] != '\0')
 		{
 			if (check_surroundings(map, x, y) == 0)
+			{
+				perror("Error: invalid map");
 				return (0);
+			}
 			x++;
 		}
 		y++;
@@ -35,7 +38,11 @@ int	validate_map(t_map *map)
 int	check_surroundings(t_map *map, int x, int y)
 {
 	if (x == 0 || x == map->x || y == 0 || y == map->y)
-		return (is_inside_map_char(map->map[y][x]) == 0);
+	{
+		if (is_inside_map_char(map->map[y][x]) == 0)
+			return (1);
+		return (0);
+	}
 	if (map->map[y][x] == '1')
 		return (1);
 	if (map->map[y - 1][x - 1] == ' ' || map->map[y - 1][x] == ' '
@@ -51,5 +58,7 @@ int	check_surroundings(t_map *map, int x, int y)
 
 int	is_inside_map_char(char c)
 {
-	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }
