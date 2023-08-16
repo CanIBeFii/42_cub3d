@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 16:27:45 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:58:09 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	map_checker(char *path, t_game *mlx)
 	fd = open(path, O_RDONLY);
 	if (get_map_info(fd, mlx) == 1)
 		exit(1);
-	// get_map(fd, &mlx->map);
+	get_map(fd, &mlx->map);
 	// if (mlx->map.map == NULL)
 	// {
 	// 	perror("Error: invalid map given");
