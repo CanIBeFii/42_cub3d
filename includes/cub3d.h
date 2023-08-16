@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 15:39:30 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:22:25 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ int		check_map_line(char *line);
 int		is_valid_map_char(char c);
 int		double_array_size(char **array);
 char	*go_to_first_map_line(int fd);
+
+// MAP_VALIDATOR.C
+
+int		validate_map(t_map *map);
+int		check_surroundings(t_map *map, int x, int y);
+int		is_inside_map_char(char c);
 
 // MAP_INFO.C
 
