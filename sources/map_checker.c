@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 18:30:10 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:38:37 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,15 @@ int	get_map(int fd, t_map *map, int index)
 		if (check_map_line(line) == 0)
 		{
 			free_double_array(map->map);
-			perror("Error: invalid map line");
 			return (0);
 		}
 		if ((int)ft_strlen(line) > max_line_size)
 			max_line_size = ft_strlen(line);
-		map->map = realloc_double_char_array(map->map, max_line_size);
-		map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
+		map->map = realloc_double_char_array(map->map, max_line_size, 0);
+		if (ft_strchr(line, '\n') != NULL)
+			map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
+		else
+			map->map[index] = ft_substr(line, 0, ft_strlen(line));
 		index++;
 		line = get_next_line(fd);
 	}

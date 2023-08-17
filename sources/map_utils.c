@@ -6,20 +6,18 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:07:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 18:10:24 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:38:23 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**realloc_double_char_array(char **array, int new_line_size)
+char	**realloc_double_char_array(char **array, int new_line_size, int index)
 {
 	int		size;
 	int		line_size;
-	int		index;
 	char	**new_array;
 
-	index = 0;
 	size = double_array_size(array);
 	new_array = malloc(sizeof(char *) * (size + 2));
 	if (new_array == NULL)
@@ -28,7 +26,7 @@ char	**realloc_double_char_array(char **array, int new_line_size)
 	{
 		line_size = ft_strlen(array[index]);
 		new_array[index] = malloc(sizeof(char) * new_line_size);
-		ft_strlcpy(new_array[index], array[index], line_size);
+		ft_strlcpy(new_array[index], array[index], line_size + 1);
 		free(array[index]);
 		index++;
 	}
@@ -50,7 +48,10 @@ int	check_map_line(char *line)
 	{
 		c = line[index];
 		if (is_valid_map_char(c) == 0)
+		{
+			perror("Error: invalid map line");
 			return (0);
+		}
 		index += 1;
 	}
 	return (1);
