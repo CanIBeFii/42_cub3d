@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:57:28 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:19:00 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int		check_missing_info(t_map_info *info);
 
 int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_map_info *info);
+int		check_values(char **rgb_char);
 int		check_texture_path(char *line, t_game *mlx);
 
 // COLORS.COLORS

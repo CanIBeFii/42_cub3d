@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:53:00 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:29:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,23 @@ int	check_rgb_values(char *line, t_map_info *info)
 	rgb_char = ft_split(line + x, ',');
 	if (rgb_char == NULL)
 		return (1);
+	if (double_array_size(rgb_char) != 3)
+	{
+		free_double_array(rgb_char);
+		perror("Error: invalid number of rgb values given\n");
+		return (1);
+	}
+	if (check_values(rgb_char) == 0)
+	{
+		free_double_array(rgb_char);
+		perror("Error: rgb values must be integers\n");
+		return (1);
+	}
 	rgb.r = ft_atoi(rgb_char[0]);
 	rgb.g = ft_atoi(rgb_char[1]);
 	rgb.b = ft_atoi(rgb_char[2]);
 	if ((rgb.r < 0 || rgb.r > 255) || (rgb.g < 0 || rgb.g > 255)
-		|| (rgb.b < 0 || rgb.b > 255) || rgb_char[3] != NULL)
+		|| (rgb.b < 0 || rgb.b > 255))
 	{
 		free_double_array(rgb_char);
 		perror("Error: rgb value out of bounds\n");
@@ -63,6 +75,28 @@ int	check_rgb_values(char *line, t_map_info *info)
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		get_rgb_values(&info->floor_color, rgb);
 	return (0);
+}
+
+int	check_values(char **rgb_char)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (rgb_char[x] != NULL)
+	{
+		y = 0;
+		while (rgb_char[x][y] != '\0' && rgb_char[x][y] != '\n')
+		{
+			if (ft_isdigit(rgb_char[x][y]) == 0)
+			{
+				return (0);
+			}
+			y++;
+		}
+		x++;
+	}
+	return (1);
 }
 
 int	check_texture_path(char *line, t_game *mlx)
