@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:36:57 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/08 13:59:36 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:00:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	create_window(t_game *mlx)
 
 int	close_window(t_game *mlx)
 {
-	(void)mlx;
-	exit (EXIT_FAILURE);
+	free_game(mlx);
+	exit (EXIT_SUCCESS);
 	return (0);
 }

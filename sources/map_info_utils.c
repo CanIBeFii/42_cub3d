@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/16 16:26:16 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:53:00 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ int	check_rgb_values(char *line, t_map_info *info)
 	rgb.r = ft_atoi(rgb_char[0]);
 	rgb.g = ft_atoi(rgb_char[1]);
 	rgb.b = ft_atoi(rgb_char[2]);
-	free_double_array(rgb_char);
 	if ((rgb.r < 0 || rgb.r > 255) || (rgb.g < 0 || rgb.g > 255)
 		|| (rgb.b < 0 || rgb.b > 255) || rgb_char[3] != NULL)
 	{
+		free_double_array(rgb_char);
 		perror("Error: rgb value out of bounds\n");
 		return (1);
 	}
+	free_double_array(rgb_char);
 	if (ft_strncmp(line, "C ", 2) == 0)
 		get_rgb_values(&info->ceiling_color, rgb);
 	else if (ft_strncmp(line, "F ", 2) == 0)
@@ -80,6 +81,7 @@ int	check_texture_path(char *line, t_game *mlx)
 	else
 		path = ft_substr(line, x, line_len - x);
 	path_fd = open(path, O_RDONLY);
+	free (path);
 	if (path_fd < 0)
 	{
 		perror("Error: texture not found\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/10 15:50:13 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:02:51 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ void	free_double_array(char **array)
 	}
 	free(array);
 	array = NULL;
+}
+
+void	free_game(t_game *mlx)
+{
+	(void)mlx;
+	// mlx_destroy_window(mlx->mlx_ptr, mlx->window);
+	// mlx_destroy_display(mlx->mlx_ptr);
+	// free (mlx->mlx_ptr);
 }

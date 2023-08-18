@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:38:37 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:52:12 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,18 @@ int	get_map_info(int fd, t_game *mlx)
 		{
 			return_value = check_info(line, mlx);
 			if (return_value == 1)
+			{
+				free(line);
 				return (1);
+			}
 			else if (return_value == 2)
 				break ;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (line)
+		free (line);
 	return (0);
 }
 
@@ -62,6 +67,7 @@ int	get_map(int fd, t_map *map, int index)
 	{
 		if (check_map_line(line) == 0)
 		{
+			free (line);
 			free_double_array(map->map);
 			return (0);
 		}
@@ -73,6 +79,7 @@ int	get_map(int fd, t_map *map, int index)
 		else
 			map->map[index] = ft_substr(line, 0, ft_strlen(line));
 		index++;
+		free (line);
 		line = get_next_line(fd);
 	}
 	map->x = max_line_size;
