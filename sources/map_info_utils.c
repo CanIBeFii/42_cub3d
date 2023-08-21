@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/18 16:29:10 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:09:46 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,58 +18,50 @@ int	check_info(char *line, t_game *mlx)
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 	{
 		if (check_texture_path(line, mlx) == 1)
+		{
+			free(line);
 			return (1);
+		}
 	}
 	else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 	{
-		if (check_rgb_values(line, &mlx->info) == 1)
+		if (check_rgb_values(line, &mlx->info, 1) == 1)
+		{
+			free(line);
 			return (1);
+		}
 	}
 	else
 	{
-		perror("Error: not enough information given\n");
-		return (1);
+		free(line);
+		return (print_error("Error: not enough information given\n", 1));
 	}
 	if (check_missing_info(&mlx->info) == 0)
 		return (2);
 	return (0);
 }
 
-int	check_rgb_values(char *line, t_map_info *info)
+int	check_rgb_values(char *line, t_map_info *info, int x)
 {
 	char	**rgb_char;
 	t_rgb	rgb;
-	int		x;
 
-	x = 1;
-	while (line[x] == ' ' || line[x] == '\t')
+	while (line[++x] == ' ' || line[x] == '\t')
 		x++;
 	rgb_char = ft_split(line + x, ',');
-	if (rgb_char == NULL)
-		return (1);
-	if (double_array_size(rgb_char) != 3)
+	if (rgb_char == NULL || double_array_size(rgb_char) != 3
+		|| check_values(rgb_char) == 0)
 	{
 		free_double_array(rgb_char);
-		perror("Error: invalid number of rgb values given\n");
-		return (1);
-	}
-	if (check_values(rgb_char) == 0)
-	{
-		free_double_array(rgb_char);
-		perror("Error: rgb values must be integers\n");
-		return (1);
+		return (print_error("Error: invalid rgb value given\n", 1));
 	}
 	rgb.r = ft_atoi(rgb_char[0]);
 	rgb.g = ft_atoi(rgb_char[1]);
 	rgb.b = ft_atoi(rgb_char[2]);
+	free_double_array(rgb_char);
 	if ((rgb.r < 0 || rgb.r > 255) || (rgb.g < 0 || rgb.g > 255)
 		|| (rgb.b < 0 || rgb.b > 255))
-	{
-		free_double_array(rgb_char);
-		perror("Error: rgb value out of bounds\n");
-		return (1);
-	}
-	free_double_array(rgb_char);
+		return (print_error("Error: rgb value out of bounds\n", 1));
 	if (ft_strncmp(line, "C ", 2) == 0)
 		get_rgb_values(&info->ceiling_color, rgb);
 	else if (ft_strncmp(line, "F ", 2) == 0)
@@ -82,19 +74,17 @@ int	check_values(char **rgb_char)
 	int	x;
 	int	y;
 
-	x = 0;
-	while (rgb_char[x] != NULL)
+	y = 0;
+	while (rgb_char[y] != NULL)
 	{
-		y = 0;
-		while (rgb_char[x][y] != '\0' && rgb_char[x][y] != '\n')
+		x = 0;
+		while (rgb_char[y][x] != '\0' && rgb_char[y][x] != '\n')
 		{
-			if (ft_isdigit(rgb_char[x][y]) == 0)
-			{
+			if (ft_isdigit(rgb_char[y][x]) == 0)
 				return (0);
-			}
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (1);
 }
@@ -117,14 +107,8 @@ int	check_texture_path(char *line, t_game *mlx)
 	path_fd = open(path, O_RDONLY);
 	free (path);
 	if (path_fd < 0)
-	{
-		perror("Error: texture not found\n");
-		return (1);
-	}
+		return (print_error("Error: texture not found\n", 1));
 	if (check_dup_textures(mlx, line) == 1)
-	{
-		perror("Error: duplicate texture found\n");
-		return (1);
-	}
+		return (print_error("Error: duplicate texture found\n", 1));
 	return (0);
 }

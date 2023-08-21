@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:50:55 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:46:43 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:23:38 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	validate_map(t_map *map)
 
 	y = 0;
 	num_of_players = 0;
+	if (map->x == 0 || map->y == 0)
+		return (print_error("Error: no map given\n", 0));
 	while (map->map[y] != NULL)
 	{
 		x = 0;
@@ -29,19 +31,13 @@ int	validate_map(t_map *map)
 				&& map->map[y][x] != '0')
 				num_of_players++;
 			if (check_surroundings(map, x, y) == 0)
-			{
-				perror("Error: invalid map");
-				return (0);
-			}
+				return (print_error("Error: invalid map\n", 0));
 			x++;
 		}
 		y++;
 	}
 	if (num_of_players != 1)
-	{
-		perror("Error: invalid map");
-		return (0);
-	}
+		return (print_error("Error: invalid map\n", 0));
 	return (1);
 }
 

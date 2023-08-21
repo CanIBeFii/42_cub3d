@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/18 16:19:00 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:53:01 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		check_missing_info(t_map_info *info);
 // MAP_INFO_UTILS.C
 
 int		check_info(char *line, t_game *mlx);
-int		check_rgb_values(char *line, t_map_info *info);
+int		check_rgb_values(char *line, t_map_info *info, int x);
 int		check_values(char **rgb_char);
 int		check_texture_path(char *line, t_game *mlx);
 
@@ -151,6 +151,10 @@ int		get_b(int trgb);
 
 void	free_double_array(char **array);
 void	free_game(t_game *mlx);
+
+// ERROR.C
+
+int		print_error(char *message, int return_value);
 
 // HANDLE_WINDOW.C
 

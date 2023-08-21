@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:52:12 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:10:08 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	get_map_info(int fd, t_game *mlx)
 		{
 			return_value = check_info(line, mlx);
 			if (return_value == 1)
-			{
-				free(line);
 				return (1);
-			}
 			else if (return_value == 2)
 				break ;
 		}
@@ -67,7 +64,6 @@ int	get_map(int fd, t_map *map, int index)
 	{
 		if (check_map_line(line) == 0)
 		{
-			free (line);
 			free_double_array(map->map);
 			return (0);
 		}
@@ -75,10 +71,9 @@ int	get_map(int fd, t_map *map, int index)
 			max_line_size = ft_strlen(line);
 		map->map = realloc_double_char_array(map->map, max_line_size, 0);
 		if (ft_strchr(line, '\n') != NULL)
-			map->map[index] = ft_substr(line, 0, ft_strlen(line) - 1);
+			map->map[index++] = ft_substr(line, 0, ft_strlen(line) - 1);
 		else
-			map->map[index] = ft_substr(line, 0, ft_strlen(line));
-		index++;
+			map->map[index++] = ft_substr(line, 0, ft_strlen(line));
 		free (line);
 		line = get_next_line(fd);
 	}

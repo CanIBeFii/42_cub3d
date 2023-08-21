@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:07:47 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:38:23 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:07:36 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	check_map_line(char *line)
 		c = line[index];
 		if (is_valid_map_char(c) == 0)
 		{
-			perror("Error: invalid map line");
-			return (0);
+			free(line);
+			return (print_error("Error: invalid map line", 0));
 		}
 		index += 1;
 	}
