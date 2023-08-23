@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+         #
+#    By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 13:29:16 by mibernar          #+#    #+#              #
-#    Updated: 2023/08/21 13:59:04 by fialexan         ###   ########.fr        #
+#    Updated: 2023/08/23 17:18:46 by mibernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_LIST = colors.c file_checker.c free.c handle_window.c keys.c main.c \
 				map_checker.c map_info.c map_info_utils.c map_utils.c rays.c \
-				map_validator.c error.c
+				map_validator.c error.c textures.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

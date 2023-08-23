@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/23 16:10:00 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:21:46 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	cub3d(t_game *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	create_window(mlx);
+	open_imgs(mlx, &mlx->info);
 	draw_rays(mlx);
 	mlx_hook(mlx->window, 17, 0L, close_window, mlx);
 	mlx_hook(mlx->window, 2, 1L << 0, keys, mlx);
@@ -41,8 +42,6 @@ int	main(int argc, char **argv)
 {
 	t_game	mlx;
 
-	(void)argc;
-	(void)argv;
 	check_file(argc, argv, &mlx);
 	init_vars(&mlx);
 	map_checker(argv[1], &mlx);
