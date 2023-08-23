@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/23 15:24:21 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:09:25 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void	free_game(t_game *mlx)
 {
 	if (mlx->map.map != NULL)
 		free_double_array(mlx->map.map);
+	if (mlx->info.no)
+		free(mlx->info.no);
+	if (mlx->info.so)
+		free(mlx->info.so);
+	if (mlx->info.ea)
+		free(mlx->info.ea);
+	if (mlx->info.we)
+		free(mlx->info.we);
 	// mlx_destroy_window(mlx->mlx_ptr, mlx->window);
 	// mlx_destroy_display(mlx->mlx_ptr);
 	// free (mlx->mlx_ptr);

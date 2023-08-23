@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/21 13:53:01 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:52:45 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ typedef struct s_data
 
 typedef struct s_map_info
 {
-	int		no;
-	int		so;
-	int		ea;
-	int		we;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
 
 	t_data	no_texture;
 	t_data	so_texture;
@@ -127,17 +127,16 @@ int		is_inside_map_char(char c);
 
 // MAP_INFO.C
 
-void	get_texture(t_game *mlx, t_data *texture, char *line);
-int		check_dup_textures(t_game *mlx, char *line);
 void	get_rgb_values(t_rgb *surface, t_rgb color);
 int		check_missing_info(t_map_info *info);
 
 // MAP_INFO_UTILS.C
 
+int		check_dup_textures(t_game *mlx, char *line, char *path);
 int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_map_info *info, int x);
 int		check_values(char **rgb_char);
-int		check_texture_path(char *line, t_game *mlx);
+int		check_texture_path(char *line, t_game *mlx, int x);
 
 // COLORS.COLORS
 

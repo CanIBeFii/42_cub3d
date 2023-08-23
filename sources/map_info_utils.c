@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/21 14:09:46 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:51:51 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_info(char *line, t_game *mlx)
 	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 	{
-		if (check_texture_path(line, mlx) == 1)
+		if (check_texture_path(line, mlx, 2) == 1)
 		{
 			free(line);
 			return (1);
@@ -89,14 +89,12 @@ int	check_values(char **rgb_char)
 	return (1);
 }
 
-int	check_texture_path(char *line, t_game *mlx)
+int	check_texture_path(char *line, t_game *mlx, int x)
 {
 	char		*path;
 	int			path_fd;
 	int			line_len;
-	int			x;
 
-	x = 2;
 	while (line[x] == ' ' || line[x] == '\t')
 		x++;
 	line_len = ft_strlen(line);
@@ -105,10 +103,16 @@ int	check_texture_path(char *line, t_game *mlx)
 	else
 		path = ft_substr(line, x, line_len - x);
 	path_fd = open(path, O_RDONLY);
-	free (path);
 	if (path_fd < 0)
+	{
+		free (path);
 		return (print_error("Error: texture not found\n", 1));
-	if (check_dup_textures(mlx, line) == 1)
+	}
+	if (check_dup_textures(mlx, line, path) == 1)
+	{
+		free (path);
 		return (print_error("Error: duplicate texture found\n", 1));
+	}
+	free (path);
 	return (0);
 }
