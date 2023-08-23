@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:05:38 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/21 14:16:51 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:24:21 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	free_double_array(char **array)
 
 void	free_game(t_game *mlx)
 {
-	(void)mlx;
 	if (mlx->map.map != NULL)
 		free_double_array(mlx->map.map);
 	// mlx_destroy_window(mlx->mlx_ptr, mlx->window);

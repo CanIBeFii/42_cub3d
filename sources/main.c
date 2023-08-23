@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/21 14:17:04 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:23:40 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	cub3d(t_game *mlx)
 	mlx->mlx_ptr = mlx_init();
 	create_window(mlx);
 	draw_rays(mlx);
-	mlx_hook(mlx->window, 17, 0L, close_window, &mlx);
-	mlx_hook(mlx->window, 2, 1L << 0, keys, &mlx);
+	mlx_hook(mlx->window, 17, 0L, close_window, mlx);
+	mlx_hook(mlx->window, 2, 1L << 0, keys, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }
 
