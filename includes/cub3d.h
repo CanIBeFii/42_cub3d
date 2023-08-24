@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/23 15:52:45 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:08:07 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,11 @@
 
 // TYPEDEF
 
-typedef struct s_player
-{
-	float	pos_x;
-	float	pos_y;
-}	t_player;
-
-typedef struct s_vector
+typedef struct s_vector_int
 {
 	int	x;
 	int	y;
-}	t_vector;
+}	t_vector_int;
 
 typedef struct s_rgb
 {
@@ -53,12 +47,12 @@ typedef struct s_rgb
 
 typedef struct s_data
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	t_vector	img_size;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	t_vector_int	img_size;
 }	t_data;
 
 typedef struct s_map_info
@@ -77,11 +71,26 @@ typedef struct s_map_info
 	t_rgb	ceiling_color;
 }	t_map_info;
 
+typedef struct s_vector
+{
+	double	y;
+	double	x;
+}	t_vector;
+
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	direction;
+	t_vector	camera;
+}	t_player;
+
 typedef struct s_map
 {
 	char		**map;
-	int			x;
-	int			y;
+	int			max_x;
+	int			max_y;
+
+	t_player	player;
 }	t_map;
 
 typedef struct s_game
@@ -137,6 +146,11 @@ int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_map_info *info, int x);
 int		check_values(char **rgb_char);
 int		check_texture_path(char *line, t_game *mlx, int x);
+
+// PLAYER.C
+
+int		save_player_pos(t_player *player, int spawn_y,
+			int spawn_x, char spawn_dir);
 
 // COLORS.COLORS
 
