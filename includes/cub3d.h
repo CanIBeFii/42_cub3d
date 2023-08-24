@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/24 15:19:46 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:23:45 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
+# define FOV 180
 
 //KEYS
 
@@ -69,10 +70,6 @@ typedef struct s_map_info
 	char	*we;
 
 	t_data	no_texture;
-	t_data	so_texture;
-	t_data	ea_texture;
-	t_data	we_texture;
-
 	t_rgb	floor_color;
 	t_rgb	ceiling_color;
 }	t_map_info;
@@ -89,6 +86,15 @@ typedef struct s_player
 	t_vector	direction;
 	t_vector	camera;
 }	t_player;
+
+typedef struct s_ray
+{
+	t_vector		direction;
+	t_vector_int	map_pos;
+	t_vector		delta_dist;
+	t_vector		initial_dist;
+	t_vector_int	step;
+}	t_ray;
 
 typedef struct s_map
 {
