@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/24 15:08:07 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:19:46 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 
 //KEYS
 
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define L_ARROW 65361
+# define R_ARROW 65363
 # define ESC_KEY 65307
 
 // TYPEDEF
@@ -178,8 +184,16 @@ int		close_window(t_game *mlx);
 
 int		keys(int key_code, t_game *mlx);
 
+//TEXTURES.C
+
+void	open_imgs(t_game *mlx, t_map_info *info);
+
 //DRAW_RAYS.C
 
 void	draw_rays(t_game *mlx);
+
+//MOVEMENTS.C
+
+void	movements(int key_code, t_game *mlx);
 
 #endif
