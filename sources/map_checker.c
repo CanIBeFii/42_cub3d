@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/21 14:10:08 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:13:25 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_map(int fd, t_map *map, int index)
 		free (line);
 		line = get_next_line(fd);
 	}
-	map->x = max_line_size;
-	map->y = index;
+	map->max_x = max_line_size;
+	map->max_y = index;
 	return (1);
 }

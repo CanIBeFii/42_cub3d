@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/23 16:10:00 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:02:40 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	init_vars(t_game *mlx)
 	mlx->info.floor_color.g = -1;
 	mlx->info.floor_color.b = -1;
 	mlx->map.map = NULL;
+	mlx->map.player.direction.x = 0;
+	mlx->map.player.direction.y = 0;
+	mlx->map.player.camera.x = 0;
+	mlx->map.player.camera.y = 0;
 }
 
 int	main(int argc, char **argv)
