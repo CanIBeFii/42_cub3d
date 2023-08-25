@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/24 16:23:45 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/25 17:07:17 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 # define L_ARROW 65361
 # define R_ARROW 65363
 # define ESC_KEY 65307
+
+//VALUES
+
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.5
 
 // TYPEDEF
 
@@ -200,6 +205,6 @@ void	draw_rays(t_game *mlx);
 
 //MOVEMENTS.C
 
-void	movements(int key_code, t_game *mlx);
+void	movements(int key_code, t_player *player);
 
 #endif
