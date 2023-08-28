@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/28 15:54:10 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:05:05 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ typedef struct s_ray
 	t_vector		direction;
 	t_vector_int	map_pos;
 	t_vector		delta_dist;
-	t_vector		initial_dist;
+	t_vector		distance;
 	t_vector_int	step;
+
+	double			real_distance;
 }	t_ray;
 
 typedef struct s_map
@@ -172,6 +174,12 @@ int		check_texture_path(char *line, t_game *mlx, int x);
 
 int		save_player_pos(t_player *player, int spawn_y,
 			int spawn_x, char spawn_dir);
+
+// DDA.C
+
+void	dda(t_map *map, t_player *player);
+void	dda_step_calc(t_ray *ray, t_player *player);
+void	dda_real_distance_calc(t_ray *ray, t_map *map);
 
 // COLORS.COLORS
 
