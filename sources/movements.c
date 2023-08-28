@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:43:40 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/25 17:20:21 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:26:18 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,16 @@ void	movements(int key_code, t_player *player)
 		player->pos.x -= player->direction.x * MOVE_SPEED;
 		player->pos.y -= player->direction.y * MOVE_SPEED;
 	}
-	/*needs code for left and right strafe
-	*
-	*
-	*
-	*/
+	if (key_code == A_KEY)
+	{
+		player->pos.x -= player->direction.y * MOVE_SPEED;
+		player->pos.y += player->direction.x * MOVE_SPEED;
+	}
+	if (key_code == D_KEY)
+	{
+		player->pos.x += player->direction.y * MOVE_SPEED;
+		player->pos.y -= player->direction.x * MOVE_SPEED;
+	}
 	if (key_code == L_ARROW)
 	{
 		player->direction.x = player->direction.x * cos(-ROT_SPEED) - player->direction.y * sin(-ROT_SPEED);
