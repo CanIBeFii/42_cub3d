@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/23 15:51:51 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:28:27 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ int	check_texture_path(char *line, t_game *mlx, int x)
 	else
 		path = ft_substr(line, x, line_len - x);
 	path_fd = open(path, O_RDONLY);
-	if (path_fd < 0)
+	if (path_fd < 0 || ft_strncmp(path + ft_strlen(path) - 4, ".xpm", 4) != 0)
 	{
 		free (path);
-		return (print_error("Error: texture not found\n", 1));
+		return (print_error("Error: invalid texture\n", 1));
 	}
 	if (check_dup_textures(mlx, line, path) == 1)
 	{
