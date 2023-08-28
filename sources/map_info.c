@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:28:29 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/23 16:02:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:28:13 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	check_dup_textures(t_game *mlx, char *line, char *path)
 	}
 	return (0);
 }
-
-
 
 void	get_rgb_values(t_rgb *surface, t_rgb color)
 {
