@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/25 17:07:17 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:54:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ typedef struct s_map_info
 	char	*we;
 
 	t_data	no_texture;
+	t_data	so_texture;
+	t_data	ea_texture;
+	t_data	we_texture;
+
 	t_rgb	floor_color;
 	t_rgb	ceiling_color;
 }	t_map_info;
