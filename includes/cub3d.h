@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/29 13:12:56 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:58:21 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
-# define FOV 180
+# define FOV 60
 
 //KEYS
 
@@ -107,6 +107,8 @@ typedef struct s_ray
 	double			real_distance;
 	int				wall_start;
 	int				wall_end;
+
+	int				side;
 }	t_ray;
 
 typedef struct s_map
