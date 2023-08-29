@@ -1,13 +1,13 @@
-NO ./textures/bluestone.xpm
-SO ./textures/eagle.xpm
-WE ./textures/greystone.xpm
-EA ./textures/redbrick.xpm
+NO /nfs/homes/fialexan/Desktop/42_cub3d/textures/bluestone.xpm
+SO /nfs/homes/fialexan/Desktop/42_cub3d/textures/eagle.xpm
+WE /nfs/homes/fialexan/Desktop/42_cub3d/textures/greystone.xpm
+EA /nfs/homes/fialexan/Desktop/42_cub3d/textures/redbrick.xpm
 
 F 225,100,0
 C 225,30,0
 
 1111111111111111111111111
-10W0000000000000000000001
+1000000000000000000000001
 10110000000E0100000000001
 1001000000000000110000001
 1111111111111111111111111

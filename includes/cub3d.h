@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/28 18:05:05 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:12:56 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_ray
 	t_vector_int	step;
 
 	double			real_distance;
+	int				wall_start;
+	int				wall_end;
 }	t_ray;
 
 typedef struct s_map
@@ -180,6 +182,7 @@ int		save_player_pos(t_player *player, int spawn_y,
 void	dda(t_map *map, t_player *player);
 void	dda_step_calc(t_ray *ray, t_player *player);
 void	dda_real_distance_calc(t_ray *ray, t_map *map);
+void	dda_wall_height(t_ray *ray);
 
 // COLORS.COLORS
 

@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/28 17:47:12 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:51:50 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	dda(t_map *map, t_player *player)
 	t_ray	ray;
 
 	index = 0;
-	ray.map_pos.x = player->pos.x;
-	ray.map_pos.y = player->pos.y;
 	while (index < FOV)
 	{
+		ray.map_pos.x = player->pos.x;
+		ray.map_pos.y = player->pos.y;
 		camera_ray = 2 * index / FOV - 1;
 		ray.direction.x = player->direction.x + player->camera.x + camera_ray;
 		ray.direction.y = player->direction.y + player->camera.y + camera_ray;
@@ -30,7 +30,7 @@ void	dda(t_map *map, t_player *player)
 		ray.delta_dist.y = fabs(1 / ray.direction.y);
 		dda_step_calc(&ray, player);
 		dda_real_distance_calc(&ray, map);
-		draw_wall()
+		dda_wall_height(&ray);
 		index++;
 	}
 }
@@ -40,13 +40,13 @@ void	dda_step_calc(t_ray *ray, t_player *player)
 	if (ray->direction.x < 0)
 	{
 		ray->step.x = -1;
-		ray->initial_distance.x = (player->pos.x - ray->map_pos.x)
+		ray->distance.x = (player->pos.x - ray->map_pos.x)
 			* ray->delta_dist.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->initial_distance.x = (ray->map_pos.x + 1.0 - player->pos.x)
+		ray->distance.x = (ray->map_pos.x + 1.0 - player->pos.x)
 			* ray->delta_dist.x;
 	}
 	if (ray->direction.y < 0)
@@ -89,4 +89,17 @@ void	dda_real_distance_calc(t_ray *ray, t_map *map)
 		ray->real_distance = (ray->distance.x - ray->delta_dist.x);
 	else
 		ray->real_distance = (ray->distance.y - ray->delta_dist.y);
+}
+
+void	dda_wall_height(t_ray *ray)
+{
+	int	line_height;
+
+	line_height = (int)(SCREEN_H / ray->real_distance);
+	ray->wall_start = -line_height / 2 + SCREEN_H / 2;
+	if (ray->wall_start < 0)
+		ray->wall_start = 0;
+	ray->wall_end = line_height / 2 + SCREEN_H / 2;
+	if (ray->wall_end >= SCREEN_H)
+		ray->wall_end = SCREEN_H - 1;
 }
