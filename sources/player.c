@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:44:18 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/24 14:06:50 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:12:21 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	save_player_pos(t_player *player, int spawn_y, int spawn_x, char spawn_dir)
 	player->pos.y = spawn_y;
 	if (spawn_dir == 'N')
 	{
-		player->direction.y = 1;
-		player->camera.x = 0.6; 
+		player->direction.y = -1;
+		player->camera.x = -0.6;
 	}
 	else if (spawn_dir == 'E')
 	{
@@ -28,8 +28,8 @@ int	save_player_pos(t_player *player, int spawn_y, int spawn_x, char spawn_dir)
 	}
 	else if (spawn_dir == 'S')
 	{
-		player->direction.y = -1;
-		player->camera.x = -0.6;
+		player->direction.y = 1;
+		player->camera.x = 0.6;
 	}
 	else
 	{
