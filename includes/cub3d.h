@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/30 16:06:48 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:40:48 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,9 @@ void	draw_rays(t_game *mlx);
 
 //MOVEMENTS.C
 
-void	movements(int key_code, t_player *player);
+void	movement_up_down(t_player *player, t_map *map, int key_code);
+void	movement_left_right(t_player *player, t_map *map, int key_code);
+void	camera_changes(int key_code, t_player *player);
 
 //DRAW.C
 
