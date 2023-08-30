@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/30 13:25:43 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:06:48 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,11 +182,11 @@ int		save_player_pos(t_player *player, int spawn_y,
 
 // DDA.C
 
-void	dda(t_map *map, t_player *player, t_map_info *info);
+void	dda(t_game *mlx, t_map *map, t_player *player, t_map_info *info);
 void	dda_step_calc(t_ray *ray, t_player *player);
 void	dda_real_distance_calc(t_ray *ray, t_map *map);
 void	dda_wall_height(t_ray *ray);
-void	dda_side_selector(t_ray *ray, t_player *player, t_map_info *info);
+void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player, t_map_info *info);
 
 // COLORS.COLORS
 
@@ -225,5 +225,11 @@ void	draw_rays(t_game *mlx);
 //MOVEMENTS.C
 
 void	movements(int key_code, t_player *player);
+
+//DRAW.C
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		get_color(int tex_x, int tex_y, t_data *curr);
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height);
 
 #endif

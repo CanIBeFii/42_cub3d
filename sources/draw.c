@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/29 16:57:09 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:55:10 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_color(int tex_x, int tex_y, t_data *curr)
 	return (color);
 }
 
-void	draw_walls(t_ray *ray, t_data *texture, double wall_height)
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height)
 {
 	double	step;
 	double	texture_pos;
@@ -51,7 +51,10 @@ void	draw_walls(t_ray *ray, t_data *texture, double wall_height)
 	y = ray->wall_start;
 	while (y < ray->wall_end)
 	{
-		color = get_color(, texture_pos, texture);
+		printf("%d\n", y);
+		color = get_color(ray->x_texture, texture_pos, texture);
+		my_mlx_pixel_put(&mlx->img, ray->x_texture, texture_pos, color);
 		texture_pos += step;
+		y++;
 	}
 }

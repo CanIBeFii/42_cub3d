@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/30 13:25:13 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:32:15 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	cub3d(t_game *mlx)
 	mlx->mlx_ptr = mlx_init();
 	create_window(mlx);
 	open_imgs(mlx, &mlx->info);
-	dda(&mlx->map, &mlx->map.player, &mlx->info);
+	dda(mlx, &mlx->map, &mlx->map.player, &mlx->info);
 	mlx_hook(mlx->window, 17, 0L, close_window, mlx);
 	mlx_hook(mlx->window, 2, 1L << 0, keys, mlx);
 	mlx_loop(mlx->mlx_ptr);
