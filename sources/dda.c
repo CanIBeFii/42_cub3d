@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/29 17:00:34 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:26:16 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	dda(t_map *map, t_player *player, t_map_info *info)
 		dda_step_calc(&ray, player);
 		dda_real_distance_calc(&ray, map);
 		dda_wall_height(&ray);
-
+		dda_side_selector(&ray, player, info);
 		index++;
 	}
 }
@@ -106,23 +106,25 @@ void	dda_wall_height(t_ray *ray)
 
 void	dda_side_selector(t_ray *ray, t_player *player, t_map_info *info)
 {
-	int	x_texture;
+	double	wall_x;
 
+	(void)info;
 	if (ray->side == 0)
-	{
-		if (ray->step.x == -1)
-		{
-			x_texture = 
-		}
-			ray->wall = 'W';
-		else
-			ray->wall = 'E';
-	}
+		wall_x = player->pos.y + ray->real_distance * ray->direction.y;
 	else
-	{
-		if (ray->step.y == -1)
-			ray->wall = 'N';
-		else
-			ray->wall = 'S';
-	}
+		wall_x = player->pos.x + ray->real_distance * ray->direction.x;
+	wall_x -= floor(wall_x);
+	ray->x_texture = (int)(wall_x * 64);
+	if (ray->side == 0 && ray->direction.x > 0)
+		ray->x_texture = 64 - ray->x_texture - 1;
+	if (ray->side == 1 && ray->direction.y < 0)
+		ray->x_texture = 64 - ray->x_texture - 1;
+	// if (ray->side == 0 && ray->direction.x > 0)
+	// 	draw_walls(ray, &info->ea_texture, ray->wall_end - ray->wall_start);
+	// else if (ray->side == 0 && ray->direction.x < 0)
+	// 	draw_walls(ray, &info->we_texture, ray->wall_end - ray->wall_start);
+	// else if (ray->side == 1 && ray->direction.y > 0)
+	// 	draw_walls(ray, &info->no_texture, ray->wall_end - ray->wall_start);
+	// else if (ray->side == 1 && ray->direction.y < 0)
+	// 	draw_walls(ray, &info->so_texture, ray->wall_end - ray->wall_start);
 }

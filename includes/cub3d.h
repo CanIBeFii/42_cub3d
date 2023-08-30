@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/29 16:58:21 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:25:43 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_ray
 	int				wall_end;
 
 	int				side;
+	int				x_texture;
 }	t_ray;
 
 typedef struct s_map
@@ -181,10 +182,11 @@ int		save_player_pos(t_player *player, int spawn_y,
 
 // DDA.C
 
-void	dda(t_map *map, t_player *player);
+void	dda(t_map *map, t_player *player, t_map_info *info);
 void	dda_step_calc(t_ray *ray, t_player *player);
 void	dda_real_distance_calc(t_ray *ray, t_map *map);
 void	dda_wall_height(t_ray *ray);
+void	dda_side_selector(t_ray *ray, t_player *player, t_map_info *info);
 
 // COLORS.COLORS
 
