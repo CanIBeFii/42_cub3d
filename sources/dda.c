@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/30 16:06:19 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:30:33 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	dda(t_game *mlx, t_map *map, t_player *player, t_map_info *info)
 	index = 0;
 	while (index < FOV)
 	{
+		ray.id = index;
 		ray.map_pos.x = player->pos.x;
 		ray.map_pos.y = player->pos.y;
 		camera_ray = (2 * index) / (double) FOV - 1;
