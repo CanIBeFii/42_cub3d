@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/31 14:03:57 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:20:14 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,7 @@ void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player, t_map_info *in
 
 // COLORS.COLORS
 
-int		create_trgb(int t, int r, int g, int b);
-int		get_t(int trgb);
+int		create_rgb(t_rgb *color);
 int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
@@ -236,5 +235,6 @@ void	my_img_clear(t_data data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(int tex_x, int tex_y, t_data *curr);
 void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height);
+void	draw_floor_ceiling(t_game *mlx, t_ray *ray);
 
 #endif

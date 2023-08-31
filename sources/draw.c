@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/31 14:10:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:19:58 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,27 @@ void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height)
 		texture_pos += step;
 		y++;
 	}
+	draw_floor_ceiling(mlx, ray);
 }
 
+void	draw_floor_ceiling(t_game *mlx, t_ray *ray)
+{
+	int	c_color;
+	int	f_color;
+	int	y;
+
+	c_color = create_rgb(&mlx->info.ceiling_color);
+	f_color = create_rgb(&mlx->info.floor_color);
+	y = 0;
+	while (y < ray->wall_start)
+	{
+		my_mlx_pixel_put(&mlx->img, ray->id, y, c_color);
+		y++;
+	}
+	y = ray->wall_end + 1;
+	while (y < SCREEN_H)
+	{
+		my_mlx_pixel_put(&mlx->img, ray->id, y, f_color);
+		y++;
+	}
+}

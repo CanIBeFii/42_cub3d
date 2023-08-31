@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:38:07 by fialexan          #+#    #+#             */
-/*   Updated: 2023/07/25 14:38:39 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:17:57 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	create_trgb(int t, int r, int g, int b)
+int	create_rgb(t_rgb *color)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	get_t(int trgb)
-{
-	return ((trgb >> 24) & 0xFF);
+	return (color->r << 16 | color->g << 8 | color->b);
 }
 
 int	get_r(int trgb)
