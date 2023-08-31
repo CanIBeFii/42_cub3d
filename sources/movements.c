@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:43:40 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/30 14:41:10 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:07:43 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,31 @@ void	movement_left_right(t_player *player, t_map *map, int key_code)
 
 void	camera_changes(int key_code, t_player *player)
 {
-	if (key_code == L_ARROW)
+	double	old_dir_x;
+	double	old_camera_x;
+
+	old_dir_x = player->direction.x;
+	old_camera_x = player->camera.x;
+	if (key_code == R_ARROW)
 	{
 		player->direction.x = player->direction.x * cos(-ROT_SPEED)
 			- player->direction.y * sin(-ROT_SPEED);
-		player->direction.y = player->direction.x * sin(-ROT_SPEED)
+		player->direction.y = old_dir_x * sin(-ROT_SPEED)
 			+ player->direction.y * cos(-ROT_SPEED);
 		player->camera.x = player->camera.x * cos(-ROT_SPEED)
 			- player->camera.y * sin(-ROT_SPEED);
-		player->camera.y = player->camera.x * sin(-ROT_SPEED)
+		player->camera.y = old_camera_x * sin(-ROT_SPEED)
 			+ player->camera.y * cos(-ROT_SPEED);
 	}
-	else if (key_code == R_ARROW)
+	else if (key_code == L_ARROW)
 	{
 		player->direction.x = player->direction.x * cos(ROT_SPEED)
 			- player->direction.y * sin(ROT_SPEED);
-		player->direction.y = player->direction.x * sin(ROT_SPEED)
+		player->direction.y = old_dir_x * sin(ROT_SPEED)
 			+ player->direction.y * cos(ROT_SPEED);
 		player->camera.x = player->camera.x * cos(ROT_SPEED)
 			- player->camera.y * sin(ROT_SPEED);
-		player->camera.y = player->camera.x * sin(ROT_SPEED)
+		player->camera.y = old_camera_x * sin(ROT_SPEED)
 			+ player->camera.y * cos(ROT_SPEED);
 	}
 }

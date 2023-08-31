@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/31 13:30:41 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:03:57 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
-# define FOV 60
+# define FOV 640
 
 //KEYS
 
@@ -40,7 +40,7 @@
 //VALUES
 
 # define MOVE_SPEED 0.1
-# define ROT_SPEED 0.5
+# define ROT_SPEED 0.1
 
 // TYPEDEF
 
@@ -232,6 +232,7 @@ void	camera_changes(int key_code, t_player *player);
 
 //DRAW.C
 
+void	my_img_clear(t_data data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(int tex_x, int tex_y, t_data *curr);
 void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height);

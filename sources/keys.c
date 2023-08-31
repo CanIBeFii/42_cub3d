@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:53:57 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/30 14:43:22 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:53:40 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ int	keys(int key_code, t_game *mlx)
 		movement_left_right(&mlx->map.player, &mlx->map, key_code);
 	else if (key_code == L_ARROW || key_code == R_ARROW)
 		camera_changes(key_code, &mlx->map.player);
+	else
+		return (0);
+	my_img_clear(mlx->img);
+	dda(mlx, &mlx->map, &mlx->map.player, &mlx->info);
 	return (0);
 }

@@ -6,11 +6,29 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/30 15:55:10 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:10:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	my_img_clear(t_data data)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while (j < SCREEN_H)
+	{
+		i = 0;
+		while (i < SCREEN_W)
+		{
+			my_mlx_pixel_put(&data, i, j, 0x000000);
+			i++;
+		}
+		j++;
+	}
+}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -51,10 +69,10 @@ void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height)
 	y = ray->wall_start;
 	while (y < ray->wall_end)
 	{
-		printf("%d\n", y);
 		color = get_color(ray->x_texture, texture_pos, texture);
-		my_mlx_pixel_put(&mlx->img, ray->x_texture, texture_pos, color);
+		my_mlx_pixel_put(&mlx->img, ray->id, y, color);
 		texture_pos += step;
 		y++;
 	}
 }
+
