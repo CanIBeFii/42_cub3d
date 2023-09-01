@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/24 14:13:25 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:03:19 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ void	map_checker(char *path, t_game *mlx)
 
 	fd = open(path, O_RDONLY);
 	if (get_map_info(fd, mlx) == 1)
+	{
+		free_game(mlx);
 		exit(1);
+	}
 	if (get_map(fd, &mlx->map, 0) == 0)
+	{
+		free_game(mlx);
 		exit(1);
+	}
 	if (validate_map(&mlx->map) == 0)
+	{
+		free_game(mlx);
 		exit(1);
+	}
 }
 
 int	get_map_info(int fd, t_game *mlx)
