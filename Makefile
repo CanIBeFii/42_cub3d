@@ -6,7 +6,7 @@
 #    By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 13:29:16 by mibernar          #+#    #+#              #
-#    Updated: 2023/08/30 13:30:58 by mibernar         ###   ########.fr        #
+#    Updated: 2023/09/04 15:23:14 by mibernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_LIST = colors.c file_checker.c free.c handle_window.c keys.c main.c \
-				map_checker.c map_info.c map_info_utils.c map_utils.c rays.c \
+				map_checker.c map_info.c map_info_utils.c map_utils.c \
 				map_validator.c error.c textures.c movements.c player.c dda.c \
 				draw.c
 SOURCES_DIRECTORY = ./sources/

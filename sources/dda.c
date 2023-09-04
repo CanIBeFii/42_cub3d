@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/31 13:30:33 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:21:56 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ void	dda_wall_height(t_ray *ray)
 		ray->wall_end = SCREEN_H - 1;
 }
 
-void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player, t_map_info *info)
+void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player,
+		t_map_info *info)
 {
 	double	wall_x;
 
@@ -121,11 +122,15 @@ void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player, t_map_info *in
 	if (ray->side == 1 && ray->direction.y < 0)
 		ray->x_texture = 64 - ray->x_texture - 1;
 	if (ray->side == 0 && ray->direction.x > 0)
-		draw_walls(mlx, ray, &info->ea_texture, ray->wall_end - ray->wall_start);
+		draw_walls(mlx, ray, &info->ea_texture, ray->wall_end
+			- ray->wall_start);
 	else if (ray->side == 0 && ray->direction.x < 0)
-		draw_walls(mlx, ray, &info->we_texture, ray->wall_end - ray->wall_start);
+		draw_walls(mlx, ray, &info->we_texture,
+			ray->wall_end - ray->wall_start);
 	else if (ray->side == 1 && ray->direction.y > 0)
-		draw_walls(mlx, ray, &info->no_texture, ray->wall_end - ray->wall_start);
+		draw_walls(mlx, ray, &info->no_texture,
+			ray->wall_end - ray->wall_start);
 	else if (ray->side == 1 && ray->direction.y < 0)
-		draw_walls(mlx, ray, &info->so_texture, ray->wall_end - ray->wall_start);
+		draw_walls(mlx, ray, &info->so_texture,
+			ray->wall_end - ray->wall_start);
 }

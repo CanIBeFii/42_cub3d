@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/01 18:10:51 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:23:54 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_game
 
 	t_map		map;
 	t_map_info	info;
-	
+
 	int			game_started;
 
 }	t_game;
@@ -190,7 +190,8 @@ void	dda(t_game *mlx, t_map *map, t_player *player, t_map_info *info);
 void	dda_step_calc(t_ray *ray, t_player *player);
 void	dda_real_distance_calc(t_ray *ray, t_map *map);
 void	dda_wall_height(t_ray *ray);
-void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player, t_map_info *info);
+void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player,
+			t_map_info *info);
 
 // COLORS.COLORS
 
@@ -237,7 +238,8 @@ void	camera_changes(int key_code, t_player *player);
 void	my_img_clear(t_data data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(int tex_x, int tex_y, t_data *curr);
-void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height);
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture,
+			double wall_height);
 void	draw_floor_ceiling(t_game *mlx, t_ray *ray);
 
 #endif
