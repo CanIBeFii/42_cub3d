@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/31 14:19:58 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:53:43 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	get_color(int tex_x, int tex_y, t_data *curr)
 {
-	int		bpp;
-	char	*data;
-	int		color;
-	int		pixel_index;
-	int		i;
+	int	color;
+	int	offset;
 
-	data = mlx_get_data_addr(curr->img, &curr->bits_per_pixel,
-			&curr->line_length, &curr->endian);
-	bpp = curr->bits_per_pixel / 8;
-	color = 0;
-	pixel_index = tex_y * 64 + tex_x;
-	i = -1;
-	while (++i < bpp)
-		color |= data[(pixel_index * bpp) + i] << (8 * i);
+	offset = tex_y * curr->line_length + tex_x * (curr->bits_per_pixel / 8);
+	color = *(int *)(curr->addr + offset);
 	return (color);
 }
 

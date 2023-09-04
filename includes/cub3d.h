@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/04 15:23:54 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:52:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,10 +222,6 @@ int		keys(int key_code, t_game *mlx);
 //TEXTURES.C
 
 void	open_imgs(t_game *mlx, t_map_info *info);
-
-//DRAW_RAYS.C
-
-void	draw_rays(t_game *mlx);
 
 //MOVEMENTS.C
 

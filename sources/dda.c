@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/04 15:21:56 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:22:21 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	dda_wall_height(t_ray *ray)
 
 	line_height = (int)(SCREEN_H / ray->real_distance);
 	ray->wall_start = -line_height / 2 + SCREEN_H / 2;
-	if (ray->wall_start < 0)
+	if (ray->wall_start < 0 || line_height < 0)
 		ray->wall_start = 0;
 	ray->wall_end = line_height / 2 + SCREEN_H / 2;
-	if (ray->wall_end >= SCREEN_H)
+	if (ray->wall_end >= SCREEN_H || line_height < 0)
 		ray->wall_end = SCREEN_H - 1;
 }
 
