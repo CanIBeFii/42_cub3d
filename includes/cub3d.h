@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/04 17:52:41 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:51:08 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 // SCREEN SIZE
 
-# define SCREEN_W 640
+# define SCREEN_W 720
 # define SCREEN_H 480
-# define FOV 640
+# define FOV 720
 
 //KEYS
 
