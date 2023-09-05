@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:08:04 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/04 16:22:21 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:37:01 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player,
 		draw_walls(mlx, ray, &info->we_texture,
 			ray->wall_end - ray->wall_start);
 	else if (ray->side == 1 && ray->direction.y > 0)
-		draw_walls(mlx, ray, &info->no_texture,
+		draw_walls(mlx, ray, &info->so_texture,
 			ray->wall_end - ray->wall_start);
 	else if (ray->side == 1 && ray->direction.y < 0)
-		draw_walls(mlx, ray, &info->so_texture,
+		draw_walls(mlx, ray, &info->no_texture,
 			ray->wall_end - ray->wall_start);
 }

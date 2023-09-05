@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:43:40 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/31 14:07:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:41:45 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	movement_up_down(t_player *player, t_map *map, int key_code)
 
 void	movement_left_right(t_player *player, t_map *map, int key_code)
 {
-	if (key_code == A_KEY)
+	if (key_code == D_KEY)
 	{
 		if (map->map[(int)(player->pos.y + player->direction.x * MOVE_SPEED)]
 			[(int)(player->pos.x)] != '1')
@@ -45,7 +45,7 @@ void	movement_left_right(t_player *player, t_map *map, int key_code)
 			[(int)(player->pos.x - player->direction.y * MOVE_SPEED)] != '1')
 			player->pos.x -= player->direction.y * MOVE_SPEED;
 	}
-	else if (key_code == D_KEY)
+	else if (key_code == A_KEY)
 	{
 		if (map->map[(int)(player->pos.y - player->direction.x * MOVE_SPEED)]
 			[(int)(player->pos.x)] != '1')
@@ -63,7 +63,7 @@ void	camera_changes(int key_code, t_player *player)
 
 	old_dir_x = player->direction.x;
 	old_camera_x = player->camera.x;
-	if (key_code == R_ARROW)
+	if (key_code == L_ARROW)
 	{
 		player->direction.x = player->direction.x * cos(-ROT_SPEED)
 			- player->direction.y * sin(-ROT_SPEED);
@@ -74,7 +74,7 @@ void	camera_changes(int key_code, t_player *player)
 		player->camera.y = old_camera_x * sin(-ROT_SPEED)
 			+ player->camera.y * cos(-ROT_SPEED);
 	}
-	else if (key_code == L_ARROW)
+	else if (key_code == R_ARROW)
 	{
 		player->direction.x = player->direction.x * cos(ROT_SPEED)
 			- player->direction.y * sin(ROT_SPEED);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:44:18 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/29 14:12:21 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:35:16 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	save_player_pos(t_player *player, int spawn_y, int spawn_x, char spawn_dir)
 	if (spawn_dir == 'N')
 	{
 		player->direction.y = -1;
-		player->camera.x = -0.6;
+		player->camera.x = 0.6;
 	}
 	else if (spawn_dir == 'E')
 	{
 		player->direction.x = 1;
-		player->camera.y = -0.6;
+		player->camera.y = 0.6;
 	}
 	else if (spawn_dir == 'S')
 	{
 		player->direction.y = 1;
-		player->camera.x = 0.6;
+		player->camera.x = -0.6;
 	}
 	else
 	{
 		player->direction.x = -1;
-		player->camera.y = 0.6;
+		player->camera.y = -0.6;
 	}
 	return (1);
 }
