@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
-/*   Updated: 2023/09/04 17:53:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:20:30 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,22 @@ int	get_color(int tex_x, int tex_y, t_data *curr)
 	return (color);
 }
 
-void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture, double wall_height)
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture)
 {
 	double	step;
 	double	texture_pos;
+	int		texture_y;
 	int		color;
 	int		y;
 
-	step = texture->img_size.y / wall_height;
-	texture_pos = (ray->wall_start - SCREEN_H / 2 + wall_height / 2) * step;
+	step = 1.0 * texture->img_size.y / ray->line_height;
+	texture_pos = (ray->wall_start - SCREEN_H / 2
+			+ ray->line_height / 2) * step;
 	y = ray->wall_start;
 	while (y < ray->wall_end)
 	{
-		color = get_color(ray->x_texture, texture_pos, texture);
+		texture_y = (int)texture_pos & (texture->img_size.y - 1);
+		color = get_color(ray->x_texture, texture_y, texture);
 		my_mlx_pixel_put(&mlx->img, ray->id, y, color);
 		texture_pos += step;
 		y++;

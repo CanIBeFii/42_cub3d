@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/05 12:51:08 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:19:05 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_ray
 	t_vector_int	step;
 
 	double			real_distance;
+	int				line_height;
 	int				wall_start;
 	int				wall_end;
 
@@ -234,8 +235,7 @@ void	camera_changes(int key_code, t_player *player);
 void	my_img_clear(t_data data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_color(int tex_x, int tex_y, t_data *curr);
-void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture,
-			double wall_height);
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture);
 void	draw_floor_ceiling(t_game *mlx, t_ray *ray);
 
 #endif
