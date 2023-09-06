@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:28:29 by mibernar          #+#    #+#             */
-/*   Updated: 2023/08/28 16:28:13 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:47:32 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ int	check_dup_textures(t_game *mlx, char *line, char *path)
 		if (mlx->info.we != NULL)
 			return (1);
 		mlx->info.we = ft_strdup(path);
+	}
+	return (0);
+}
+
+int	check_dup_rgb(t_map_info *info, char c)
+{
+	if (c == 'F')
+	{
+		if (info->floor_color.r != -1 || info->floor_color.g != -1
+			|| info->floor_color.b != -1)
+			return (1);
+	}
+	else
+	{
+		if (info->ceiling_color.r != -1 || info->ceiling_color.g != -1
+			|| info->ceiling_color.b != -1)
+			return (1);
 	}
 	return (0);
 }

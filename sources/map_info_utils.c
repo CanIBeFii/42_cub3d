@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/08/28 16:28:27 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:48:59 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_rgb_values(char *line, t_map_info *info, int x)
 	char	**rgb_char;
 	t_rgb	rgb;
 
-	while (line[++x] == ' ' || line[x] == '\t')
+	while (line[x] == ' ' || line[x] == '\t')
 		x++;
 	rgb_char = ft_split(line + x, ',');
 	if (rgb_char == NULL || double_array_size(rgb_char) != 3
@@ -55,13 +55,12 @@ int	check_rgb_values(char *line, t_map_info *info, int x)
 		free_double_array(rgb_char);
 		return (print_error("Error: invalid rgb value given\n", 1));
 	}
-	rgb.r = ft_atoi(rgb_char[0]);
-	rgb.g = ft_atoi(rgb_char[1]);
-	rgb.b = ft_atoi(rgb_char[2]);
-	free_double_array(rgb_char);
+	assign_rgb_values(&rgb, rgb_char);
 	if ((rgb.r < 0 || rgb.r > 255) || (rgb.g < 0 || rgb.g > 255)
 		|| (rgb.b < 0 || rgb.b > 255))
 		return (print_error("Error: rgb value out of bounds\n", 1));
+	if (check_dup_rgb(info, line[0]) == 1)
+		return (print_error("Error: duplicate rgb value\n", 1));
 	if (ft_strncmp(line, "C ", 2) == 0)
 		get_rgb_values(&info->ceiling_color, rgb);
 	else if (ft_strncmp(line, "F ", 2) == 0)
@@ -115,4 +114,12 @@ int	check_texture_path(char *line, t_game *mlx, int x)
 	}
 	free (path);
 	return (0);
+}
+
+void	assign_rgb_values(t_rgb *rgb, char **rgb_char)
+{
+	rgb->r = ft_atoi(rgb_char[0]);
+	rgb->g = ft_atoi(rgb_char[1]);
+	rgb->b = ft_atoi(rgb_char[2]);
+	free_double_array(rgb_char);
 }
