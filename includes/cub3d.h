@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/05 13:19:05 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:22:04 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	check_file(int argc, char **argv, t_game *mlx);
 // MAP_CHECKER.C
 
 void	map_checker(char *path, t_game *mlx);
-int		get_map(int fd, t_map *map, int index);
+int		get_map(int fd, t_map *map, int index, int max_line_size);
 int		get_map_info(int fd, t_game *mlx);
 
 // MAP_UTILS.C

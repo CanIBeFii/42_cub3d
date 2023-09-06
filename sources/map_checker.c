@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/01 18:03:19 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/06 14:22:15 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	map_checker(char *path, t_game *mlx)
 		free_game(mlx);
 		exit(1);
 	}
-	if (get_map(fd, &mlx->map, 0) == 0)
+	if (get_map(fd, &mlx->map, 0, 0) == 0)
 	{
+		mlx->map.map = NULL;
 		free_game(mlx);
 		exit(1);
 	}
@@ -62,18 +63,17 @@ int	get_map_info(int fd, t_game *mlx)
 	return (0);
 }
 
-int	get_map(int fd, t_map *map, int index)
+int	get_map(int fd, t_map *map, int index, int max_line_size)
 {
 	char	*line;
-	int		max_line_size;
 
 	line = go_to_first_map_line(fd);
-	max_line_size = 0;
 	while (line != NULL)
 	{
 		if (check_map_line(line) == 0)
 		{
 			free_double_array(map->map);
+			free(line);
 			return (0);
 		}
 		if ((int)ft_strlen(line) > max_line_size)
