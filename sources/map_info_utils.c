@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 15:43:48 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/06 14:48:59 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:30:54 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	check_rgb_values(char *line, t_map_info *info, int x)
 		free_double_array(rgb_char);
 		return (print_error("Error: invalid rgb value given\n", 1));
 	}
-	assign_rgb_values(&rgb, rgb_char);
+	if (assign_rgb_values(&rgb, rgb_char) == 1)
+		return (print_error("Error: missing rgb value\n", 1));
 	if ((rgb.r < 0 || rgb.r > 255) || (rgb.g < 0 || rgb.g > 255)
 		|| (rgb.b < 0 || rgb.b > 255))
 		return (print_error("Error: rgb value out of bounds\n", 1));
@@ -116,10 +117,29 @@ int	check_texture_path(char *line, t_game *mlx, int x)
 	return (0);
 }
 
-void	assign_rgb_values(t_rgb *rgb, char **rgb_char)
+int	assign_rgb_values(t_rgb *rgb, char **rgb_char)
 {
+	int	index;
+	int	len;
+
+	if (rgb_char[0] == NULL || rgb_char[1] == NULL || rgb_char[2] == NULL)
+		return (1);
+	index = -1;
+	while (rgb_char[++index] != NULL)
+	{
+		len = -1;
+		while (rgb_char[index][++len] != '\0')
+		{
+			if (ft_isdigit(rgb_char[index][len]) == 0
+				&& rgb_char[index][len] != '\n')
+				return (1);
+		}
+		if (len == 1 && rgb_char[index][0] == '\n')
+			return (1);
+	}
 	rgb->r = ft_atoi(rgb_char[0]);
 	rgb->g = ft_atoi(rgb_char[1]);
 	rgb->b = ft_atoi(rgb_char[2]);
 	free_double_array(rgb_char);
+	return (0);
 }

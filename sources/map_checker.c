@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 14:28:13 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/06 14:22:15 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:52:13 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ int	get_map(int fd, t_map *map, int index, int max_line_size)
 		if (check_map_line(line) == 0)
 		{
 			free_double_array(map->map);
-			free(line);
-			return (0);
+			return (print_error("Error: invalid map line", 0));
 		}
 		if ((int)ft_strlen(line) > max_line_size)
 			max_line_size = ft_strlen(line);

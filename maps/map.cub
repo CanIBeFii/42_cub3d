@@ -1,7 +1,7 @@
-NO /nfs/homes/fialexan/Desktop/42_cub3d/textures/bluestone.xpm
-SO /nfs/homes/fialexan/Desktop/42_cub3d/textures/eagle.xpm
-WE /nfs/homes/fialexan/Desktop/42_cub3d/textures/greystone.xpm
-EA /nfs/homes/fialexan/Desktop/42_cub3d/textures/redbrick.xpm
+NO ./textures/bluestone.xpm
+SO ./textures/eagle.xpm
+WE ./textures/greystone.xpm
+EA ./textures/redbrick.xpm
 
 F 50,50,50
 C 0,153,220

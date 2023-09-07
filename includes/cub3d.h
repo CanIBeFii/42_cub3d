@@ -6,7 +6,7 @@
 /*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
-/*   Updated: 2023/09/06 14:47:59 by fialexan         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:09:45 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int		check_info(char *line, t_game *mlx);
 int		check_rgb_values(char *line, t_map_info *info, int x);
 int		check_values(char **rgb_char);
 int		check_texture_path(char *line, t_game *mlx, int x);
-void	assign_rgb_values(t_rgb *rgb, char **rgb_char);
+int		assign_rgb_values(t_rgb *rgb, char **rgb_char);
 
 // PLAYER.C
 
@@ -230,7 +230,7 @@ void	open_imgs(t_game *mlx, t_map_info *info);
 
 void	movement_up_down(t_player *player, t_map *map, int key_code);
 void	movement_left_right(t_player *player, t_map *map, int key_code);
-void	camera_changes(int key_code, t_player *player);
+void	camera_changes(int key_code, t_player *player, double old_dir_x);
 
 //DRAW.C
 

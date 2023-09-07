@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:43:40 by mibernar          #+#    #+#             */
-/*   Updated: 2023/09/05 12:41:45 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:04:25 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ void	movement_left_right(t_player *player, t_map *map, int key_code)
 	}
 }
 
-void	camera_changes(int key_code, t_player *player)
+void	camera_changes(int key_code, t_player *player, double old_dir_x)
 {
-	double	old_dir_x;
 	double	old_camera_x;
 
-	old_dir_x = player->direction.x;
 	old_camera_x = player->camera.x;
 	if (key_code == L_ARROW)
 	{
