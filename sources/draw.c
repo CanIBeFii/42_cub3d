@@ -3,105 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 18:38:10 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/23 17:29:23 by mibernar         ###   ########.fr       */
+/*   Created: 2023/08/29 15:14:53 by mibernar          #+#    #+#             */
+/*   Updated: 2023/09/05 13:20:30 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_map(t_game *mlx)
+void	my_img_clear(t_data data)
 {
-	int	x;
+	int	j;
 	int	i;
-	int	start;
 
-	start = mlx->map_info.last_line_info_elem;
-	i = start;
-	while (mlx->map[i])
+	j = 0;
+	while (j < SCREEN_H)
 	{
-		x = 0;
-		while (mlx->map[i][x] && mlx->map[i][x] != '\n')
+		i = 0;
+		while (i < SCREEN_W)
 		{
-			if (mlx->map[i][x] == '1')
-				draw_square(mlx, (x * 64) + SCREEN_W, (i - start - 1) * 64, 0x00FFFFFF);
-			else
-				draw_square(mlx, (x * 64) + SCREEN_W, (i - start - 1) * 64, 0x00000000);
-			x++;
-		}
-		i++;
-	}
-}
-
-void	draw_line(t_game *mlx, float x2, float y2, int color)
-{
-	int		dx;
-	int		dy;
-	int		i;
-
-	dx = x2 - mlx->player.pos_x;
-	dy = y2 - mlx->player.pos_y;
-	i = 1;
-	if (dx >= 0)
-	{
-		while (i <= dx)
-		{
-			my_mlx_pixel_put(&mlx->img, (mlx->player.pos_x + (i * dx) / dx),
-				mlx->player.pos_y + (i * dy) / dx, color);
+			my_mlx_pixel_put(&data, i, j, 0x000000);
 			i++;
 		}
-	}
-	else
-	{
-		while (i <= -dx)
-		{
-			my_mlx_pixel_put(&mlx->img, mlx->player.pos_x - (i * dx) / dx,
-				mlx->player.pos_y - (i * dy) / dx, color);
-			i++;
-		}
+		j++;
 	}
 }
 
-void	draw_square(t_game *mlx, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int	i;
-	int	j;
+	char	*dst;
 
-	i = 0;
-	while (i < 65)
-	{
-		j = 0;
-		while (j < 65)
-		{
-			if (j >= 63)
-				my_mlx_pixel_put(&mlx->img, x + i, y + j, 0x4f4d4d);
-			else if (i >= 63)
-				my_mlx_pixel_put(&mlx->img, x + i, y + j, 0x4f4d4d);
-			else
-				my_mlx_pixel_put(&mlx->img, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	draw_player(t_game *mlx, int x, int y, int color)
+int	get_color(int tex_x, int tex_y, t_data *curr)
 {
-	int	i;
-	int	j;
+	int	color;
+	int	offset;
 
-	i = -7;
-	printf("x: %d y: %d\n", x, y);
-	while (i < 8)
+	offset = tex_y * curr->line_length + tex_x * (curr->bits_per_pixel / 8);
+	color = *(int *)(curr->addr + offset);
+	return (color);
+}
+
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture)
+{
+	double	step;
+	double	texture_pos;
+	int		texture_y;
+	int		color;
+	int		y;
+
+	step = 1.0 * texture->img_size.y / ray->line_height;
+	texture_pos = (ray->wall_start - SCREEN_H / 2
+			+ ray->line_height / 2) * step;
+	y = ray->wall_start;
+	while (y < ray->wall_end)
 	{
-		j = -7;
-		while (j < 8)
-		{
-			my_mlx_pixel_put(&mlx->img, (x + i) + SCREEN_W, y + j, color);
-			j++;
-		}
-		i++;
+		texture_y = (int)texture_pos & (texture->img_size.y - 1);
+		color = get_color(ray->x_texture, texture_y, texture);
+		my_mlx_pixel_put(&mlx->img, ray->id, y, color);
+		texture_pos += step;
+		y++;
+	}
+	draw_floor_ceiling(mlx, ray);
+}
+
+void	draw_floor_ceiling(t_game *mlx, t_ray *ray)
+{
+	int	c_color;
+	int	f_color;
+	int	y;
+
+	c_color = create_rgb(&mlx->info.ceiling_color);
+	f_color = create_rgb(&mlx->info.floor_color);
+	y = 0;
+	while (y < ray->wall_start)
+	{
+		my_mlx_pixel_put(&mlx->img, ray->id, y, c_color);
+		y++;
+	}
+	y = ray->wall_end + 1;
+	while (y < SCREEN_H)
+	{
+		my_mlx_pixel_put(&mlx->img, ray->id, y, f_color);
+		y++;
 	}
 }

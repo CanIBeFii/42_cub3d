@@ -3,89 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 13:28:11 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/31 18:43:44 by mibernar         ###   ########.fr       */
+/*   Created: 2023/07/25 13:44:41 by fialexan          #+#    #+#             */
+/*   Updated: 2023/09/05 14:06:47 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	game_init(t_game mlx)
+void	cub3d(t_game *mlx)
 {
-	mlx.mlx_ptr = mlx_init();
-	mlx.window = mlx_new_window(mlx.mlx_ptr, SCREEN_W, SCREEN_H, "cub3d");
-	mlx.img.img = mlx_new_image(mlx.mlx_ptr, SCREEN_W, SCREEN_H);
-	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
-			&mlx.img.line_length, &mlx.img.endian);
-	// draw_map(&mlx);
-	// draw_player(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
-	// draw_line(&mlx, mlx.player.pos_x, mlx.player.pos_y, 0x00FF0000);
-	draw_rays(&mlx, mlx.player.pos_x, mlx.player.pos_y, -(PI / 6));
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.window, mlx.img.img, 0, 0);
-	mlx_hook(mlx.window, 17, 0L, close_window, &mlx);
-	mlx_hook(mlx.window, 2, 1L << 0, keys, &mlx);
-	mlx_loop(mlx.mlx_ptr);
+	mlx->game_started = 1;
+	mlx->mlx_ptr = mlx_init();
+	create_window(mlx);
+	open_imgs(mlx, &mlx->info);
+	dda(mlx, &mlx->map, &mlx->map.player, &mlx->info);
+	mlx_hook(mlx->window, 17, 0L, close_window, mlx);
+	mlx_hook(mlx->window, 2, 1L << 0, keys, mlx);
+	mlx_loop(mlx->mlx_ptr);
 }
 
 void	init_vars(t_game *mlx)
 {
-	mlx->map_info.north = 0;
-	mlx->map_info.south = 0;
-	mlx->map_info.west = 0;
-	mlx->map_info.east = 0;
-	mlx->map_info.ceiling = 0;
-	mlx->map_info.floor = 0;
-	mlx->map = NULL;
-	mlx->player.pos_x = 0;
-	mlx->player.pos_y = 0;
-	mlx->player.pa = 0;
-	mlx->player.pdx = cos(mlx->player.pa) * 5;
-	mlx->player.pdy = sin(mlx->player.pa) * 5;
-	mlx->map_info.map_x = 0;
-	mlx->map_info.map_y = 0;
-}
-
-void	cub3d(int fd, char *path)
-{
-	t_game	mlx;
-
-	init_vars(&mlx);
-	if (map_check(fd, path, &mlx) == 0)
-	{
-		free_double_array(mlx.map);
-		perror("ERROR: invalid map");
-		return ;
-	}
-	game_init(mlx);
+	mlx->info.ea = NULL;
+	mlx->info.we = NULL;
+	mlx->info.no = NULL;
+	mlx->info.so = NULL;
+	mlx->info.ceiling_color.r = -1;
+	mlx->info.ceiling_color.g = -1;
+	mlx->info.ceiling_color.b = -1;
+	mlx->info.floor_color.r = -1;
+	mlx->info.floor_color.g = -1;
+	mlx->info.floor_color.b = -1;
+	mlx->map.map = NULL;
+	mlx->map.player.direction.x = 0;
+	mlx->map.player.direction.y = 0;
+	mlx->map.player.camera.x = 0;
+	mlx->map.player.camera.y = 0;
+	mlx->game_started = 0;
 }
 
 int	main(int argc, char **argv)
 {
-	char	*path;
-	int		fd;
-	int		x;
+	t_game	mlx;
 
-	if (argc != 2)
-	{
-		perror("ERROR: invalid number of arguments");
-		return (1);
-	}
-	path = argv[1];
-	x = ft_strlen(path) - 1;
-	if (path[x] != 'b' || path[x - 1] != 'u' || path[x - 2] != 'c'
-		|| path[x - 3] != '.')
-	{
-		perror("ERROR: invalid file type");
-		return (1);
-	}
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("ERROR: can't open file");
-		return (1);
-	}
-	cub3d(fd, path);
+	check_file(argc, argv, &mlx);
+	init_vars(&mlx);
+	map_checker(argv[1], &mlx);
+	cub3d(&mlx);
 	return (0);
 }

@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_management.c                                :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 15:37:54 by mibernar          #+#    #+#             */
-/*   Updated: 2023/04/12 16:37:17 by mibernar         ###   ########.fr       */
+/*   Created: 2023/08/21 13:29:35 by fialexan          #+#    #+#             */
+/*   Updated: 2023/08/21 13:31:31 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	close_window(t_game *mlx)
+int	print_error(char *message, int return_value)
 {
-	free_double_array(mlx->map);
-	exit (0);
-	return (0);
+	perror(message);
+	return (return_value);
 }

@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_functions.c                                 :+:      :+:    :+:   */
+/*   handle_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 16:08:25 by mibernar          #+#    #+#             */
-/*   Updated: 2023/05/23 17:04:18 by mibernar         ###   ########.fr       */
+/*   Created: 2023/07/26 16:36:57 by mibernar          #+#    #+#             */
+/*   Updated: 2023/08/30 16:05:57 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_img_clear(t_game *mlx, t_data data)
+void	create_window(t_game *mlx)
 {
-	int	j;
-	int	i;
-
-	j = 0;
-	while (j < (mlx->map_info.map_y * 64))
-	{
-		i = 0;
-		while (i < (mlx->map_info.map_x * 64))
-		{
-			my_mlx_pixel_put(&data, i, j, 0x000000);
-			i++;
-		}
-		j++;
-	}
+	mlx->window = mlx_new_window(mlx->mlx_ptr, SCREEN_W, SCREEN_H, "cub3d");
+	mlx->img.img = mlx_new_image(mlx->mlx_ptr, SCREEN_W, SCREEN_H);
+	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel,
+			&mlx->img.line_length, &mlx->img.endian);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	close_window(t_game *mlx)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	free_game(mlx);
+	exit (EXIT_SUCCESS);
+	return (0);
 }

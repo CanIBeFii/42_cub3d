@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fialexan <fialexan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 13:32:28 by mibernar          #+#    #+#             */
-/*   Updated: 2023/06/20 15:37:54 by mibernar         ###   ########.fr       */
+/*   Created: 2023/07/25 13:32:00 by fialexan          #+#    #+#             */
+/*   Updated: 2023/09/06 17:09:45 by fialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,18 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <sys/wait.h>
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include "./libft.h"
 
-//BIG SCREEN SIZE
+// SCREEN SIZE
 
-// # define SCREEN_H 1720
-// # define SCREEN_W 1920
-
-//SMALL SCREEN SIZE
-
-# define SCREEN_H 520
 # define SCREEN_W 720
+# define SCREEN_H 480
+# define FOV 720
 
-//PI
-
-# define PI 		3.1415926535
-# define FOV		(PI / 3)
-# define NB_RAYS	240
-
-//KEY_CODES
+//KEYS
 
 # define W_KEY 119
 # define A_KEY 97
@@ -50,132 +37,207 @@
 # define R_ARROW 65363
 # define ESC_KEY 65307
 
-typedef struct s_bresenham
-{
-	int	absolute_x;
-	int	absolute_y;
-	int	x_modifier;
-	int	y_modifier;
-	int	abs_diff;
-	int	abs_diff2x;	
-}	t_bresenham;
+//VALUES
 
-typedef struct s_player
-{
-	float	pos_x;
-	float	pos_y;
-	float	pdx;
-	float	pdy;
-	float	pa;
-}t_player;
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
 
-typedef struct s_map
-{
-	int	north;
-	int	south;
-	int	west;
-	int	east;
-	int	ceiling;
-	int	floor;
-	int	last_line_info_elem;
-	int	map_x;
-	int	map_y;
-}t_map;
+// TYPEDEF
 
-typedef struct s_vector
+typedef struct s_vector_int
 {
 	int	x;
 	int	y;
-}t_vector;
+}	t_vector_int;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}t_data;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	t_vector_int	img_size;
+}	t_data;
 
-typedef struct s_texture
+typedef struct s_map_info
 {
-	void	*img;
-	char	*addr;
-	char	*data;
-	t_data	texture_data;
-	int		fd;
-	int		w;
-	int		h;
-}	t_texture;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+
+	t_data	no_texture;
+	t_data	so_texture;
+	t_data	ea_texture;
+	t_data	we_texture;
+
+	t_rgb	floor_color;
+	t_rgb	ceiling_color;
+}	t_map_info;
+
+typedef struct s_vector
+{
+	double	y;
+	double	x;
+}	t_vector;
+
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	direction;
+	t_vector	camera;
+}	t_player;
+
+typedef struct s_ray
+{
+	int				id;
+
+	t_vector		direction;
+	t_vector_int	map_pos;
+	t_vector		delta_dist;
+	t_vector		distance;
+	t_vector_int	step;
+
+	double			real_distance;
+	int				line_height;
+	int				wall_start;
+	int				wall_end;
+
+	int				side;
+	int				x_texture;
+}	t_ray;
+
+typedef struct s_map
+{
+	char		**map;
+	int			max_x;
+	int			max_y;
+
+	t_player	player;
+}	t_map;
 
 typedef struct s_game
 {
 	void		*mlx_ptr;
 	void		*window;
-	void		*map_window;
-	t_vector	window_size;
-	t_map		map_info;
-	t_player	player;
-	t_texture	texture;
 	t_data		img;
-	t_data		map_img;
-	char		**map;
-	char		**map_layout;
-}t_game;
+	char		*path;
 
-//MAIN.C
-void		cub3d(int fd, char *path);
-void		game_init(t_game mlx);
+	t_map		map;
+	t_map_info	info;
 
-//WINDOW_MANAGEMENT.C
-int			close_window(t_game *mlx);
+	int			game_started;
 
-//HANDLE_KEYS.C
-int			keys(int keycode, t_game *mlx);
+}	t_game;
 
-//MAP_CHECK.C
-void		player_orientation(t_game *mlx, int i, int x);
-int			map_check(int fd, char *path, t_game *mlx);
-char		**get_map(int fd, char *path);
-int			check_map_content(t_game *mlx);
+// MAIN.C
 
-//MAP_CHECK_UTILS.C
-int			number_lines(int fd);
-int			check_map_elements(t_game *mlx, char *line);
-int			check_map_characters(t_game *mlx, int i, int x);
+void	cub3d(t_game *mlx);
 
-//FREE.C
-void		free_double_array(char **double_array);
+// FILE_CHECKER.C
 
-//MOVEMENT.C
-void		move_dot(int key_code, t_game *mlx);
-void		movement_keys(int key_code, t_game *mlx);
-void		direction_keys(int key_code, t_game *mlx);
+void	check_file(int argc, char **argv, t_game *mlx);
+
+// MAP_CHECKER.C
+
+void	map_checker(char *path, t_game *mlx);
+int		get_map(int fd, t_map *map, int index, int max_line_size);
+int		get_map_info(int fd, t_game *mlx);
+
+// MAP_UTILS.C
+
+char	**realloc_double_char_array(char **array, int new_line_size, int index);
+int		check_map_line(char *line);
+int		is_valid_map_char(char c);
+int		double_array_size(char **array);
+char	*go_to_first_map_line(int fd);
+
+// MAP_VALIDATOR.C
+
+int		validate_map(t_map *map);
+int		check_surroundings(t_map *map, int x, int y);
+int		is_out(t_map *map, int y, int x);
+int		is_inside_map_char(char c);
+
+// MAP_INFO.C
+
+int		check_dup_textures(t_game *mlx, char *line, char *path);
+int		check_dup_rgb(t_map_info *info, char c);
+void	get_rgb_values(t_rgb *surface, t_rgb color);
+int		check_missing_info(t_map_info *info);
+
+// MAP_INFO_UTILS.C
+
+int		check_info(char *line, t_game *mlx);
+int		check_rgb_values(char *line, t_map_info *info, int x);
+int		check_values(char **rgb_char);
+int		check_texture_path(char *line, t_game *mlx, int x);
+int		assign_rgb_values(t_rgb *rgb, char **rgb_char);
+
+// PLAYER.C
+
+int		save_player_pos(t_player *player, int spawn_y,
+			int spawn_x, char spawn_dir);
+
+// DDA.C
+
+void	dda(t_game *mlx, t_map *map, t_player *player, t_map_info *info);
+void	dda_step_calc(t_ray *ray, t_player *player);
+void	dda_real_distance_calc(t_ray *ray, t_map *map);
+void	dda_wall_height(t_ray *ray);
+void	dda_side_selector(t_game *mlx, t_ray *ray, t_player *player,
+			t_map_info *info);
+
+// COLORS.COLORS
+
+int		create_rgb(t_rgb *color);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
+
+// FREE.C
+
+void	free_double_array(char **array);
+void	free_mlx(t_game *mlx);
+void	free_game(t_game *mlx);
+
+// ERROR.C
+
+int		print_error(char *message, int return_value);
+
+// HANDLE_WINDOW.C
+
+void	create_window(t_game *mlx);
+int		close_window(t_game *mlx);
+
+// KEYS.C
+
+int		keys(int key_code, t_game *mlx);
+
+//TEXTURES.C
+
+void	open_imgs(t_game *mlx, t_map_info *info);
+
+//MOVEMENTS.C
+
+void	movement_up_down(t_player *player, t_map *map, int key_code);
+void	movement_left_right(t_player *player, t_map *map, int key_code);
+void	camera_changes(int key_code, t_player *player, double old_dir_x);
 
 //DRAW.C
-void		draw_square(t_game *mlx, int x, int y, int color);
-void		draw_line(t_game *mlx, float x2, float y2, int color);
-void		draw_map(t_game *mlx);
-void		draw_player(t_game *mlx, int x, int y, int color);
 
-//BRESENHAM.C
-void		bresenham_algo(t_vector begin, t_vector end, t_game *mlx);
-void		bresenham_loop(t_vector begin, t_vector end, t_game *mlx,
-				t_bresenham algo);
-t_bresenham	bresenham_init(t_vector begin, t_vector end);
-
-//RAYS.C
-void		draw_rays(t_game *mlx, float x2, float y2, float loop);
-t_vector	get_end_ray_cordinates(t_game *mlx, float loop, float x0, float y0);
-
-//MY_MLX_FUNCTIONS.C
-void		my_img_clear(t_game *mlx, t_data data);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-//3D.C
-void		draw_ceiling(t_game *mlx);
-void		draw_floor(t_game *mlx);
-void		draw_walls(t_game *mlx, float distance, int ray_id);
-void		draw_3d(t_game *mlx, float distance, int ray_id, float ray_angle);
+void	my_img_clear(t_data data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		get_color(int tex_x, int tex_y, t_data *curr);
+void	draw_walls(t_game *mlx, t_ray *ray, t_data *texture);
+void	draw_floor_ceiling(t_game *mlx, t_ray *ray);
 
 #endif
